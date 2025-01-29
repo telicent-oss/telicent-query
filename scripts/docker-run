@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+# Ear-marked to mv to @telicent-oss/telicent-frontend-cli
+# Check if the container exists and remove it if it does
+if [ "$(docker ps -a -q -f name=telicent-query-local-running)" ]; then
+    docker rm -f telicent-query-local-running
+fi
+
+docker images | grep telicent-query-local
+
+# Run the Docker container
+docker run -p 8080:8080 --user 10101:10101 --name telicent-query-local-running telicent-query-local

@@ -1,0 +1,9 @@
+{
+  "name": "Query app",
+  "repo_name": "telicent-query",
+  "image_name": "telicent-query",
+  "app_name": "query",
+  "app_name_snake_case": "query_app",
+  "uri-basename": "query",
+  "brandColor": "#FFA22F"
+}

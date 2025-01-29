@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --app-color: 255, 162, 47;
+  --app-color-50: 255, 238, 221;
+  --app-color-100: 255, 217, 185;
+  --app-color-200: 255, 199, 151;
+  --app-color-300: 254, 182, 116;
+  --app-color-400: 255, 173, 78;
+  --app-color-500: 255, 162, 47;
+  --app-color-600: 231, 135, 34;
+  --app-color-700: 208, 107, 22;
+  --app-color-800: 136, 73, 8;
+  --app-color-900: 83, 43, 5;
+  --app-color-950: 38, 19, 3;
+}
+body.graphiql-dark .graphiql-container,
+body.graphiql-dark .CodeMirror-info,
+body.graphiql-dark .CodeMirror-lint-tooltip,
+body.graphiql-dark .graphiql-dialog,
+body.graphiql-dark .graphiql-dialog-overlay,
+body.graphiql-dark .graphiql-tooltip,
+body.graphiql-dark [data-radix-popper-content-wrapper] {
+  --color-base: 0, 0%, 14% !important;
+  --color-primary: 0, 0%, 96% !important;
+}
+button.graphiql-execute-button {
+  background-color: rgba(var(--teli-app-color), 1) !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #14141460;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6a6a6a;
+  border-radius: 12px;
+  border: 1px solid #141414;
+}
+.error-notification {
+  @apply px-2 py-1 bg-error;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+  border-radius: 5px;
+}
+
+@supports (scrollbar-color: #6a6a6a #14141460) {
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #6a6a6a #14141460;
+  }
+}
+
+@layer components {
+  .cyNode {
+    @apply flex items-center justify-center break-all;
+  }
+
+  .hideNode {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .break-anywhere {
+    overflow-wrap: anywhere;
+  }
+  .panel-max-h {
+    height: fit-content;
+    max-height: calc(100vh - 54px);
+  }
+}
+
+.bp4-dark #sparql-table .bp4-table-container,
+.bp4-dark #sparql-table .bp4-table-menu,
+.bp4-dark #sparql-table .bp4-table-column-headers,
+.bp4-dark #sparql-table .bp4-table-quadrant {
+  background-color: #272727;
+}
+
+.bp4-dark #sparql-table .bp4-table-cell-client,
+.bp4-dark #sparql-table .bp4-table-row-headers {
+  background-color: #303030;
+}
+
+.bp4-dark .bp4-menu-item {
+  background-color: #303030;
+}
+
+.toolbar {
+  @apply relative w-fit dark:bg-opacity-95;
+}
