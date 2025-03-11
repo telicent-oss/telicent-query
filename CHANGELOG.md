@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.7](https://github.com/telicent-oss/telicent-query/compare/v1.1.6...v1.1.7) (2025-03-11)
+
+
+### Bug Fixes
+
+* **axios:** [TELFE-1040] CVE-2025-27152 ([62c98ec](https://github.com/telicent-oss/telicent-query/commit/62c98ecd6ac876f482ff5724dfc0c96993261dec))
+
 ## [1.1.6](https://github.com/telicent-oss/telicent-query/compare/v1.1.5...v1.1.6) (2025-01-29)
 
 
