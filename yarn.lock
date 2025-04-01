@@ -2861,10 +2861,10 @@
     global "^4.4.0"
     zod "^3.22.4"
 
-"@telicent-oss/telicent-frontend-cli@1.1.12":
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/telicent-frontend-cli/-/telicent-frontend-cli-1.1.12.tgz#f1eff75ae1debccd236e7ebf842220baaf13ddf8"
-  integrity sha512-FjtHiya2zMcQJh1qjXGgD+70ZXWkO04UiuqyjpROhVnMT5U2veX8k1U9x1GlHQhAD4SKz97Xq0kKHI8MoJjzzA==
+"@telicent-oss/telicent-frontend-cli@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/telicent-frontend-cli/-/telicent-frontend-cli-1.2.1.tgz#f333ecdc3e769b7a05dd266e698d83ccfdc2a025"
+  integrity sha512-ooCnJy9FLcYUTJqF7qzeinhNJrBzX8UXuhpQ1VA8DMU5ZEfssDIL871HzDFd/iI7WB/WNoUA0w1wj4ne6+jp+g==
   dependencies:
     "@commander-js/extra-typings" "12.0.1"
     "@types/update-notifier" "^6.0.8"
