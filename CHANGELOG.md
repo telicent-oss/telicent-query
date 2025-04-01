@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/telicent-oss/telicent-query/compare/v1.1.7...v1.2.0) (2025-04-01)
+
+
+### Features
+
+* **telicent images:** added ([a6f31dd](https://github.com/telicent-oss/telicent-query/commit/a6f31dd97764cb806220b25f2512290335049b50))
+
+
+### Bug Fixes
+
+* **workflow:** names ([398c6e3](https://github.com/telicent-oss/telicent-query/commit/398c6e38bce2f41ad6aab30012db7af560825c9f))
+
 ## [1.1.7](https://github.com/telicent-oss/telicent-query/compare/v1.1.6...v1.1.7) (2025-03-11)
 
 
