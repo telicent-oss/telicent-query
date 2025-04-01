@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/telicent-oss/telicent-query/compare/v1.2.0...v1.2.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **publish.yml:** [TELFE-920] publish with version tag ([1e7e165](https://github.com/telicent-oss/telicent-query/commit/1e7e1651e6b658ba9b78806afa37d49216e31972))
+
 ## [1.2.0](https://github.com/telicent-oss/telicent-query/compare/v1.1.7...v1.2.0) (2025-04-01)
 
 
