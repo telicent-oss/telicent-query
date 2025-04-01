@@ -1,4 +1,5 @@
-# Build and push telicent-test
+name: publish.yaml
+
 on:
   push:
     branches:
@@ -8,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  prepare:
+  app_details:
     runs-on: ubuntu-latest
     outputs:
       semver: ${{ steps.semver.outputs.current-version }}
@@ -31,102 +32,65 @@ jobs:
           REPO_NAME=$(jq -r '.repo_name // error("repo_name missing")' ./src/app.config.json) && \
             echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT;
 
-  integrated_tests:
+  run_tests:
     permissions:
       id-token: write
       contents: read
       packages: write
     needs:
-      - prepare
+      - app_details
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: configure-node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 20
-      - name: Get node version
-        id: node
-        run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
-      - name: Get node_modules cache
-        uses: actions/cache@v3.0.2
-        id: node_modules
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-      - name: Install dependencies
-        run: LOCAL_MACHINE=false yarn install --network-concurrency 3 # Network concurrency to avoid rate-limiting
-      - run: git diff .
+          node-version: 20.14
+      - run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
+      - run: LOCAL_MACHINE=false yarn install --network-concurrency 1 # Network concurrency to avoid rate-limiting
       - run: yarn global add jest && yarn test:ci
 
-  build_application:
+  shared-workflows__vulnerability-scanning-on-repo:
+    needs:
+      - app_details
+      - run_tests
+    uses: telicent-oss/shared-workflows/.github/workflows/vulnerability-scanning-on-repo.yml@main
+    with:
+      APP_NAME: ${{ needs.app_details.outputs.app_name }}
+    secrets: inherit
+
+  build_and_upload_artifacts:
     permissions:
       id-token: write
       contents: read
       packages: write
     needs:
-      - prepare
-      - integrated_tests
+      - run_tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: configure-node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 20
-      - name: Get node version
-        id: node
-        run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
-      - name: Get node_modules cache
-        uses: actions/cache@v3.0.2
-        id: node_modules
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
-      - name: Install dependencies
-        run: LOCAL_MACHINE=false yarn install --network-concurrency 1 # Network concurrency to avoid rate-limiting
-      - name: Build application
-        run: yarn build:tailwind && LOCAL_MACHINE=false yarn build
-      - name: Upload build to artifact
-        uses: actions/upload-artifact@v4
+          node-version: 20.14
+      - run: LOCAL_MACHINE=false yarn install --network-concurrency 1 # Network concurrency to avoid rate-limiting
+      - run: yarn build:tailwind && LOCAL_MACHINE=false yarn build
+      - uses: actions/upload-artifact@v4
         with:
           name: build
-          path: build/
+          path: ./build
 
-  vuln_scan:
+  shared-workflows__docker-push-to-registries:
     needs:
-      - prepare
-      - integrated_tests
-    uses: telicent-oss/shared-workflows/.github/workflows/vulnerability-scanning-on-repo.yml@main
-    with:
-      APP_NAME: ${{ needs.prepare.outputs.app_name }}
-    secrets: inherit
-
-  build_deployment_image:
-    permissions:
-      id-token: write
-      contents: write
-      packages: write
-    needs:
-      - prepare
-      - vuln_scan
-      - build_application
+      - app_details
+      - build_and_upload_artifacts
     uses: telicent-oss/shared-workflows/.github/workflows/docker-push-to-registries.yml@main
     with:
-      APP_NAME: ${{ needs.prepare.outputs.app_name }}
+      APP_NAME: ${{ needs.app_details.outputs.app_name }}
       DOCKERFILE: Dockerfile
       PATH: .
-      VERSION: ${{ needs.prepare.outputs.semver }}
+      VERSION: ${{ needs.app_details.outputs.version }}
       BUILD_ARTIFACT: build
       ENABLE_BUILDKIT_CACHE: false
-      ALLOW_MUTABLE_TAGS: false
-      DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
+      BUILD_ARGS: |
+        APP_NAME=${{ needs.app_details.outputs.app_name }}
+      GRYPE_SECURITY_ISSUES_BLOCK_ONLY_IF_FIX_AVAILABLE: false
     secrets: inherit

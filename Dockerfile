@@ -1,13 +1,12 @@
-FROM nginxinc/nginx-unprivileged:stable-alpine-slim
-USER 101
+FROM telicent/telicent-nginx1.27:latest
+ARG APP_NAME
+USER user
+COPY "./$APP_NAME.sbom.json" /opt/telicent/sbom/sbom.json
+COPY nginx/ /usr/local/nginx/conf/
+COPY build/ /usr/local/nginx/html/
+COPY ./LICENCE /usr/local/nginx/html/LICENCE
+COPY ./NOTICE  /usr/local/nginx/html/NOTICE
 
-WORKDIR /usr/share/nginx/html/query
-COPY ./build /usr/share/nginx/html/query
-COPY ./query.sbom.json /opt/telicent/sbom/sbom.json
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./LICENCE /usr/share/nginx/html/query/LICENCE
-COPY ./NOTICE  /usr/share/nginx/html/query/NOTICE
-
+# run
 EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

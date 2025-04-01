@@ -1,63 +1,50 @@
 #!/usr/bin/env bash
 set -e
 
-trivy image --download-db-only
+source ./scripts/utils.app-config-json
+# Note: The above sets:
+# - $app_name
+# - $repo_name
+# - $image_sbom_json
+
+source ./scripts/utils.docker-image-names
+# Note: The above sets:
+# - $image_run 
+
+#app_sbom_json="$app_name.sbom.json"
+
 
 # Setup trap to handle all script terminations
-trap 'rm -f ./query.sbom.json' EXIT
-echo "{}" >./query.sbom.json
+cleanup() {
+  rm -f "./${app_name}.sbom.json"
+}
+trap cleanup EXIT
+echo "{}" > "./${app_name}.sbom.json"
 
-[ -f image-SBOM.gitignored.json ] && rm image-SBOM.gitignored.json
+trivy image --download-db-only
 
-# Check if trivy is installed
-if ! command -v trivy &>/dev/null; then
-  echo "Please install Trivy before running."
-  echo " - Ubuntu: sudo apt-get update && sudo apt-get install -y trivy"
-  echo " - macOS: brew install aquasecurity/trivy/trivy"
-  echo " - Windows: scoop install trivy"
-fi
-
-export NPM_TOKEN=$(UNMASK=true yarn --silent tefe npmrc-authtoken //npm.pkg.github.com/)
-
-if [[ -z "$NPM_TOKEN" ]]; then
+export FONT_AWESOME_TOKEN=$(UNMASK=true yarn --silent tefe npmrc-authtoken //npm.fontawesome.com/)
+if [[ -z "$FONT_AWESOME_TOKEN" ]]; then
   echo "Necessary tokens not found in .npmrc, cannot proceed with build."
   exit 1
 fi
+if [[ -z "$app_name" || -z "$repo_name" ]]; then
+  echo "Necessary config found, cannot proceed with build."
+  exit 1
+fi
 
-# Modify Docker build to use tokens
-# To debug it helps to use:  --no-cache \
-yarn build;
+echo "APP_NAME=$app_name"
 
+yarn install
+yarn build
+
+echo "image_run: $image_run"
 docker build \
-  --no-cache \
-  --progress=plain \
-  -f Dockerfile \
-  -t telicent-query-local \
-  --load .;
+    --no-cache \
+    --progress=plain \
+    -f Dockerfile \
+    -t "$image_run" \
+    --build-arg APP_NAME="$app_name" \
+    --load .;
 
-docker images | grep telicent-query-local;
-
-syft telicent-query-local -o json | grype --quiet --fail-on high;
-
-     
-trivy image  \
-  --format table \
-  --exit-code  1 \
-  --ignore-unfixed \
-  --vuln-type  os,library \
-  --severity HIGH,CRITICAL \
-  telicent-query-local;
-
-trivy image --format cyclonedx \
-  --exit-code 0 \
-  --vuln-type os,library \
-  --severity HIGH,CRITICAL \
-  --output image-SBOM.gitignored.json \
-  telicent-query-local;
-
-trivy sbom \
-  --format table \
-  --exit-code 1 \
-  --vuln-type os,library \
-  --severity HIGH,CRITICAL \
-  image-SBOM.gitignored.json;
+./scripts/utils.scan "$image_run";
