@@ -12,15 +12,13 @@ jobs:
   app_details:
     runs-on: ubuntu-latest
     outputs:
-      semver: ${{ steps.semver.outputs.current-version }}
+      current_version: ${{ steps.npm_get_version_action.outputs.current-version }}
       app_name: ${{ steps.app_config.outputs.app_name }}
       image_name: ${{ steps.app_config.outputs.image_name }}
       repo_name: ${{ steps.app_config.outputs.repo_name }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Get version from package.json
-        id: semver
+      - uses: actions/checkout@v4
+      - id: npm_get_version_action
         uses: martinbeentjes/npm-get-version-action@main
       - run: sudo apt-get install jq
       - id: app_config
@@ -87,7 +85,7 @@ jobs:
       APP_NAME: ${{ needs.app_details.outputs.app_name }}
       DOCKERFILE: Dockerfile
       PATH: .
-      VERSION: ${{ needs.app_details.outputs.version }}
+      VERSION: ${{ needs.app_details.outputs.current_version }}
       BUILD_ARTIFACT: build
       ENABLE_BUILDKIT_CACHE: false
       BUILD_ARGS: |
