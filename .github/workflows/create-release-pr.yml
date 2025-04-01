@@ -1,4 +1,4 @@
-name: Publish new release version
+name: create-release-pr.yml
 
 on:
   push:
