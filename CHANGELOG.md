@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/telicent-oss/telicent-query/compare/v1.2.1...v1.2.2) (2025-07-07)
+
+
+### Bug Fixes
+
+* **publish.yml:** [TELFE-1221] publish depends on vuln scan ([#8](https://github.com/telicent-oss/telicent-query/issues/8)) ([055e012](https://github.com/telicent-oss/telicent-query/commit/055e0128f917bbc60161dad39c464d295dc15a5e))
+
 ## [1.2.1](https://github.com/telicent-oss/telicent-query/compare/v1.2.0...v1.2.1) (2025-04-01)
 
 
