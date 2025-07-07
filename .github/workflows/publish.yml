@@ -79,6 +79,7 @@ jobs:
   shared-workflows__docker-push-to-registries:
     needs:
       - app_details
+      - shared-workflows__vulnerability-scanning-on-repo
       - build_and_upload_artifacts
     uses: telicent-oss/shared-workflows/.github/workflows/docker-push-to-registries.yml@main
     with:
