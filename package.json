@@ -70,7 +70,9 @@
     "react-error-overlay": "6.0.9",
     "@telicent-oss/ontologyservice": "^0.0.7",
     "ws": "8.17.1",
-    "axios": "^1.7.4"
+    "axios": "^1.11.0",
+    "@triply/yasqe/**/form-data": "^3.0.4",
+    "axios/**/form-data": "^4.0.4"
   },
   "scripts": {
     "prestart": "[ \"$LOCAL_MACHINE\" = \"false\" ] && echo 'skip cp-config' || ./scripts/cp-config.js.sh",
