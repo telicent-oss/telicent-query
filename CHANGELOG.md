@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/telicent-oss/telicent-query/compare/v1.2.2...v1.2.3) (2025-07-25)
+
+
+### Bug Fixes
+
+* **deps:** fix CVE-2025-7783 ([#10](https://github.com/telicent-oss/telicent-query/issues/10)) ([8623e37](https://github.com/telicent-oss/telicent-query/commit/8623e378ff1a3ced1c22dbee8bf1489f668ad436))
+
 ## [1.2.2](https://github.com/telicent-oss/telicent-query/compare/v1.2.1...v1.2.2) (2025-07-07)
 
 
