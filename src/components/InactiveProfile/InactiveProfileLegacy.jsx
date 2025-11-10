@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TeliButton, TeliStandardLayout } from '@telicent-oss/ds';
 import config from 'config/app-config';
 
-const UserInfo = () => (
+const InactiveProfileLegacy = () => (
   <TeliStandardLayout appName="query" beta={config.beta} apps={config.apps}>
     <section className="mt-4 ml-4">
       <p>
@@ -17,4 +17,4 @@ const UserInfo = () => (
   </TeliStandardLayout>
 );
 
-export default UserInfo;
+export default InactiveProfileLegacy;
