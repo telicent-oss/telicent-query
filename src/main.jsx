@@ -9,6 +9,7 @@ import './main.css';
 import config from 'config/app-config';
 import { AuthProvider, UIThemeProvider } from '@telicent-oss/ds';
 import { QueryClient } from '@tanstack/react-query';
+import { APP_CONFIG_JSON } from 'constants';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +26,17 @@ const root = createRoot(document.getElementById('root'));
 
 const RenderApp = config.featureFlags.FF_AUTH_V2 ? (
   <UIThemeProvider dark theme="GraphOrange">
-    <AuthProvider config={config?.AUTH_V2_CONFIG} apiUrl={config.apiUrl} queryClient={queryClient}>
+    <AuthProvider
+      config={{
+        onLogout: () => {
+          console.log('You are now logged out. Redirecting');
+          window.location.href = `/${APP_CONFIG_JSON['uri-basename']}`;
+        },
+        ...config?.AUTH_V2_CONFIG,
+      }}
+      apiUrl={config.apiUrl}
+      queryClient={queryClient}
+    >
       <App />
     </AuthProvider>
   </UIThemeProvider>

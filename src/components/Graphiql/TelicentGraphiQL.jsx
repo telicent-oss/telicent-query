@@ -21,7 +21,7 @@ const getFetcher = () =>
     ? useAuthFetcher({ url: config.graph.url })
     : createGraphiQLFetcher({ url: config.graph.url });
 
-export default () => {
+const TelicentGraphiQL = () => {
   const fetcher = getFetcher();
 
   return (
@@ -34,3 +34,5 @@ export default () => {
     </section>
   );
 };
+
+export default TelicentGraphiQL;

@@ -9,12 +9,10 @@ import { ErrorPage } from 'lib';
 import { APP_CONFIG_JSON } from './constants';
 import TelicentGraphiQL from './components/Graphiql/TelicentGraphiQL';
 
-console.log({
-  ff: config.featureFlags,
-  authConf: config.AUTH_V2_CONFIG,
-});
+const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
+
 const App = () => (
-  <BrowserRouter basename={`/${APP_CONFIG_JSON['uri-basename']}`}>
+  <BrowserRouter basename={basename}>
     <Routes>
       <Route path="/health" element={<h3>Hello I'm Telicent Query</h3>} />
       <Route path="/" element={<UserFetch />}>
@@ -28,7 +26,15 @@ const App = () => (
           path="/auth-redirect-uri"
           element={
             <>
-              <AuthRedirectUri config={config.AUTH_V2_CONFIG} />
+              <AuthRedirectUri
+                config={{
+                  onLogout: () => {
+                    console.log('You are now logged out. Redirecting');
+                    window.location.href = basename;
+                  },
+                  ...config.AUTH_V2_CONFIG,
+                }}
+              />
             </>
           }
         />
