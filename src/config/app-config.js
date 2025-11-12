@@ -16,6 +16,10 @@ const config = {
 
   beta: env.BETA === 'true',
   appList: [],
+  featureFlags: {
+    FF_AUTH_V2: Boolean(env.featureFlags?.FF_AUTH_V2),
+  },
+  AUTH_V2_CONFIG: env.AUTH_V2_CONFIG,
 };
 
 export const getConfig = () => config;
