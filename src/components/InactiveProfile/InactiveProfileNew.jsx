@@ -4,7 +4,6 @@ import config from 'config/app-config';
 
 const InactiveProfileNew = () => {
   const { login } = useAuth();
-  console.log(login);
   return (
     <TeliStandardLayout appName="query" beta={config.beta} apps={config.apps}>
       <section className="mt-4 ml-4">
