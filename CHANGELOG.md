@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/telicent-oss/telicent-query/compare/v1.2.3...v1.3.0) (2025-11-12)
+
+
+### Features
+
+* add auth v2 ([e3a1062](https://github.com/telicent-oss/telicent-query/commit/e3a10623c75ebc51caa65cb05af4d54482c8f4d3))
+
+
+### Bug Fixes
+
+* implement PR suggestions ([2f8d486](https://github.com/telicent-oss/telicent-query/commit/2f8d486b84bc8c719e33a363fc154cf98fe2a57c))
+* pr requests ([b3aa36a](https://github.com/telicent-oss/telicent-query/commit/b3aa36a5884f1e3558ea9e26c13ace853434bfe2))
+
 ## [1.2.3](https://github.com/telicent-oss/telicent-query/compare/v1.2.2...v1.2.3) (2025-07-25)
 
 
