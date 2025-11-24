@@ -1,7 +1,7 @@
 FROM telicent/telicent-nginx1.27:latest
 ARG APP_NAME
 USER user
-COPY "./$APP_NAME.sbom.json" /opt/telicent/sbom/sbom.json
+COPY ./*.sbom.json /opt/telicent/sbom/
 COPY nginx/ /usr/local/nginx/conf/
 COPY build/ /usr/local/nginx/html/
 COPY ./LICENCE /usr/local/nginx/html/LICENCE
