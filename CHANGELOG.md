@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/telicent-oss/telicent-query/compare/v1.3.0...v1.3.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* patch axios cve ([f3f1497](https://github.com/telicent-oss/telicent-query/commit/f3f14972717d4ad22c7360444e1821d5c4220db4))
+
 ## [1.3.0](https://github.com/telicent-oss/telicent-query/compare/v1.2.3...v1.3.0) (2025-11-12)
 
 
