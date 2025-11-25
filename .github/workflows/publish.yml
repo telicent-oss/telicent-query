@@ -1,95 +1,168 @@
-name: publish.yaml
+name: publish.yml
+run-name: Publish
+
+# Revoke almost all permissions by default and grant only those needed to each job.
+# https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions
+permissions:
+  contents: read
+
+env:
+  RELEASE_PREFIX: 'chore(main): release'
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - CHANGELOG.md
   workflow_dispatch:
+  push:
+      branches:
+        - main
 
 jobs:
-  app_details:
+  create-release-pr:
+    name: Release please
+    if: ${{ github.event_name == 'push' }}
+    # https://github.com/googleapis/release-please-action?tab=readme-ov-file#workflow-permissions
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release please action
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      current_version: ${{ steps.npm_get_version_action.outputs.current-version }}
-      app_name: ${{ steps.app_config.outputs.app_name }}
-      image_name: ${{ steps.app_config.outputs.image_name }}
-      repo_name: ${{ steps.app_config.outputs.repo_name }}
+      semver: ${{ steps.semver.outputs.current-version }}
+      app-name: ${{ steps.app_config.outputs.app-name }}
+      release-created: ${{ steps.release.outputs.release-created }}
     steps:
-      - uses: actions/checkout@v4
-      - id: npm_get_version_action
+      - &checkout_repo
+        name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Get version from package.json
+        id: semver
         uses: martinbeentjes/npm-get-version-action@main
-      - run: sudo apt-get install jq
-      - id: app_config
+      - name: Get app config from app.config.json
+        id: app_config
         run: |
-          APP_NAME=$(jq -r '.app_name // error("app_name missing")' ./src/app.config.json) && \
-            echo "app_name=$APP_NAME" >> $GITHUB_OUTPUT;
-          IMAGE_NAME=$(jq -r '.image_name // error("image_name missing")' ./src/app.config.json) && \
-            echo "image_name=$IMAGE_NAME" >> $GITHUB_OUTPUT;
-          REPO_NAME=$(jq -r '.repo_name // error("repo_name missing")' ./src/app.config.json) && \
-            echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT;
+          sudo apt-get install jq
+          APP_NAME=$(jq -r '.app_name // error("app_name missing from ./src/app.config.json")' ./src/app.config.json) && \
+            echo "app-name=$APP_NAME" >> $GITHUB_OUTPUT && echo "APP_NAME: $APP_NAME"
+      - name: Get release please PR info from commit message
+        id: release
+        run: |
+          RELEASE_CREATED=${{ contains(github.event.head_commit.message, env.RELEASE_PREFIX) }} && \
+          echo "release-created=$RELEASE_CREATED" >> $GITHUB_OUTPUT && echo "RELEASE_CREATED: $RELEASE_CREATED"
 
-  run_tests:
+  vuln-scan:
+    name: Vulnerability scanning
+    needs:
+      - prepare
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+      packages: write
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run vulnerability scanning
+        continue-on-error: ${{ needs.prepare.outputs.release-created != 'true' }}
+        uses: telicent-oss/shared-workflows/.github/actions/trivy-repo-scan@main
+        with:
+          app-name: ${{ needs.prepare.outputs.app-name }}
+          node-version: 20
+
+  test-and-build-application:
+    name: Run tests and build application
+    needs:
+      - prepare
     permissions:
       id-token: write
       contents: read
-      packages: write
-    needs:
-      - app_details
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - *checkout_repo
+      - name: Prepare Yarn
+        uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
-          node-version: 20.14
-      - run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
-      - run: LOCAL_MACHINE=false yarn install --network-concurrency 1 # Network concurrency to avoid rate-limiting
-      - run: yarn global add jest && yarn test:ci
-
-  shared-workflows__vulnerability-scanning-on-repo:
-    needs:
-      - app_details
-      - run_tests
-    uses: telicent-oss/shared-workflows/.github/workflows/vulnerability-scanning-on-repo.yml@main
-    with:
-      APP_NAME: ${{ needs.app_details.outputs.app_name }}
-    secrets: inherit
-
-  build_and_upload_artifacts:
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
-    needs:
-      - run_tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20.14
-      - run: LOCAL_MACHINE=false yarn install --network-concurrency 1 # Network concurrency to avoid rate-limiting
-      - run: yarn build:tailwind && LOCAL_MACHINE=false yarn build
-      - uses: actions/upload-artifact@v4
+          node-version: 20
+          additional-args: '--network-timeout 600000'
+          create-yarnrc: false
+          sanity-check: true
+          verbose: true
+      - name: Run tests
+        run: yarn global add jest && yarn test:ci
+        shell: bash
+      - name: Build application
+        run: yarn build:tailwind && LOCAL_MACHINE=false yarn build
+      - name: Upload build to artifact
+        uses: actions/upload-artifact@v4
         with:
           name: build
-          path: ./build
+          path: build/
 
-  shared-workflows__docker-push-to-registries:
+  # Build and push a non-release image to ECR on push to main when no GitHub release is created by release please, or on workflow_dispatch
+  build-dev-image:
+    name: Build dev image
+    if: needs.prepare.outputs.release-created != 'true'
     needs:
-      - app_details
-      - shared-workflows__vulnerability-scanning-on-repo
-      - build_and_upload_artifacts
-    uses: telicent-oss/shared-workflows/.github/workflows/docker-push-to-registries.yml@main
-    with:
-      APP_NAME: ${{ needs.app_details.outputs.app_name }}
-      DOCKERFILE: Dockerfile
-      PATH: .
-      VERSION: ${{ needs.app_details.outputs.current_version }}
-      BUILD_ARTIFACT: build
-      ENABLE_BUILDKIT_CACHE: false
-      BUILD_ARGS: |
-        APP_NAME=${{ needs.app_details.outputs.app_name }}
-      GRYPE_SECURITY_ISSUES_BLOCK_ONLY_IF_FIX_AVAILABLE: false
-    secrets: inherit
+      - prepare
+      - test-and-build-application
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push image
+        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@TELDEVOPS-880-update-actions-for-oss
+        with:
+          app-name: ${{ needs.prepare.outputs.app-name }}
+          allow-mutable-tags: false
+          allow-version-tag: false
+          build-artifact: build
+          dockerfile: Dockerfile
+          enable-buildkit-cache: false
+          grype-scan-image: false
+          path: .
+          registry: aws
+          version: ${{ needs.prepare.outputs.semver }}
+          # Secrets
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # Build and push a release image to Quay on push to main when a GitHub release is created by release please.
+  build-release-image:
+    name: Build release image
+    if: needs.prepare.outputs.release-created == 'true'
+    needs:
+      - prepare
+      - vuln-scan
+      - test-and-build-application
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push image
+        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@TELDEVOPS-880-update-actions-for-oss
+        with:
+          app-name: ${{ needs.prepare.outputs.app-name }}
+          allow-mutable-tags: false
+          allow-sha-tag: false
+          build-artifact: build
+          dockerfile: Dockerfile
+          enable-buildkit-cache: false
+          path: .
+          registry: quay
+          version: ${{ needs.prepare.outputs.semver }}
+          # Secrets
+          quay-username: ${{ secrets.QUAY_USERNAME }}
+          quay-token: ${{ secrets.QUAY_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

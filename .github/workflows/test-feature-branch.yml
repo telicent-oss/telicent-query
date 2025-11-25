@@ -1,4 +1,6 @@
 name: test-feature-branch.yml
+run-name: Test feature branch
+
 on:
   push:
     branches-ignore:
@@ -7,7 +9,18 @@ on:
 jobs:
   quality:
     name: Run unit tests
-    uses: telicent-oss/shared-workflows/.github/workflows/javascript-test-feature-branch.yml@main
-    secrets: inherit
-    with:
-      yarn-test-command: test:ci
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Prepare Yarn
+        uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
+        with:
+          node-version: 20
+          additional-args: '--network-timeout 600000'
+      - name: Run tests
+        run: yarn test
+        shell: bash
