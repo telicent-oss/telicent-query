@@ -4,10 +4,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@telicent-oss/ds';
 
 const UserFetch = () => {
-  const { user, loading: isLoading, error } = useAuth();
+  const { loading: isLoading, error } = useAuth();
 
-  console.log({ user, loading: isLoading, error });
-  if (isLoading === null) {
+  if (isLoading) {
     return <section>Loading...</section>;
   }
 
