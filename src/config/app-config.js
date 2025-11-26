@@ -1,6 +1,5 @@
 const env = import.meta.env.JEST_WORKER_ID ? import.meta.process.env : window;
 
-console.log({ env });
 const config = {
   access: {
     url: env.ACCESS_URL,

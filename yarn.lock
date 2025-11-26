@@ -2841,10 +2841,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.11.3.tgz#ab92ff899825e2d71fc9914dda2847a099d43862"
   integrity sha512-v2mrNSnMwnPJtcVqNvV0c5roGCBqeogN8jDtgtuHCphdwBasOZ17x8UV8qpHUh+u0MLfX43c0uUHKje0s+Zb0w==
 
-"@telicent-oss/ds@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.2.tgz#218d4fd8a6119a2d52d97c0c6489163de4749cd6"
-  integrity sha512-5VHkNAqPMyF5SVqX5iRk5tdCPL1n3/adNWq/sOfAJwiwt4OW4CSUleG562es6G3hyn1qM6uWhqEaSRAjxaiR4A==
+"@telicent-oss/ds@^1.5.13":
+  version "1.5.13"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.13.tgz#443e99f0e1e838255d9a1d2de9824308ca9289d5"
+  integrity sha512-2YDGPWB+is8YZSK9DR+/kG2M/mmMnFbACJFGlnWrPgt2Wr+7s5+IKNr5YhXBLhxA2nsEWAEMpef41DnVW6+peQ==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
@@ -2856,7 +2856,7 @@
     "@mui/material" "^5.16.6"
     "@mui/x-date-pickers" "^8.9.2"
     "@react-spring/web" "9.7.3"
-    "@telicent-oss/fe-auth-lib" "https://github.com/telicent-oss/rdf-libraries/releases/download/fe-auth-lib-v0.0.1-TELFE-1371.17/telicent-oss-fe-auth-lib-0.0.1-TELFE-1371.17.tgz"
+    "@telicent-oss/fe-auth-lib" "0.0.1-TELFE-1371.1"
     "@telicent-oss/mui-icons-material" "^1.0.0"
     "@telicent-oss/react-lib" "^0.5.0"
     "@telicent-oss/telicent-frontend-cli" "^1.5.0"
@@ -2880,9 +2880,10 @@
     svg-path-parser "^1.1.0"
     zod "^3.21.4"
 
-"@telicent-oss/fe-auth-lib@https://github.com/telicent-oss/rdf-libraries/releases/download/fe-auth-lib-v0.0.1-TELFE-1371.17/telicent-oss-fe-auth-lib-0.0.1-TELFE-1371.17.tgz":
-  version "0.0.1-TELFE-1371.17"
-  resolved "https://github.com/telicent-oss/rdf-libraries/releases/download/fe-auth-lib-v0.0.1-TELFE-1371.17/telicent-oss-fe-auth-lib-0.0.1-TELFE-1371.17.tgz#7478a5fd140c0be7a3822ab2e81a8ed4f2bbea92"
+"@telicent-oss/fe-auth-lib@0.0.1-TELFE-1371.1":
+  version "0.0.1-TELFE-1371.1"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-0.0.1-TELFE-1371.1.tgz#6e43841b83ef4ae017d0d4c2d7022f283c65808a"
+  integrity sha512-O1H772BsuW1MDo4zLa598CJdoaa1+tvtzb6PLpXD8UHLvN1Mi+2TJeg74EwYHtQta55iSZnf9yytdo04VYbhUA==
   dependencies:
     zod "^3.23.8"
 
@@ -2893,10 +2894,10 @@
   dependencies:
     "@babel/runtime" "^7.28.2"
 
-"@telicent-oss/ontologyservice@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ontologyservice/-/ontologyservice-0.0.7.tgz#ae3a108519c3269f9d92d4037445f1477ec57235"
-  integrity sha512-PKpw/SbUeyts8wJZtJtRXpMrpBtl5Wtk81FVlTSzuK2RlcCZxGv5UY2k/qrS9WvjehlSU+YBX00n6C2gb5nswQ==
+"@telicent-oss/ontologyservice@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ontologyservice/-/ontologyservice-0.0.4.tgz#52184f81b1069a38238fba0d1c76b430ee70e40e"
+  integrity sha512-0MwJ6ccz7KVWQskmYbIYCjvkWXfHqOxL7UqpE1vdSwgAKL/KupF85QrvsWkhrE93w+TxI/mm9H94pnPFIf0MOA==
   dependencies:
     "@telicent-oss/rdfservice" "*"
     zod "^3.22.4"
@@ -8955,14 +8956,7 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@18.2.0:
-  version "18.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
-  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
-  dependencies:
-    loose-envify "^1.1.0"
-
-react@^18.3.1:
+react@18.2.0, react@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
