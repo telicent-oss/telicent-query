@@ -105,7 +105,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: ./build
+          path: ./dist
 
   # Build and push a non-release image to ECR on push to main when no GitHub release is created by release please, or on workflow_dispatch
   build-dev-image:
