@@ -8,6 +8,35 @@ Ticket: <!-- Let the ticket expand inline. Maybe change the ticket name field fo
 
 <!-- The Solution.  -->
 
+### Design Testing
+
+- Pre-release version: _e.g. v1.2.3-JIRA-123.0_ <!-- create a prerelease branch, build it, and push it with flux. By also including the version here u allow Dev testers to verify the right version is deployed  -->
+- [ ] This PR is setup for easy assessment of "<strong>Design approval areas</strong>")  
+
+<details>
+  <summary><strong>Design approval areas</strong></summary>
+
+  <hr />
+  
+  A _indicative_ list of suggested screenshots or videos.
+
+  Action each: Mark "`[x]`" (click) for _complete_, or "`[-]`" for _not-applicable_.
+
+  - [ ] UI content:
+    - [ ] **Ideal** - show UI with "happy content" i.e. what Figma considers typical
+    - [ ] **Empty** - show UI with empty (or minimum) content
+    - [ ] **Full** - show UI with all (or technically maximum) content
+  - [ ] UI States:
+    - [ ] **Form validation** - show UI for validation errors, hints and success
+    - [ ] **Network states** - show UI for fetch failures and success
+    - [ ] **env-config errors** - show release-engineer UI for app config errors
+  - [ ] Responsiveness:
+    - [ ] **Min width** - show UI with minimum width supported by parent container, or [most common desktop](https://www.google.com/search?q=most+common+desktop+screen+resolution+now) split screen
+    - [ ] **Min height** - show UI with minimum height supported by parent container, or [most common desktop](https://www.google.com/search?q=most+common+desktop+screen+resolution+now) half height
+  - [ ] Accessibility: new issues introduced this PR (perhaps include report before, and report after)
+
+</details>
+
 ### Testing Method
 
 <!-- Describe your testing steps -->
@@ -36,6 +65,8 @@ General guidance
 - Generally, approve a PR if it makes the system better, even if it's not perfect. — [Google: The Standard of Code Review](https://google.github.io/eng-practices/review/reviewer/standard.html)
 - The aim of both PR AUTHOR and PR REVIEWER is to get the code merged
 - Aim for consensus, defined as _everyone can live with the outcome_
+- PR with changes requires 2 approvals
+- PR with no changes requires 1 approvals
 
 For PR REVIEWER:
 

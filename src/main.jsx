@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@telicent-oss/ds/dist/style.css';
-import 'graphiql/graphiql.min.css';
 import './main.css';
 import config from 'config/app-config';
 import { AuthProvider, UIThemeProvider } from '@telicent-oss/ds';

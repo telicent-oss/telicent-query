@@ -39,9 +39,10 @@ const App = () => (
               />
             }
           />
-          <Route path="/callback" element={
-            <Callback clientId={config.AUTH_V2_CONFIG.clientId} />
-          } />
+          <Route
+            path="/callback"
+            element={<Callback clientId={config.AUTH_V2_CONFIG.clientId} />}
+          />
         </>
       )}
     </Routes>
