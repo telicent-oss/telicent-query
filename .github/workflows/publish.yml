@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push image
-        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@TELDEVOPS-880-update-actions-for-oss
+        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@main
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
           allow-mutable-tags: false
@@ -151,7 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push image
-        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@TELDEVOPS-880-update-actions-for-oss
+        uses: telicent-oss/shared-workflows/.github/actions/push-container-image@main
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
           allow-mutable-tags: false
