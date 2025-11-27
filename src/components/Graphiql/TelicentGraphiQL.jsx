@@ -9,7 +9,6 @@ const TelicentGraphiQLNew = () => {
 
   const fetcher = useCallback(
     async (params) => {
-      console.log({ api, user });
       const { data } = await api.post(config.graph.url, params, {
         withCredentials: true,
       });
