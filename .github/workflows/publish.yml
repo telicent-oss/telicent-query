@@ -77,6 +77,7 @@ jobs:
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
           node-version: 20
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   test-and-build-application:
     name: Run tests and build application
