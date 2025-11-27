@@ -21,7 +21,7 @@ const BASE = process.env.REACT_DEV_SYSTEM_INTEGRATION_URL || 'http://127.0.0.1:8
 
 export default defineConfig({
   plugins: [react()],
-  base: '/query',
+  base: '/query/',
   server: {
     port: 3001,
     strictPort: true,
