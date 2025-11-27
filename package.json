@@ -1,6 +1,6 @@
 {
   "name": "telicent-query",
-  "version": "1.3.0",
+  "version": "1.3.0-TELFE-1395.6",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
