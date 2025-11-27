@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 const yasqeOptions = {
   requestConfig: {
     endpoint: `${config.sparql.url}`,
+    withCredentials: true,
   },
   createShareableLink: false,
   theme: 'material-darker',

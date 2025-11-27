@@ -11,7 +11,6 @@ import TelicentGraphiQL from './components/Graphiql/TelicentGraphiQL';
 
 const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
 
-console.log({ config })
 const App = () => (
   <BrowserRouter basename={basename}>
     <Routes>

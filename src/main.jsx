@@ -9,7 +9,7 @@ import './main.css';
 import config from 'config/app-config';
 import { AuthProvider, UIThemeProvider } from '@telicent-oss/ds';
 import { QueryClient } from '@tanstack/react-query';
-import APP_CONFIG_JSON from './app.config.json'
+import APP_CONFIG_JSON from './app.config.json';
 
 export const queryClient = new QueryClient({
   defaultOptions: {

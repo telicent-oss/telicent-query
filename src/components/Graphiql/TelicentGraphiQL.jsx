@@ -2,27 +2,26 @@ import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import { TeliBrand, useAuth } from '@telicent-oss/ds';
 import { GraphiQL } from 'graphiql';
 import config from '../../config/app-config';
+import { useCallback } from 'react';
 
-const useAuthFetcher = ({ url }) => {
-  const { api } = useAuth();
-  return async (graphQLParams) => {
-    // We call your authenticated Axios instance
-    console.log('searching');
-    const response = await api.post(url, graphQLParams);
-    console.log({ response });
+const TelicentGraphiQLNew = () => {
+  const { api, user } = useAuth(); // now legal
 
-    // Axios returns `data` already parsed
-    return response.data;
-  };
+  const fetcher = useCallback(
+    async (params) => {
+      const { data } = await api.post(config.graph.url, params, {
+        withCredentials: true,
+      });
+      return data;
+    },
+    [api, user],
+  );
+
+  return <GraphiQL fetcher={fetcher} />;
 };
 
-const getFetcher = () =>
-  config.featureFlags.FF_AUTH_V2
-    ? useAuthFetcher({ url: config.graph.url })
-    : createGraphiQLFetcher({ url: config.graph.url });
-
-const TelicentGraphiQL = () => {
-  const fetcher = getFetcher();
+const TelicentGraphiQLLegacy = () => {
+  const fetcher = createGraphiQLFetcher({ url: config.graph.url });
 
   return (
     <section style={{ height: '100vh' }}>
@@ -35,4 +34,4 @@ const TelicentGraphiQL = () => {
   );
 };
 
-export default TelicentGraphiQL;
+export default config.featureFlags.FF_AUTH_V2 ? TelicentGraphiQLNew : TelicentGraphiQLLegacy;
