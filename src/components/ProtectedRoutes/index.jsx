@@ -12,6 +12,8 @@ export const ProtectedRoutes = () => {
     }
   }, [user]);
 
+  if (!user) return null;
+
   return (
     <>
       <AuthModal />
