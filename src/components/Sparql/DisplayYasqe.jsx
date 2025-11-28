@@ -5,16 +5,16 @@ import 'codemirror/theme/material-darker.css';
 import config from 'config/app-config';
 import React, { useEffect } from 'react';
 
-const yasqeOptions = {
-  requestConfig: {
-    endpoint: `${config.sparql.url}`,
-    withCredentials: true,
-  },
-  createShareableLink: false,
-  theme: 'material-darker',
-};
-
 const DisplayYasqe = ({ setResults, setDuration, setLoading }) => {
+  const yasqeOptions = {
+    requestConfig: {
+      endpoint: `${config.sparql.url}`,
+      withCredentials: true,
+    },
+    createShareableLink: false,
+    theme: 'material-darker',
+  };
+
   useEffect(() => {
     const element = document.getElementById('yasqe');
     const yasqe = new Yasqe(element, yasqeOptions);

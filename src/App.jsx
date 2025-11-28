@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, Route, Routes } from 'react-router-dom';
 import { AuthRedirectUri, Callback } from '@telicent-oss/ds';
 import config from 'config/app-config';
 
@@ -11,12 +11,22 @@ import TelicentGraphiQL from './components/Graphiql/TelicentGraphiQL';
 
 const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
 
-const App = () => (
-  <BrowserRouter basename={basename}>
+const App = () => {
+  const location = useLocation();
+  const isCallback = location.pathname.endsWith('/callback');
+
+  if (isCallback) {
+    return (
+      <Routes>
+        <Route path="/callback" element={<Callback clientId={config.AUTH_V2_CONFIG.clientId} />} />
+      </Routes>
+    );
+  }
+  return (
     <Routes>
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<UserFetch />}>
-          <Route index element={<Sparql />} />
+          <Route path="/" element={<Sparql />} />
           <Route path="/graphiql" element={<TelicentGraphiQL />} />
         </Route>
       </Route>
@@ -39,13 +49,10 @@ const App = () => (
               />
             }
           />
-          <Route path="/callback" element={
-            <Callback clientId={config.AUTH_V2_CONFIG.clientId} />
-          } />
         </>
       )}
     </Routes>
-  </BrowserRouter>
-);
+  );
+};
 
 export default App;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@telicent-oss/ds/dist/style.css';
-import 'graphiql/graphiql.min.css';
 import './main.css';
 import config from 'config/app-config';
 import { AuthProvider, UIThemeProvider } from '@telicent-oss/ds';
@@ -23,25 +23,29 @@ export const queryClient = new QueryClient({
 });
 
 const root = createRoot(document.getElementById('root'));
-
-const RenderApp = config.featureFlags.FF_AUTH_V2 ? (
+const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
+const RenderApp = (
   <UIThemeProvider dark theme="GraphOrange">
-    <AuthProvider
-      config={{
-        onLogout: () => {
-          console.log('You are now logged out. Redirecting');
-          window.location.href = `/${APP_CONFIG_JSON['uri-basename']}`;
-        },
-        ...config?.AUTH_V2_CONFIG,
-      }}
-      apiUrl={config.apiUrl}
-      queryClient={queryClient}
-    >
-      <App />
-    </AuthProvider>
+    <BrowserRouter basename={basename}>
+      {config.featureFlags.FF_AUTH_V2 ? (
+        <AuthProvider
+          config={{
+            onLogout: () => {
+              console.log('You are now logged out. Redirecting');
+              window.location.href = `/${APP_CONFIG_JSON['uri-basename']}`;
+            },
+            ...config?.AUTH_V2_CONFIG,
+          }}
+          apiUrl={config.apiUrl}
+          queryClient={queryClient}
+        >
+          <App />
+        </AuthProvider>
+      ) : (
+        <App />
+      )}
+    </BrowserRouter>
   </UIThemeProvider>
-) : (
-  <App />
 );
 
 root.render(RenderApp);

@@ -21,6 +21,9 @@ const BASE = process.env.REACT_DEV_SYSTEM_INTEGRATION_URL || 'http://127.0.0.1:8
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['graphiql'],
+  },
   base: '/query',
   server: {
     port: 3001,
@@ -45,8 +48,8 @@ export default defineConfig({
   },
   build: {
     outDir: './build',
-    target: 'esnext',
-    rollupOptions: { external: ['/env-config.js'] },
+    emptyOutDir: true,
+    rollupOptions: { external: ['env-config.js'] },
   },
 
   resolve: {
