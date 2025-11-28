@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.4.0](https://github.com/telicent-oss/telicent-query/compare/v1.3.0...v1.4.0) (2025-11-28)
+
+
+### Features
+
+* implement auth ([5c71978](https://github.com/telicent-oss/telicent-query/commit/5c719787e984c86131e7bb629792b8fa99058a59))
+* implement auth ([6c78203](https://github.com/telicent-oss/telicent-query/commit/6c782038514a22d889d2723c82bf09ff617d4a69))
+
+
+### Bug Fixes
+
+* disable lint fix ([14ea8f6](https://github.com/telicent-oss/telicent-query/commit/14ea8f6fabcfb9e272a30dae2b5f39d03c7f626b))
+* fix base ([2efccc2](https://github.com/telicent-oss/telicent-query/commit/2efccc29695423374609a43c1e5b72393c984fb8))
+* patch axios cve ([cc0a570](https://github.com/telicent-oss/telicent-query/commit/cc0a570cbf2b479e87d07e01518e9a117c9e6da6))
+* patch axios cve ([f3f1497](https://github.com/telicent-oss/telicent-query/commit/f3f14972717d4ad22c7360444e1821d5c4220db4))
+* **ProtectedRoutes:** return null if no user ([3d34fbe](https://github.com/telicent-oss/telicent-query/commit/3d34fbe256b8371ddb00a6deecffaaf95ac5fc09))
+* **ProtectedRoutes:** return null if no user ([4aea8fa](https://github.com/telicent-oss/telicent-query/commit/4aea8fabe59ad2e765468b38d67856cfefa81f3e))
+* **publish.yml:** update build path ([408e5fb](https://github.com/telicent-oss/telicent-query/commit/408e5fb6882c7bff3e9dff22fce05cffe08caa74))
+* styles ([e6b1403](https://github.com/telicent-oss/telicent-query/commit/e6b1403e9ecd2ced10d92a90c7deeff195d5a5aa))
+
 ## [1.3.0](https://github.com/telicent-oss/telicent-query/compare/v1.2.3...v1.3.0) (2025-11-12)
 
 
