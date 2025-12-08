@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/telicent-oss/telicent-query/compare/v1.4.0...v1.4.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* **ds/fe-auth-lib:** [TELFE-1435] no /userinfo & no double stringify Application/json ([#24](https://github.com/telicent-oss/telicent-query/issues/24)) ([79222b3](https://github.com/telicent-oss/telicent-query/commit/79222b3701ea3c2e36eacf3da57db712c255b6e4))
+
 ## [1.4.0](https://github.com/telicent-oss/telicent-query/compare/v1.3.0...v1.4.0) (2025-11-28)
 
 
