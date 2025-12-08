@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/telicent-oss/telicent-query/compare/v1.4.1...v1.4.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* **bugs:** double instantiation ([#26](https://github.com/telicent-oss/telicent-query/issues/26)) ([563ad94](https://github.com/telicent-oss/telicent-query/commit/563ad9485f46e829d4f6f53a0642a19f5a7f0d1e))
+
 ## [1.4.1](https://github.com/telicent-oss/telicent-query/compare/v1.4.0...v1.4.1) (2025-12-08)
 
 
