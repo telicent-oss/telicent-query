@@ -2899,10 +2899,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.12.tgz#1dff176df9cc8f93c78c5e46bcea11079b397578"
   integrity sha512-1YBOJfRHV4sXUmWsFSf5rQor4Ss82G8dQWLRbnk3GA4jeP8hQt1hxXh0tmflpC0dz3VgEv/1+qwPyLeWkQuPFA==
 
-"@telicent-oss/ds@^1.5.21":
-  version "1.5.21"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.21.tgz#0a3c621ed551e7e2adce704a854791c879339a8a"
-  integrity sha512-alaoqjkRj4AiV7gOcaTClR1JLZF3DE4HbhF47N6cPIQ//j7Cxb+EUG2cTvTncv5eQDhe/GVtnb4htR0+nN6wsw==
+"@telicent-oss/ds@^1.5.22":
+  version "1.5.22"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.22.tgz#00cb3d70f5d33c585834b865fb85d985d899d3e2"
+  integrity sha512-SOI/W9JyF+yavwnMVr6bqaA/E4lh03sOifSiScnrgMZXnIii/m9Zo+aGOZQpyJJZs+SnEB+2Eb+57hngtLn6BQ==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
@@ -2914,7 +2914,7 @@
     "@mui/material" "^5.16.6"
     "@mui/x-date-pickers" "^8.9.2"
     "@react-spring/web" "9.7.3"
-    "@telicent-oss/fe-auth-lib" "1.0.0"
+    "@telicent-oss/fe-auth-lib" "1.0.1"
     "@telicent-oss/mui-icons-material" "^1.0.0"
     "@telicent-oss/react-lib" "^0.5.0"
     "@telicent-oss/telicent-frontend-cli" "^1.5.0"
@@ -2938,10 +2938,10 @@
     svg-path-parser "^1.1.0"
     zod "^3.21.4"
 
-"@telicent-oss/fe-auth-lib@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.0.tgz#57f5eb921e1ffd6d8fa581623da265bad62daf20"
-  integrity sha512-UQDr2lm829aK8O/7nms+jfZk1muneQVenhE/bLX/V8YVwOEbwQKA2GMLrHDrtAgDtTlc/+Sxw7W+Yyi1i+yoRA==
+"@telicent-oss/fe-auth-lib@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.1.tgz#90b36f43d8c62317e6c88df9174ae34f7f3f88c3"
+  integrity sha512-+sttu9nSOU95lECuwlvBDjJN5WcOwQOyKHIlPHLZttocbgE3pM2u/CyDi/XY2ZuYBUydkWVf9QR5RD/apOLb5A==
   dependencies:
     zod "^3.23.8"
 
