@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/telicent-oss/telicent-query/compare/v1.4.2...v1.4.3) (2025-12-09)
+
+
+### Bug Fixes
+
+* **ds:** [TELFE-1440] upg ds ([#28](https://github.com/telicent-oss/telicent-query/issues/28)) ([543554e](https://github.com/telicent-oss/telicent-query/commit/543554e10c74ea2a0a3faf1129f49955cdf19e3f))
+
 ## [1.4.2](https://github.com/telicent-oss/telicent-query/compare/v1.4.1...v1.4.2) (2025-12-08)
 
 
