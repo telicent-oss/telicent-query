@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { TeliBasicLayout, TeliBrand, TeliHeader, TeliSpinner as Spinner } from '@telicent-oss/ds';
+import { TeliSpinner as Spinner } from '@telicent-oss/ds';
 import DisplayYasqe from './DisplayYasqe';
 import SparqlTable from './SparqlTable';
-import { APP_CONFIG_JSON } from '../../constants';
-import classNames from 'classnames';
+import Header from '../Header';
 import ScrollToTop from './ScrollToTop';
 
 const DisplaySparql = () => {
@@ -12,22 +11,9 @@ const DisplaySparql = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <TeliBasicLayout>
-      <TeliHeader
-        className={classNames(
-          'sticky top-0 h-16 z-20 transition-all duration-200 bg-black-100',
-          {},
-        )}
-        navProps={{ className: 'pt-2' }}
-      >
-        <TeliBrand
-          appName={APP_CONFIG_JSON.app_name}
-          className="flex items-center justify-center"
-        />
+    <>
+      <Header />
 
-        <div className="bg-black-100 search--grid-template search--container"></div>
-        <div className="absolute top-0 right-1"></div>
-      </TeliHeader>
       <div className="p-1.5 sticky">
         <DisplayYasqe setResults={setResults} setDuration={setDuration} setLoading={setLoading} />
       </div>
@@ -55,7 +41,7 @@ const DisplaySparql = () => {
           <ScrollToTop />
         </div>
       )}
-    </TeliBasicLayout>
+    </>
   );
 };
 
