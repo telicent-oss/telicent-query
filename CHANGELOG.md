@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/telicent-oss/telicent-query/compare/v1.4.3...v1.4.4) (2025-12-11)
+
+
+### Bug Fixes
+
+* **auth:** [TELFE-1441] work with new version of ds ([#30](https://github.com/telicent-oss/telicent-query/issues/30)) ([4b1309d](https://github.com/telicent-oss/telicent-query/commit/4b1309d68f7092cfe63000440a9df6d73e86d278))
+
 ## [1.4.3](https://github.com/telicent-oss/telicent-query/compare/v1.4.2...v1.4.3) (2025-12-09)
 
 
