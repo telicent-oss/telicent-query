@@ -1,3 +1,5 @@
+import APP_CONFIG_JSON from '../app.config.json';
+
 const env = import.meta.env.JEST_WORKER_ID ? import.meta.process.env : window;
 
 const config = {
@@ -18,7 +20,9 @@ const config = {
   featureFlags: {
     FF_AUTH_V2: Boolean(env.featureFlags?.FF_AUTH_V2),
   },
+  APP_CONFIG_JSON,
   AUTH_V2_CONFIG: env.AUTH_V2_CONFIG,
+  APP_SWITCH_LIBRARY: [],
 };
 
 export const getConfig = () => config;

@@ -2899,10 +2899,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.13.tgz#1e55efe82730e60f4d68b1e2bc956bd3d94f307b"
   integrity sha512-uQFoSdKKf5S8k51W5t7b2qpfkyIbdHMzAn+AMQvHPxKUPeo1SsGaA4JRISQT87jm28b7z8OEqPcg1IOZagQHcA==
 
-"@telicent-oss/ds@^1.5.24":
-  version "1.5.24"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.24.tgz#7b1e4f161b2aad3fa2496a9e5b122799a93957d6"
-  integrity sha512-g/SfAGHOOpXon9wUcLD1pp2flrAZKJ4VT/CV3sjYfzzMcCxesTyiZ+GGOiE1p7kSReqfe+E+yU/z3M1UnyUgmw==
+"@telicent-oss/ds@1.5.24-TELFE-1441.2":
+  version "1.5.24-TELFE-1441.2"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.24-TELFE-1441.2.tgz#ed598654b0153815156daca0e8c652cced1538e8"
+  integrity sha512-nUrd53UlbG6pFpY9CyjFDKHcTTMs1B7m27Xbq4IZ9g+Eqh+YP4Fzzya4FKyDpB+mb/2GR/I8zxW+WMfA8aOXHw==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
