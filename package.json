@@ -9,7 +9,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.5",
     "@tanstack/react-query": "^5.90.7",
-    "@telicent-oss/ds": "1.5.24-TELFE-1441.2",
+    "@telicent-oss/ds": "1.5.26",
     "@triply/yasqe": "^4.2.28",
     "axios": "^1.12.0",
     "classnames": "^2.3.1",
