@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5](https://github.com/telicent-oss/telicent-query/compare/v1.4.4...v1.4.5) (2025-12-12)
+
+
+### Bug Fixes
+
+* **ds:** v1.5.26 ([#32](https://github.com/telicent-oss/telicent-query/issues/32)) ([848fdab](https://github.com/telicent-oss/telicent-query/commit/848fdabbb3ea070899d02c2abbddc86860cd26b2))
+
 ## [1.4.4](https://github.com/telicent-oss/telicent-query/compare/v1.4.3...v1.4.4) (2025-12-11)
 
 
