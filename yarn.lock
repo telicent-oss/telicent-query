@@ -2294,22 +2294,22 @@
     react-is "^19.2.0"
 
 "@mui/x-date-pickers@^8.9.2":
-  version "8.21.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-8.21.0.tgz#532bdc49833dc34b321c241c70a4b31f9595fb99"
-  integrity sha512-nQ6T6RIHTO7AcUlh7+mICcbwcTOlu+GSSrBsF1Z6pdqbMaxxucABRW3cnC8PdYrSok4+zkkSdTzgKOSCGW+c1g==
+  version "8.22.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-8.22.0.tgz#60bc176a308078002e93cfbf3ee55cae234280d5"
+  integrity sha512-iF4H8EJHcltiwfytTe6M1/iCwBUCB97oVh63nAsL4tre2Ew2jm8bKR4Dw2pbgvSUonB3okpZVuweFBQdnECJCg==
   dependencies:
     "@babel/runtime" "^7.28.4"
     "@mui/utils" "^7.3.5"
-    "@mui/x-internals" "8.21.0"
+    "@mui/x-internals" "8.22.0"
     "@types/react-transition-group" "^4.4.12"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     react-transition-group "^4.4.5"
 
-"@mui/x-internals@8.21.0":
-  version "8.21.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.21.0.tgz#3961a3ead5f31af77628e28c1585a65b954b7699"
-  integrity sha512-tOU6iKi9phIQXWVzQvslKR/y5q+L/NKiBpSqtTDMV7aAxm2mOtCiO6POH2je1nw8iromrQAJfpV9pXDDRgZ01w==
+"@mui/x-internals@8.22.0":
+  version "8.22.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.22.0.tgz#adf47979b3ef1e7c078965756916f6bd57c3c655"
+  integrity sha512-PA7jCKRLbS6aYvTSbGr3Id4CPUdTrUejHm31l8Vje7dw138gBBHrHeGsqWJh/S5foorpK8loiRejKrLlTZokyQ==
   dependencies:
     "@babel/runtime" "^7.28.4"
     "@mui/utils" "^7.3.5"
@@ -2899,10 +2899,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.13.tgz#1e55efe82730e60f4d68b1e2bc956bd3d94f307b"
   integrity sha512-uQFoSdKKf5S8k51W5t7b2qpfkyIbdHMzAn+AMQvHPxKUPeo1SsGaA4JRISQT87jm28b7z8OEqPcg1IOZagQHcA==
 
-"@telicent-oss/ds@1.5.24-TELFE-1441.2":
-  version "1.5.24-TELFE-1441.2"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.24-TELFE-1441.2.tgz#ed598654b0153815156daca0e8c652cced1538e8"
-  integrity sha512-nUrd53UlbG6pFpY9CyjFDKHcTTMs1B7m27Xbq4IZ9g+Eqh+YP4Fzzya4FKyDpB+mb/2GR/I8zxW+WMfA8aOXHw==
+"@telicent-oss/ds@1.5.26":
+  version "1.5.26"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.26.tgz#60fa438518d57a9da06562817c469aad872b18a7"
+  integrity sha512-PXO+TKit8GakvZfhxAiIlwByIfpf9/5611C/0mueL/JullbaW+iQXjdA4i3a4Wgd1RmW1pLqZeRJZEaKCgOT2g==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
@@ -2914,7 +2914,7 @@
     "@mui/material" "^5.16.6"
     "@mui/x-date-pickers" "^8.9.2"
     "@react-spring/web" "9.7.3"
-    "@telicent-oss/fe-auth-lib" "1.0.1"
+    "@telicent-oss/fe-auth-lib" "1.0.2"
     "@telicent-oss/mui-icons-material" "^1.0.0"
     "@telicent-oss/react-lib" "^0.5.0"
     "@telicent-oss/telicent-frontend-cli" "^1.5.0"
@@ -2938,10 +2938,10 @@
     svg-path-parser "^1.1.0"
     zod "^3.21.4"
 
-"@telicent-oss/fe-auth-lib@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.1.tgz#90b36f43d8c62317e6c88df9174ae34f7f3f88c3"
-  integrity sha512-+sttu9nSOU95lECuwlvBDjJN5WcOwQOyKHIlPHLZttocbgE3pM2u/CyDi/XY2ZuYBUydkWVf9QR5RD/apOLb5A==
+"@telicent-oss/fe-auth-lib@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.2.tgz#a0594d6b485c90d4147fd0e548d0f0c1b2d1a9bb"
+  integrity sha512-Ll/XAov+GK7prK7upN5CyU+sAHD0FLyVYzISPpt3Bhl6RcxtN5viZZ3ZJ8maQgEMveltYYCoTZ6GasNl+A6Ewg==
   dependencies:
     zod "^3.23.8"
 
@@ -3260,9 +3260,9 @@
   integrity sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==
 
 "@types/node@*":
-  version "24.10.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.10.2.tgz#82a57476a19647d8f2c7750d0924788245e39b26"
-  integrity sha512-WOhQTZ4G8xZ1tjJTvKOpyEVSGgOTvJAfDK3FNFgELyaTpzhdgHVHeqW8V+UJvzF5BT+/B54T/1S2K6gd9c7bbA==
+  version "25.0.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.1.tgz#9c41c277a1b16491174497cd075f8de7c27a1ac4"
+  integrity sha512-czWPzKIAXucn9PtsttxmumiQ9N0ok9FrBwgRWrwmVLlp86BrMExzvXRLFYRJ+Ex3g6yqj+KuaxfX1JTgV2lpfg==
   dependencies:
     undici-types "~7.16.0"
 
@@ -4091,9 +4091,9 @@ base64-js@^1.3.1:
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 baseline-browser-mapping@^2.9.0:
-  version "2.9.5"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.5.tgz#47f9549e0be1a84cd16651ac4c3b7d87a71408e6"
-  integrity sha512-D5vIoztZOq1XM54LUdttJVc96ggEsIfju2JBvht06pSzpckp3C7HReun67Bghzrtdsq9XdMGbSSB3v3GhMNmAA==
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.6.tgz#82de0f7ee5860df86d60daf0d9524ae7227eeee7"
+  integrity sha512-v9BVVpOTLB59C9E7aSnmIF8h7qRsFpx+A2nugVMTszEOMcfjlZMsXRm4LF23I3Z9AJxc8ANpIvzbzONoX9VJlg==
 
 binary-extensions@^2.0.0:
   version "2.3.0"
@@ -8810,9 +8810,9 @@ react-is@^18.0.0:
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
 react-is@^19.0.0, react-is@^19.2.0:
-  version "19.2.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.2.1.tgz#712fa6ee30c8398dc34260017325dad92b9224c5"
-  integrity sha512-L7BnWgRbMwzMAubQcS7sXdPdNLmKlucPlopgAzx7FtYbksWZgEWiuYM5x9T6UqS2Ne0rsgQTq5kY2SGqpzUkYA==
+  version "19.2.3"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.2.3.tgz#eec2feb69c7fb31f77d0b5c08c10ae1c88886b29"
+  integrity sha512-qJNJfu81ByyabuG7hPFEbXqNcWSU3+eVus+KJs+0ncpGfMyYdvSmxiJxbWR65lYi1I+/0HBcliO029gc4F+PnA==
 
 react-map-gl@^7.1.6:
   version "7.1.9"
@@ -9780,9 +9780,9 @@ synckit@^0.11.7:
     "@pkgr/core" "^0.2.9"
 
 tailwindcss@^3.0.16:
-  version "3.4.18"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.18.tgz#9fa9650aace186644b608242f1e57d2d55593301"
-  integrity sha512-6A2rnmW5xZMdw11LYjhcI5846rt9pbLSabY5XPxo+XWdxwZaFEn47Go4NzFiHu9sNNmr/kXivP1vStfvMaK1GQ==
+  version "3.4.19"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.19.tgz#af2a0a4ae302d52ebe078b6775e799e132500ee2"
+  integrity sha512-3ofp+LL8E+pK/JuPLPggVAIaEuhvIz4qNcf3nA1Xn2o/7fb7s/TYpHhwGDv1ZU3PkBluUVaF8PyCHcm48cKLWQ==
   dependencies:
     "@alloc/quick-lru" "^5.2.0"
     arg "^5.0.2"
