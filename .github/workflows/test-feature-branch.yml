@@ -37,8 +37,7 @@ jobs:
           TEST_RESULTS_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results.json"
           TEST_RESULTS_ARTIFACT_NAME: "${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results"
       - name: Run tests
-        run: yarn test --json --output-file ${{ runner.temp }}/test_output.json 2>&1
-        # run: yarn test --json --output-file ${{ runner.temp }}/test_output.json 2>&1 | tee ${{ runner.temp }}/test_output.txt
+        run: yarn test --json --output-file ${{ steps.globals.outputs.test-results-file-path }}
         shell: bash
       - name: Test results artefact
         if: always()
@@ -51,5 +50,5 @@ jobs:
         shell: bash
         run: |
           echo "# Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          cat ${{ runner.temp }}/test_output.json >> $GITHUB_STEP_SUMMARY
+          cat ${{ steps.globals.outputs.test-results-file-path }} >> $GITHUB_STEP_SUMMARY
 
