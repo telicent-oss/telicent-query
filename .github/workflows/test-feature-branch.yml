@@ -16,15 +16,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-      - name: Prepare Yarn
+      - name: Yarn Prepare
         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
           node-version: 20
           additional-args: '--network-timeout 600000'
+      - name: Get app config from app.config.json
+        id: app_config
+        run: |
+          sudo apt-get install jq
+          APP_NAME=$(jq -r '.app_name // error("app_name missing from ./src/app.config.json")' ./src/app.config.json) && \
+            echo "app-name=$APP_NAME" >> $GITHUB_OUTPUT && echo "APP_NAME: $APP_NAME"
+      - name: Set globals
+        id: globals
+        shell: bash
+        run: |
+          echo "test-results-file-path=$TEST_RESULTS_FILE_PATH" >> $GITHUB_OUTPUT
+          echo "test-results-artifact-name=$TEST_RESULTS_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+        env:
+          TEST_RESULTS_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results.json"
+          TEST_RESULTS_ARTIFACT_NAME: "${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results"
       - name: Run tests
-        run: yarn test --reporters="github-actions" --reporters="summary" --json --output-file ${{ runner.temp }}/test_output.json 2>&1
+        run: yarn test --json --output-file ${{ runner.temp }}/test_output.json 2>&1
         # run: yarn test --json --output-file ${{ runner.temp }}/test_output.json 2>&1 | tee ${{ runner.temp }}/test_output.txt
         shell: bash
+      - name: Test results artefact
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.globals.outputs.test-results-artifact-name }}
+          path: ${{ steps.globals.outputs.test-results-file-path }}
       - name: Test results summary
         if: always()
         shell: bash
