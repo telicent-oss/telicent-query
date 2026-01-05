@@ -31,36 +31,29 @@ jobs:
         id: globals
         shell: bash
         run: |
-          echo "coverage-summary-file-path=$COVERAGE_SUMMARY_FILE_PATH" >> $GITHUB_OUTPUT
-          echo "coverage-file-path=$COVERAGE_FILE_PATH" >> $GITHUB_OUTPUT
+          echo "summary-file-path=$SUMMARY_FILE_PATH" >> $GITHUB_OUTPUT
           echo "test-results-file-path=$TEST_RESULTS_FILE_PATH" >> $GITHUB_OUTPUT
           echo "test-results-artifact-name=$TEST_RESULTS_ARTIFACT_NAME" >> $GITHUB_OUTPUT
         env:
-          COVERAGE_SUMMARY_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.coverage.txt"
-          COVERAGE_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.coverage.json"
+          SUMMARY_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.summary.txt"
           TEST_RESULTS_FILE_PATH: "${{ runner.temp }}/${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results.json"
           TEST_RESULTS_ARTIFACT_NAME: "${{ steps.app_config.outputs.app-name }}.${{ github.run_number }}.test-results"
       - name: Run tests
-        run: yarn test --json --output-file ${{ steps.globals.outputs.test-results-file-path }}
+        run: yarn test --coverage --json --output-file ${{ steps.globals.outputs.test-results-file-path }}
         shell: bash
-      - name: Run coverage
-        run: yarn test --coverage
-        shell: bash
+      - name: Run tests for summary
+        run: yarn test --coverage --reporters=github-actions --reporters=summary 2>&1 | tee ${{ steps.globals.outputs.summary-file-path }}
       - name: Test results artefact
         if: always()
         uses: actions/upload-artifact@v6
         with:
           name: ${{ steps.globals.outputs.test-results-artifact-name }}
           path: |
-            ${{ steps.globals.outputs.coverage-file-path }}
             ${{ steps.globals.outputs.test-results-file-path }}
       - name: Test results summary
         if: always()
         shell: bash
         run: |
-          # echo "# Test Coverage Summary" >> $GITHUB_STEP_SUMMARY
-          # cat ${{ steps.globals.outputs.coverage-summary-file-path }} >> $GITHUB_STEP_SUMMARY
-          # cat ${{ steps.globals.outputs.coverage-file-path }} >> $GITHUB_STEP_SUMMARY
           echo "# Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          cat ${{ steps.globals.outputs.test-results-file-path }} >> $GITHUB_STEP_SUMMARY
+          cat ${{ steps.globals.outputs.summary-file-path }} >> $GITHUB_STEP_SUMMARY
 
