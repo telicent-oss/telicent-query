@@ -22,5 +22,12 @@ jobs:
           node-version: 20
           additional-args: '--network-timeout 600000'
       - name: Run tests
-        run: yarn test
+        run: yarn test 2>&1 | tee ${{ runner.temp }}/test_output.txt
         shell: bash
+      - name: Test results summary
+        if: always()
+        shell: bash
+        run: |
+          echo "# Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          cat ${{ runner.temp }}/test_output.txt >> $GITHUB_STEP_SUMMARY
+
