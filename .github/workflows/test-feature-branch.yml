@@ -44,7 +44,7 @@ jobs:
         run: yarn test --json --output-file ${{ steps.globals.outputs.test-results-file-path }}
         shell: bash
       - name: Run coverage
-        run: yarn test --coverage --json --output-file ${{ steps.globals.outputs.coverage-file-path }} | tee ${{ steps.globals.outputs.coverage-summary-file-path }}
+        run: yarn test --coverage=true --json --output-file ${{ steps.globals.outputs.coverage-file-path }} | tee ${{ steps.globals.outputs.coverage-summary-file-path }}
         shell: bash
       - name: Test results artefact
         if: always()
@@ -60,6 +60,7 @@ jobs:
         run: |
           echo "# Test Coverage Summary" >> $GITHUB_STEP_SUMMARY
           cat ${{ steps.globals.outputs.coverage-summary-file-path }} >> $GITHUB_STEP_SUMMARY
+          cat ${{ steps.globals.outputs.coverage-file-path }} >> $GITHUB_STEP_SUMMARY
           echo "# Test Results Summary" >> $GITHUB_STEP_SUMMARY
           cat ${{ steps.globals.outputs.test-results-file-path }} >> $GITHUB_STEP_SUMMARY
 
