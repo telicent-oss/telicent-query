@@ -1,5 +1,5 @@
 name: test-feature-branch.yml
-run-name: Test feature branch
+run-name: Test Feature Branch
 
 on:
   push:
