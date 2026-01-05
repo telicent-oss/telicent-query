@@ -22,7 +22,7 @@ jobs:
           node-version: 20
           additional-args: '--network-timeout 600000'
       - name: Run tests
-        run: yarn test --reporters="github-actions" --reporters="summary"--json --output-file ${{ runner.temp }}/test_output.json 2>&1
+        run: yarn test --reporters="github-actions" --reporters="summary" --json --output-file ${{ runner.temp }}/test_output.json 2>&1
         # run: yarn test --json --output-file ${{ runner.temp }}/test_output.json 2>&1 | tee ${{ runner.temp }}/test_output.txt
         shell: bash
       - name: Test results summary
