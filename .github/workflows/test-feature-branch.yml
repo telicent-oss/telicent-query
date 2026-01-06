@@ -23,18 +23,21 @@ jobs:
           node-version: 20
           additional-args: '--network-timeout 600000'
       - name: Run tests
-        run: yarn test --reporters=default --reporters=jest-ctrf-json-reporter
+        run: yarn test --coverage --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash
-      # - name: Detailed test report
-      #   uses: ctrf-io/github-test-reporter@v1
-      #   if: always()
-      #   with:
-      #     report-path: './ctrf-reports/ctrf-report.json'
-      #     github-report: true
-      #     annotate: false
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish coverage in job summary
+      - name: XXX
+        run: ls ./ctrf
+        shell: bash
+      - name: Detailed test report
+        uses: ctrf-io/github-test-reporter@v1
         if: always()
-        run: npx github-actions-ctrf ctrf/ctrf-report.json
-        shell: bash
+        with:
+          report-path: '.ctrf/ctrf-report.json'
+          github-report: true
+          annotate: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish coverage in job summary
+      #   if: always()
+      #   run: npx github-actions-ctrf ctrf/ctrf-report.json
+      #   shell: bash
