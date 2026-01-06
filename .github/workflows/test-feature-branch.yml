@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-      - name: Yarn Prepare
+      - name: Prepare Yarn
         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
           node-version: 20
