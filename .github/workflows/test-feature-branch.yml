@@ -22,5 +22,7 @@ jobs:
           node-version: 20
           additional-args: '--network-timeout 600000'
       - name: Run tests
-        run: yarn test --coverage
+        run: yarn test --coverage --coverage-reporters json-summary --coverage-reporters text-summary
         shell: bash
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
