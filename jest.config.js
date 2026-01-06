@@ -8,7 +8,4 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'], // Jest setup file
   transformIgnorePatterns: ['node_modules/(?!axios)/'],
-
-  collectCoverageFrom: ["**/*.{js,jsx,vue}", "!**/node_modules/**"], // Collect coverage only from JS, JSX, and Vue files, and ignore node_modules
-  coverageReporters: [ "text", "text-summary"], // Generate text and text-summary coverage reports
 };

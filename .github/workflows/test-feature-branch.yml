@@ -11,10 +11,8 @@ jobs:
     name: Run unit tests
     runs-on: ubuntu-latest
     permissions:
-      checks: write
       id-token: write
-      pull-requests: write
-      contents: write
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -24,13 +22,5 @@ jobs:
           node-version: 20
           additional-args: '--network-timeout 600000'
       - name: Run tests
-        run: yarn test
+        run: yarn test --coverage
         shell: bash
-      - name: Jest Coverage Comment
-        uses: ArtiomTr/jest-coverage-report-action@v2.1.2
-        id: coverage
-        with:
-          annotations: none
-          package-manager: yarn
-          test-script: yarn test --coverage
-          icons: emoji
