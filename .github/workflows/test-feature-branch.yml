@@ -31,11 +31,12 @@ jobs:
         with:
           report-path: ctrf/ctrf-report.json
           pull-request-report: true
+          pull-request: true
           upload-artifact: true
           fetch-previous-results: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish coverage in job summary
-        if: always()
-        run: npx github-actions-ctrf ctrf/ctrf-report.json
-        shell: bash
+      # - name: Publish coverage in job summary
+      #   if: always()
+      #   run: npx github-actions-ctrf ctrf/ctrf-report.json
+      #   shell: bash
