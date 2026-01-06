@@ -32,5 +32,5 @@ jobs:
         with:
           annotations: none
           package-manager: yarn
-          test-script: yarn test
+          test-script: yarn test --coverage
           icons: emoji
