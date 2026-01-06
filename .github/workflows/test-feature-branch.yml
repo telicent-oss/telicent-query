@@ -24,3 +24,6 @@ jobs:
       - name: Run tests
         run: yarn test --coverage
         shell: bash
+      - name: Generate Report
+        run: npx github-actions-ctrf coverage/coverage-final.json
+        if: always()
