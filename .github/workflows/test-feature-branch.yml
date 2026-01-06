@@ -29,5 +29,5 @@ jobs:
         shell: bash
       - name: Generate Report
         if: always()
-        run: npx github-actions-ctrf coverage/coverage-final.json
+        run: npx github-actions-ctrf ctrf/ctrf-report.json
         shell: bash
