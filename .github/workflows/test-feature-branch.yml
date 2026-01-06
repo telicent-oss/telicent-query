@@ -24,9 +24,6 @@ jobs:
       - name: Run tests
         run: yarn test --coverage --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash
-      - name: XXX
-        run: ls ./ctrf
-        shell: bash
       - name: Detailed test report
         uses: ctrf-io/github-test-reporter@v1
         if: always()
