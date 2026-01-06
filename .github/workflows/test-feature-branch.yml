@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      pull-requests: write
       contents: read
     steps:
       - name: Checkout repository
@@ -24,7 +25,17 @@ jobs:
       - name: Run tests
         run: yarn test --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash
-      - name: Generate Report
+      - name: Publish test report in PR comment
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: './ctrf/*.json'
+          pull-request-report: true
+          upload-artifact: true
+          fetch-previous-results: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish coverage in job summary
         if: always()
         run: npx github-actions-ctrf ctrf/ctrf-report.json
         shell: bash
