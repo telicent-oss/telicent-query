@@ -34,10 +34,7 @@ jobs:
         with:
           report-path: './ctrf/ctrf-report.json'
           github-report: true
+          pull-request-report: true
           annotate: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Publish coverage in job summary
-      #   if: always()
-      #   run: npx github-actions-ctrf ctrf/ctrf-report.json
-      #   shell: bash
