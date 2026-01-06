@@ -25,20 +25,16 @@ jobs:
       - name: Run tests
         run: yarn test --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash
-      - name: Publish test report in PR comment
-        uses: ctrf-io/github-test-reporter@v1
-        if: always()
-        with:
-          report-path: ctrf/ctrf-report.json
-          pull-request-report: true
-          pull-request: true
-          github-report: true
-          summary-report: true
-          fetch-previous-results: true
-          overwrite-comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Publish coverage in job summary
+      # - name: Detailed test report
+      #   uses: ctrf-io/github-test-reporter@v1
       #   if: always()
-      #   run: npx github-actions-ctrf ctrf/ctrf-report.json
-      #   shell: bash
+      #   with:
+      #     report-path: './ctrf-reports/ctrf-report.json'
+      #     github-report: true
+      #     annotate: false
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish coverage in job summary
+        if: always()
+        run: npx github-actions-ctrf ctrf/ctrf-report.json
+        shell: bash
