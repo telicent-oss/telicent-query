@@ -32,7 +32,7 @@ jobs:
         uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
-          report-path: '.ctrf/ctrf-report.json'
+          report-path: './ctrf/ctrf-report.json'
           github-report: true
           annotate: false
         env:
