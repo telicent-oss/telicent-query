@@ -32,10 +32,10 @@ jobs:
           report-path: ctrf/ctrf-report.json
           pull-request-report: true
           pull-request: true
+          github-report: true
           summary-report: true
-          summary: true
-          upload-artifact: true
           fetch-previous-results: true
+          overwrite-comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Publish coverage in job summary
