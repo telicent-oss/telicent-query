@@ -21,9 +21,13 @@ jobs:
         with:
           node-version: 20
           additional-args: '--network-timeout 600000'
+      - name: Install test reporter
+        run: npm install --save-dev jest-ctrf-json-reporter
+        shell: bash
       - name: Run tests
-        run: yarn test --coverage
+        run: yarn test --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash
       - name: Generate Report
-        run: npx github-actions-ctrf coverage/coverage-final.json
         if: always()
+        run: npx github-actions-ctrf coverage/coverage-final.json
+        shell: bash
