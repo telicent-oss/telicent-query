@@ -32,6 +32,8 @@ jobs:
           report-path: ctrf/ctrf-report.json
           pull-request-report: true
           pull-request: true
+          summary-report: true
+          summary: true
           upload-artifact: true
           fetch-previous-results: true
         env:
