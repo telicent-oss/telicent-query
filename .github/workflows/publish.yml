@@ -164,6 +164,7 @@ jobs:
           registry: quay
           version: ${{ needs.prepare.outputs.semver }}
           # Secrets
+          teams-webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_FE }}
           quay-username: ${{ secrets.QUAY_USERNAME }}
           quay-token: ${{ secrets.QUAY_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
