@@ -66,6 +66,7 @@
     "vite": "^6.0.5"
   },
   "resolutions": {
+    "@remix-run/router": "^1.23.2",
     "react": "^18.3.1",
     "braces": "^3.0.3",
     "nth-check": "2.0.1",
@@ -74,7 +75,8 @@
     "ws": "8.17.1",
     "axios": "^1.11.0",
     "@triply/yasqe/**/form-data": "^3.0.4",
-    "axios/**/form-data": "^4.0.4"
+    "axios/**/form-data": "^4.0.4",
+    "qs": "^6.14.1"
   },
   "scripts": {
     "prestart": "[ \"$LOCAL_MACHINE\" = \"false\" ] && echo 'skip cp-config' || ./scripts/cp-config.js.sh",
@@ -126,5 +128,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "color": "#D16002"
 }

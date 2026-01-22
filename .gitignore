@@ -141,3 +141,4 @@ reports
 .env
 .idea
 *.gitignored*
+.vscode
