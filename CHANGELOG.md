@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.6](https://github.com/telicent-oss/telicent-query/compare/v1.4.5...v1.4.6) (2026-01-22)
+
+
+### Bug Fixes
+
+* **CVEs:** [TELFE-1499] ([#38](https://github.com/telicent-oss/telicent-query/issues/38)) ([9270428](https://github.com/telicent-oss/telicent-query/commit/92704287df31963037e138f2e09e369475402e02))
+
 ## [1.4.5](https://github.com/telicent-oss/telicent-query/compare/v1.4.4...v1.4.5) (2025-12-12)
 
 
