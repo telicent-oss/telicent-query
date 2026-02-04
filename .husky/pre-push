@@ -6,3 +6,5 @@ yarn test:diffMain
 if git diff --cached main --name-only | grep -E '^(.+/)?Dockerfile(.+)?$'; then
   ./scripts/tests/misconfigure.test.sh
 fi
+
+yarn tsc --noEmit
