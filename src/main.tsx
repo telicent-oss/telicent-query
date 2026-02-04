@@ -22,21 +22,15 @@ export const queryClient = new QueryClient({
   },
 });
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root')!);
 const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
 const RenderApp = (
   <UIThemeProvider dark theme="GraphOrange">
     <BrowserRouter basename={basename}>
       {config.featureFlags.FF_AUTH_V2 ? (
         <AuthProvider
-          config={{
-            onLogout: () => {
-              console.log('You are now logged out. Redirecting');
-              window.location.href = `/${APP_CONFIG_JSON['uri-basename']}`;
-            },
-            ...config?.AUTH_V2_CONFIG,
-          }}
-          apiUrl={config.apiUrl}
+          config={config.AUTH_V2_CONFIG_WITH_LOGOUT}
+          apiUrl={config.AUTH_V2_CONFIG_WITH_LOGOUT.authServerUrl}
           queryClient={queryClient}
         >
           <App />
