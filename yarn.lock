@@ -2899,10 +2899,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.13.tgz#1e55efe82730e60f4d68b1e2bc956bd3d94f307b"
   integrity sha512-uQFoSdKKf5S8k51W5t7b2qpfkyIbdHMzAn+AMQvHPxKUPeo1SsGaA4JRISQT87jm28b7z8OEqPcg1IOZagQHcA==
 
-"@telicent-oss/ds@1.5.26":
-  version "1.5.26"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.5.26.tgz#60fa438518d57a9da06562817c469aad872b18a7"
-  integrity sha512-PXO+TKit8GakvZfhxAiIlwByIfpf9/5611C/0mueL/JullbaW+iQXjdA4i3a4Wgd1RmW1pLqZeRJZEaKCgOT2g==
+"@telicent-oss/ds@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.6.0.tgz#9bd6646a6dd5f8aab0a9407651027bf5423a499e"
+  integrity sha512-8ey4FOCkgtwmS+tbeQpQEVnbvx69ZfTMOmmPHlrOGx9qhSkP7XfjVjOeVHw/iYbdfh/lYcAdS31YJ2fX0p7wow==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
@@ -2914,7 +2914,7 @@
     "@mui/material" "^5.16.6"
     "@mui/x-date-pickers" "^8.9.2"
     "@react-spring/web" "9.7.3"
-    "@telicent-oss/fe-auth-lib" "1.0.2"
+    "@telicent-oss/fe-auth-lib" "1.0.3"
     "@telicent-oss/mui-icons-material" "^1.0.0"
     "@telicent-oss/react-lib" "^0.5.0"
     "@telicent-oss/telicent-frontend-cli" "^1.5.0"
@@ -2927,8 +2927,8 @@
     lodash.debounce "^4.0.8"
     lodash.merge "^4.6.2"
     maplibre-gl "^3.5.0"
-    ol "^10.6.1"
-    ol-mapbox-style "^13.1.0"
+    ol "^10.7.0"
+    ol-mapbox-style "^12.6.1"
     react "18.2.0"
     react-dom "18.2.0"
     react-error-boundary "^5.0.0"
@@ -2938,10 +2938,10 @@
     svg-path-parser "^1.1.0"
     zod "^3.21.4"
 
-"@telicent-oss/fe-auth-lib@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.2.tgz#a0594d6b485c90d4147fd0e548d0f0c1b2d1a9bb"
-  integrity sha512-Ll/XAov+GK7prK7upN5CyU+sAHD0FLyVYzISPpt3Bhl6RcxtN5viZZ3ZJ8maQgEMveltYYCoTZ6GasNl+A6Ewg==
+"@telicent-oss/fe-auth-lib@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/fe-auth-lib/-/fe-auth-lib-1.0.3.tgz#c64d9a06ee45fc433aa8b89a0223523b952d157d"
+  integrity sha512-+PGiNhTAKNaTRLXOVlkRP6iycA7m6ZmhR9D5c271mUGPA8bD3lLlq0+WAoTW+GoRVXWKWcveEHdKtvw1ocxVOA==
   dependencies:
     zod "^3.23.8"
 
@@ -3189,6 +3189,14 @@
   integrity sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/jest@^29.5.14":
+  version "29.5.14"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.14.tgz#2b910912fa1d6856cadcd0c1f95af7df1d6049e5"
+  integrity sha512-ZN+4sdnLUbo8EVvVc2ao0GFW6oVrQRPn4K2lglySj7APvSrgzxHiNNK99us4WDMi57xxA2yggblIAMNhXOotLQ==
+  dependencies:
+    expect "^29.0.0"
+    pretty-format "^29.0.0"
 
 "@types/jsdom@^20.0.0":
   version "20.0.1"
@@ -5858,7 +5866,7 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-expect@^29.7.0:
+expect@^29.0.0, expect@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/expect/-/expect-29.7.0.tgz#578874590dcb3214514084c08115d8aee61e11bc"
   integrity sha512-2Zks0hf1VLFYI1kbh0I5jP3KHHyCHpkfyHBzsSXRFgl/Bg9mWYfMW8oD+PdMPlEwy5HNsR9JutYy6pMeOh61nw==
@@ -7859,7 +7867,7 @@ map-obj@^4.0.0:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
-mapbox-to-css-font@^3.2.0:
+mapbox-to-css-font@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/mapbox-to-css-font/-/mapbox-to-css-font-3.2.0.tgz#899781f224cf6ffe0198d6682e553b674d4d5f72"
   integrity sha512-kvsEfzvLik34BiFj+S19bv5d70l9qSdkUzrq99dvZ9d5POaLyB4vJMQmq3BoJ5D6lFG1GYnMM7o7cm5Jh8YEEg==
@@ -8249,15 +8257,15 @@ object.values@^1.1.6, object.values@^1.2.1:
     define-properties "^1.2.1"
     es-object-atoms "^1.0.0"
 
-ol-mapbox-style@^13.1.0:
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-13.1.1.tgz#88d636bc44539cc0bb8287f05312a10dd379fee9"
-  integrity sha512-pzBybVmZgkL2GWHf/khxuzvUJU4v65csDrtHoh1SChe0u3AqFiEh8ssz1t92y+POszWtSPsjNIevxyg4JOQzMw==
+ol-mapbox-style@^12.6.1:
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-12.6.1.tgz#9f790013857b46ae78b31354f1e6d8d1fb779640"
+  integrity sha512-bpN7ZvqbQX/JZnru0MTQgPIAUBAgPOvYDj/9BoJoqCvFYjHxCpRFDQJEoD10PLw3vGHNJFYBUvY82yfW26otQg==
   dependencies:
     "@maplibre/maplibre-gl-style-spec" "^23.1.0"
-    mapbox-to-css-font "^3.2.0"
+    mapbox-to-css-font "^3.1.2"
 
-ol@^10.6.1:
+ol@^10.7.0:
   version "10.7.0"
   resolved "https://registry.yarnpkg.com/ol/-/ol-10.7.0.tgz#6a072a602cab3a5d9b35356de8b837221d78379b"
   integrity sha512-122U5gamPqNgLpLOkogFJhgpywvd/5en2kETIDW+Ubfi9lPnZ0G9HWRdG+CX0oP8od2d6u6ky3eewIYYlrVczw==
@@ -8586,6 +8594,11 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
+"prettier2@npm:prettier@^2.8.8":
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
+  integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
+
 prettier@^3.3.2:
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.4.tgz#d2f8335d4b1cec47e1c8098645411b0c9dff9c0f"
@@ -8600,7 +8613,7 @@ pretty-format@^27.0.2:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-pretty-format@^29.7.0:
+pretty-format@^29.0.0, pretty-format@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.7.0.tgz#ca42c758310f365bfa71a0bda0a807160b776812"
   integrity sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==
@@ -10086,7 +10099,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-"typescript@^4.6.4 || ^5.2.2":
+"typescript@^4.6.4 || ^5.2.2", typescript@^5.7.3:
   version "5.9.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.3.tgz#5b4f59e15310ab17a216f5d6cf53ee476ede670f"
   integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
