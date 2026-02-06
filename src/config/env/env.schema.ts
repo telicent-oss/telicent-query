@@ -5,7 +5,7 @@ export const ENV_SCHEMA = z.object({
   ACCESS_URL: z.string().optional(),
   GRAPHQL_URL: z.string(),
   SPARQL_URL: z.string(),
-  BETA: z.string().optional(),
+  BETA: z.boolean().optional(),
   featureFlags: z
     .object({
       FF_AUTH_V2: z.boolean().optional(),

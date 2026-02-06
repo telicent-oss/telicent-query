@@ -16,7 +16,7 @@ const config = (() => {
         ACCESS_URL: ENV_SCHEMA.shape.ACCESS_URL,
         GRAPHQL_URL: ENV_SCHEMA.shape.GRAPHQL_URL,
         SPARQL_URL: ENV_SCHEMA.shape.SPARQL_URL,
-        beta: z.boolean(),
+        beta: z.boolean().optional(),
         featureFlags: z.object({
           FF_AUTH_V2: z.boolean(),
         }),
@@ -28,7 +28,7 @@ const config = (() => {
         ACCESS_URL: env.ACCESS_URL,
         GRAPHQL_URL: env.GRAPHQL_URL,
         SPARQL_URL: env.SPARQL_URL,
-        beta: env.BETA === 'true',
+        beta: env.BETA,
         featureFlags: {
           FF_AUTH_V2: Boolean(env.featureFlags?.FF_AUTH_V2),
         },

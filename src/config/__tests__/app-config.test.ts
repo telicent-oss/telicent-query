@@ -49,7 +49,7 @@ describe('app-config', () => {
       ACCESS_URL: 'https://ACCESS_URL.example.test',
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
       SPARQL_URL: 'https://SPARQL_URL.example.test',
-      BETA: 'true',
+      BETA: true,
       featureFlags: { FF_AUTH_V2: true },
       AUTH_V2_CONFIG: authConfig,
     };
@@ -66,7 +66,7 @@ describe('app-config', () => {
             "redirectUri": "https://app.example.test/callback",
             "scope": "openid profile",
           },
-          "BETA": "true",
+          "BETA": true,
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "featureFlags": {
@@ -110,7 +110,7 @@ describe('app-config', () => {
       ACCESS_URL: 'https://ACCESS_URL.example.test',
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
       SPARQL_URL: 'https://SPARQL_URL.example.test',
-      BETA: 'false',
+      BETA: false,
       AUTH_V2_CONFIG: authConfig,
     };
     const { default: config } = loadConfig(envOverrides);
@@ -126,7 +126,7 @@ describe('app-config', () => {
             "redirectUri": "https://app.example.test/callback",
             "scope": "openid profile",
           },
-          "BETA": "false",
+          "BETA": false,
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
         },
