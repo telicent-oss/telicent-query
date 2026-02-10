@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/telicent-oss/telicent-query/compare/v1.5.0...v1.5.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **CVE-2026-25639:** axios upg ([#42](https://github.com/telicent-oss/telicent-query/issues/42)) ([3fa0644](https://github.com/telicent-oss/telicent-query/commit/3fa064488e5e5158bbbc8cb2a25893a1aaf8b716))
+
 ## [1.5.0](https://github.com/telicent-oss/telicent-query/compare/v1.4.6...v1.5.0) (2026-02-10)
 
 
