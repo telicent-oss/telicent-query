@@ -5,10 +5,16 @@ import 'codemirror/theme/material-darker.css';
 import config from 'config/app-config';
 import React, { useEffect } from 'react';
 
-const DisplayYasqe = ({ setResults, setDuration, setLoading }) => {
+type DisplayYasqeProps = {
+  setResults: (value: unknown[] | null) => void;
+  setDuration: (value: number | null) => void;
+  setLoading: (value: boolean) => void;
+};
+
+const DisplayYasqe = ({ setResults, setDuration, setLoading }: DisplayYasqeProps) => {
   const yasqeOptions = {
     requestConfig: {
-      endpoint: `${config.sparql.url}`,
+      endpoint: `${config.SPARQL_URL}`,
       withCredentials: true,
     },
     createShareableLink: false,
@@ -17,9 +23,10 @@ const DisplayYasqe = ({ setResults, setDuration, setLoading }) => {
 
   useEffect(() => {
     const element = document.getElementById('yasqe');
+    if (!element) return undefined;
     const yasqe = new Yasqe(element, yasqeOptions);
 
-    yasqe.on('queryResponse', (instance, req, duration) => {
+    yasqe.on('queryResponse', (_instance: unknown, req: any, duration: number) => {
       console.log({ req });
       if (req.status === 401) {
         broadcastAuthEvent(AuthEvent.UNAUTHORIZED);
@@ -32,14 +39,14 @@ const DisplayYasqe = ({ setResults, setDuration, setLoading }) => {
     yasqe.on('query', () => {
       setLoading(true);
     });
-    yasqe.on('error', (error) => {
+    yasqe.on('error', (error: unknown) => {
       console.log({ error });
     });
     return () => {
       setResults(null);
       setDuration(null);
     };
-  }, [setResults, setDuration]);
+  }, [setResults, setDuration, setLoading]);
 
   return <div id="yasqe" />;
 };

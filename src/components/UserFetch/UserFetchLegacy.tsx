@@ -17,13 +17,13 @@ const ResponseSchema = z.object({
 });
 
 const UserFetch = () => {
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [err, setErr] = useState(null);
+  const [err, setErr] = useState<{ code: string; message: string } | null>(null);
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`${config.access.url}/whoami`);
+      const response = await axios.get(`${config.ACCESS_URL}/whoami`);
       const data = ResponseSchema.parse(response).data;
       setIsLoading(false);
       return { active: Boolean(data?.active), error: null };

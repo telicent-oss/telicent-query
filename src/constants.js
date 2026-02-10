@@ -1,8 +1,9 @@
 import z from 'zod';
 
 import appConfigJson from './app.config.json';
+import { renderErrorForReleaseEngineer } from './lib/renderErrorForReleaseEngineer';
 
-const AppConfigJsonSchema = z.object({
+export const APP_CONFIG_JSON_SCHEMA = z.object({
   name: z.string(),
   repo_name: z.string(),
   app_name: z.string(),
@@ -11,4 +12,11 @@ const AppConfigJsonSchema = z.object({
   brandColor: z.string(),
 });
 
-export const APP_CONFIG_JSON = AppConfigJsonSchema.parse(appConfigJson);
+export const APP_CONFIG_JSON = (() => {
+  try {
+    return APP_CONFIG_JSON_SCHEMA.parse(appConfigJson);
+  } catch (error) {
+    renderErrorForReleaseEngineer(error, 'APP_CONFIG_JSON');
+    throw error;
+  }
+})();

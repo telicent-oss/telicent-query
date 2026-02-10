@@ -15,8 +15,4 @@ window.AUTH_V2_CONFIG = {
   scope: 'openid profile offline_access',
   redirectUri: 'http://localhost:3001',
   popupRedirectUri: 'http://localhost:3001/query/auth-redirect-uri',
-  onLogout: () => {
-    console.log('You are now logged out. Redirecting');
-    window.location.href = '/query';
-  },
 };
