@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/telicent-oss/telicent-query/compare/v1.4.6...v1.5.0) (2026-02-10)
+
+
+### Features
+
+* **typescript:** [TELFE-1488] add config ([#40](https://github.com/telicent-oss/telicent-query/issues/40)) ([c85dcdf](https://github.com/telicent-oss/telicent-query/commit/c85dcdf7bcf481502743a4a638f142614595202c))
+
 ## [1.4.6](https://github.com/telicent-oss/telicent-query/compare/v1.4.5...v1.4.6) (2026-01-22)
 
 
