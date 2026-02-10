@@ -11,7 +11,7 @@
     "@tanstack/react-query": "^5.90.7",
     "@telicent-oss/ds": "1.6.0",
     "@triply/yasqe": "^4.2.28",
-    "axios": "^1.12.0",
+    "axios": "^1.13.5",
     "classnames": "^2.3.1",
     "graphiql": "^3.7.1",
     "graphql": "^16.9.0",
@@ -76,7 +76,7 @@
     "react-error-overlay": "6.0.9",
     "@telicent-oss/ontologyservice": "0.0.4",
     "ws": "8.17.1",
-    "axios": "^1.11.0",
+    "axios": "^1.13.5",
     "@triply/yasqe/**/form-data": "^3.0.4",
     "axios/**/form-data": "^4.0.4",
     "qs": "^6.14.1"
