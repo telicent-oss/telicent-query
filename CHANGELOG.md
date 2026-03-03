@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.2](https://github.com/telicent-oss/telicent-query/compare/v1.5.1...v1.5.2) (2026-03-03)
+
+
+### Bug Fixes
+
+* cves ([4c022c3](https://github.com/telicent-oss/telicent-query/commit/4c022c3f19b96446e770c6f9ccc4fa04062ca790))
+* cves ([c9544f4](https://github.com/telicent-oss/telicent-query/commit/c9544f4fb5c7b985cc62e10ab9b2a0c277dc3fdd))
+
 ## [1.5.1](https://github.com/telicent-oss/telicent-query/compare/v1.5.0...v1.5.1) (2026-02-10)
 
 
