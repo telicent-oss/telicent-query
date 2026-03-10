@@ -1,5 +1,5 @@
 import { createGraphiQLFetcher, Fetcher } from '@graphiql/toolkit';
-import { TeliBrand, useAuth } from '@telicent-oss/ds';
+import { useAuth, Brand } from '@telicent-oss/ds';
 import { GraphiQL } from 'graphiql';
 import 'graphiql/graphiql.css';
 import config from '../../config/app-config';
@@ -56,7 +56,7 @@ const TelicentGraphiQLNew = () => {
     <section style={{ height: '100vh' }}>
       <GraphiQL fetcher={fetcher}>
         <GraphiQL.Logo>
-          <TeliBrand appName="queryQL" className="flex items-center justify-center" />
+          <Brand appName="queryQL" />
         </GraphiQL.Logo>
       </GraphiQL>
     </section>
@@ -70,7 +70,7 @@ const TelicentGraphiQLLegacy = () => {
     <section style={{ height: '100vh' }}>
       <GraphiQL fetcher={fetcher}>
         <GraphiQL.Logo>
-          <TeliBrand appName="queryQL" className="flex items-center justify-center" />
+          <Brand appName="queryQL" />
         </GraphiQL.Logo>
       </GraphiQL>
     </section>

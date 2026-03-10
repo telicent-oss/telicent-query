@@ -5,6 +5,7 @@ import {
   Button,
   Divider,
   useAuth,
+  UIThemeProvider,
 } from '@telicent-oss/ds';
 
 import packgeJson from '../../package.json';
@@ -18,32 +19,34 @@ const UserProfile = () => {
   };
 
   return (
-    <UserProfileWrapper fullName={user?.preferred_name || ''}>
-      <UserProfileContent>
-        {loading && <section>Loading...</section>}
-        {error && <section>{error.message}</section>}
-        {user && (
-          <>
-            <TitleAndContent title={'Username'} content={user.preferred_name} />
-            <TitleAndContent title={'Email'} content={user.email} />
-            <TitleAndContent title={'Version number'} content={packgeJson.version} />
-          </>
-        )}
-      </UserProfileContent>
-      <>
-        <Divider />
-        <Box sx={{ pt: 1 }}>
-          <Button
-            onClick={handleSignOut}
-            color="primary"
-            variant="contained"
-            startIcon={<i className="fa-solid fa-arrow-right-from-bracket" />}
-          >
-            Sign Out
-          </Button>
-        </Box>
-      </>
-    </UserProfileWrapper>
+    <UIThemeProvider dark theme="GraphOrange">
+      <UserProfileWrapper fullName={user?.preferred_name || ''}>
+        <UserProfileContent>
+          {loading && <section>Loading...</section>}
+          {error && <section>{error.message}</section>}
+          {user && (
+            <>
+              <TitleAndContent title={'Username'} content={user.preferred_name} />
+              <TitleAndContent title={'Email'} content={user.email} />
+              <TitleAndContent title={'Version number'} content={packgeJson.version} />
+            </>
+          )}
+        </UserProfileContent>
+        <>
+          <Divider />
+          <Box sx={{ pt: 1 }}>
+            <Button
+              onClick={handleSignOut}
+              color="primary"
+              variant="contained"
+              startIcon={<i className="fa-solid fa-arrow-right-from-bracket" />}
+            >
+              Sign Out
+            </Button>
+          </Box>
+        </>
+      </UserProfileWrapper>
+    </UIThemeProvider>
   );
 };
 
