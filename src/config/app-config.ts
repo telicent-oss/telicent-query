@@ -40,7 +40,7 @@ const config = (() => {
             window.location.href = `/${APP_CONFIG_JSON['uri-basename']}`;
           },
         },
-        APP_SWITCH_LIBRARY: [],
+        APP_SWITCH_LIBRARY: env.APP_SWITCH_LIBRARY ?? [],
       });
   } catch (error) {
     renderErrorForReleaseEngineer(error, 'app-config');
