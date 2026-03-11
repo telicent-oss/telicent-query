@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppSwitch, AppBar } from '@telicent-oss/ds';
 import { useNavigate } from 'react-router-dom';
-import UserProfile from '../UserProfile';
+import UserProfile from '../UserProfile/UserProfile';
 import config from '../../config/app-config';
 
 const Header = () => {

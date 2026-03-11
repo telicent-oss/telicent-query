@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { AppBar, FlexBox, Text, Button, Paper, H5, useExtendedTheme } from '@telicent-oss/ds';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,13 +8,12 @@ import config from '../config/app-config';
 import { Box } from '@mui/material';
 
 const ErrorPage = () => {
-  // const { state } = useLocation();
+  const { state } = useLocation();
 
   const theme = useExtendedTheme();
 
   const primaryColour = theme.palette.primary.main;
 
-  const state = { err: { message: 'test', code: '123' } };
   if (!state?.err) return <Navigate to="/" replace />;
 
   return (
@@ -36,8 +35,8 @@ const ErrorPage = () => {
               </FlexBox>
 
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
-                <Button color="primary" variant="outlined" component={Link} to="/">
-                  Retry
+                <Button color="primary" variant="outlined">
+                  <Link to={'/'}> Retry</Link>
                 </Button>
               </Box>
             </FlexBox>
