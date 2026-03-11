@@ -21,7 +21,6 @@ const UserProfile = () => {
   return (
     <UserProfileWrapper fullName={user?.preferred_name || ''}>
       <UserProfileContent>
-        <TitleAndContent title={'Version number'} content={packgeJson.version} />
         {loading && <section>Loading...</section>}
         {error && <section>{error.message}</section>}
         {user && (
