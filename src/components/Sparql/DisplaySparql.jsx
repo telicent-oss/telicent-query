@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { TeliSpinner as Spinner } from '@telicent-oss/ds';
 import DisplayYasqe from './DisplayYasqe';
 import SparqlTable from './SparqlTable';
-import Header from '../Header';
-import ScrollToTop from './ScrollToTop';
+import Header from '../Header/Header';
+import ScrollToTop from '../../lib/ScrollToTop';
 
 const DisplaySparql = () => {
   const [results, setResults] = useState(null);

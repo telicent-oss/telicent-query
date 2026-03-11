@@ -2937,10 +2937,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.19.tgz#ab7b5de0b7ba17f22530f4efda5bf2b771fbda9d"
   integrity sha512-/BMP7kNhzKOd7wnDeB8NrIRNLwkf5AhCYCvtfZV2GXWbBieFm/el0n6LOAXlTi6ZwHICSNnQcIxRCWHrLzDY+g==
 
-"@telicent-oss/ds@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.6.0.tgz#9bd6646a6dd5f8aab0a9407651027bf5423a499e"
-  integrity sha512-8ey4FOCkgtwmS+tbeQpQEVnbvx69ZfTMOmmPHlrOGx9qhSkP7XfjVjOeVHw/iYbdfh/lYcAdS31YJ2fX0p7wow==
+"@telicent-oss/ds@1.7.5":
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-1.7.5.tgz#0816bd18fcbc9ba01cd969f2a9891f6c332ad290"
+  integrity sha512-Ns+RljC0LQKYIQRG2G/p8jFzx2g78TSLUXBzEhj2qSdRX3CQnbeSoEdcT9SsWU/qJxjZp28SrxBhPQ3WSAojmw==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
@@ -2967,8 +2967,6 @@
     maplibre-gl "^3.5.0"
     ol "^10.7.0"
     ol-mapbox-style "^12.6.1"
-    react "18.2.0"
-    react-dom "18.2.0"
     react-error-boundary "^5.0.0"
     react-map-gl "^7.1.6"
     react-rnd "^10.4.13"

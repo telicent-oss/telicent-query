@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   UserProfile as UserProfileWrapper,
   UserProfileContent,
@@ -7,7 +8,7 @@ import {
   useAuth,
 } from '@telicent-oss/ds';
 
-import packgeJson from '../../package.json';
+import packgeJson from '../../../package.json';
 import Box from '@mui/material/Box';
 
 const UserProfile = () => {

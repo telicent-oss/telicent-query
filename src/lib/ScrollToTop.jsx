@@ -1,4 +1,3 @@
-import { TeliButton } from '@telicent-oss/ds';
 import React, { useState } from 'react';
 
 const ScrollToTop = () => {
@@ -8,10 +7,9 @@ const ScrollToTop = () => {
   };
 
   return (
-    <TeliButton
+    <button
       style={{
         position: 'fixed',
-
         bottom: '25px',
         right: '50px',
         backgroundColor: hovered ? 'rgba(255, 162, 47, 0.75)' : 'rgba(255, 162, 47, 0.2)',
@@ -23,7 +21,7 @@ const ScrollToTop = () => {
       onClick={onClick}
     >
       Return to top
-    </TeliButton>
+    </button>
   );
 };
 
