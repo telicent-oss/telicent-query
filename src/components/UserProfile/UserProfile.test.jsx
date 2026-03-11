@@ -44,7 +44,10 @@ describe('UserProfile', () => {
 
   it('renders base version number and sign out button', () => {
     mockUseAuth.mockReturnValue({
-      user: null,
+      user: {
+        preferred_name: 'Vanessa',
+        email: 'vanessa@example.com',
+      },
       error: null,
       logout: mockLogout,
       loading: false,
