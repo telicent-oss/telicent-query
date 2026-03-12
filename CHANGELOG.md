@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.3](https://github.com/telicent-oss/telicent-query/compare/v1.5.2...v1.5.3) (2026-03-11)
+
+
+### Bug Fixes
+
+* add tests ([72ac193](https://github.com/telicent-oss/telicent-query/commit/72ac193ed78bc6561ced59dfe4bcca8560af10bc))
+* move components ([3711987](https://github.com/telicent-oss/telicent-query/commit/3711987e7f2a6e50a76429ddcc7b5448079ea1db))
+* move header comp ([8c70f01](https://github.com/telicent-oss/telicent-query/commit/8c70f01e4c49aea72d20c64f8737c6584144e7a8))
+* remove legacy components ([34c608e](https://github.com/telicent-oss/telicent-query/commit/34c608eec378600e00c04b3558c53893d163ce83))
+* remove legacy ds components ([645be7c](https://github.com/telicent-oss/telicent-query/commit/645be7c5afe8cb753f70a6ae5f278373b8e60f23))
+* tests ([9fc7fed](https://github.com/telicent-oss/telicent-query/commit/9fc7feda6f01a1b7c23ab1288c064518afec00f3))
+* update config ([e02c9e8](https://github.com/telicent-oss/telicent-query/commit/e02c9e8b3a30a3784c9738e0acf023f26f7cbf9c))
+* update ds and add missing icons ([ecf3d09](https://github.com/telicent-oss/telicent-query/commit/ecf3d09378a660386ee1527487f00b286e77cd4d))
+* UserProfile ([1711e73](https://github.com/telicent-oss/telicent-query/commit/1711e735f2c6f5802a737aebd7a39e01818aaa41))
+
 ## [1.5.2](https://github.com/telicent-oss/telicent-query/compare/v1.5.1...v1.5.2) (2026-03-03)
 
 
