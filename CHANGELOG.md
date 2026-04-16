@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.4](https://github.com/telicent-oss/telicent-query/compare/v1.5.3...v1.5.4) (2026-04-16)
+
+
+### Bug Fixes
+
+* cves ([b1082cc](https://github.com/telicent-oss/telicent-query/commit/b1082cc6870ac2f15e5c978a8e400072bc547d82))
+* cves ([80213dc](https://github.com/telicent-oss/telicent-query/commit/80213dc3486927ec4277db4f4f7316de26359714))
+* minimatch version ([93b5b17](https://github.com/telicent-oss/telicent-query/commit/93b5b17243106c4b2c5b36317a782515ca79bb4b))
+* raise base image version in dockerfile ([8a8c142](https://github.com/telicent-oss/telicent-query/commit/8a8c142c344b73a3325a7da597058f67514d5904))
+* raise base image version in dockerfile ([f31c0aa](https://github.com/telicent-oss/telicent-query/commit/f31c0aaa13be2321b861e3506658c673759e6636))
+* update yarn and remove what we don't need anymore from resolutions ([4d8d203](https://github.com/telicent-oss/telicent-query/commit/4d8d203a334e8ea6b8bc33c7643efcab8d56614d))
+* **yarn.lock:** update packages to fix flatted cve ([8921d58](https://github.com/telicent-oss/telicent-query/commit/8921d58b8efd30876ca40cdc9ac7d4382c8013b9))
+* **yarn.lock:** update packages to fix flatted cve ([606917d](https://github.com/telicent-oss/telicent-query/commit/606917d2d0e9f84dccaca0022c38917677bd22ad))
+
 ## [1.5.3](https://github.com/telicent-oss/telicent-query/compare/v1.5.2...v1.5.3) (2026-03-11)
 
 
