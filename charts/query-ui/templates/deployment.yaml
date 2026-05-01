@@ -1,0 +1,124 @@
+{{- /*
+Copyright (C) 2026 Telicent Limited
+*/}}
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ include "query-ui.fullname" . }}
+  namespace: {{ include "query-ui.namespace" . | quote }}
+  labels:
+    {{- include "query-ui.labels" . | nindent 4 }}
+  {{- with .Values.annotations }}
+  annotations: 
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      {{- include "query-ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+      {{- include "query-ui.labels" . | nindent 8 }}
+      {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-envjs.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+    spec:
+      serviceAccountName: {{ include "query-ui.serviceAccountName" . }}
+      securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      {{- $pullSecret := .Values.global.imagePullSecrets | default .Values.image.pullSecrets }}
+      {{- with $pullSecret }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+      {{- with .Values.initContainers }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ include "query-ui.image" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources: {{- toYaml .Values.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.containerSecurityContext | nindent 10 }}
+
+        {{- if .Values.extraEnvVars }}
+        env:
+        {{- range .Values.extraEnvVars }}
+        - name: {{ .name }}
+          value: {{ .value | quote }}
+        {{- end }}
+        {{- end }}
+
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 8080
+
+        readinessProbe:
+          httpGet:
+            path: /query/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /query/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 2
+
+        volumeMounts:
+        - name: app-config-volume
+          mountPath: /usr/local/nginx/html/env-config.js
+          subPath: env-config.js
+        {{- with .Values.extraVolumeMounts }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+
+      {{- with .Values.sidecars }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: app-config-volume
+        configMap:
+          name: {{ include "query-ui.configMapName" . }}
+      {{- with .Values.extraVolumes }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

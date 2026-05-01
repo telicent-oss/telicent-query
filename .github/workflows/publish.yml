@@ -1,4 +1,4 @@
-name: publish.yml
+name: Publish
 run-name: "Publish ${{ contains(github.event.head_commit.message, 'chore(main): release') && 'to Quay' || 'to ECR' }}"
 
 # Revoke almost all permissions by default and grant only those needed to each job.
@@ -8,6 +8,7 @@ permissions:
 
 env:
   RELEASE_PREFIX: 'chore(main): release'
+  CHART_NAME: query-ui
 
 on:
   workflow_dispatch:
@@ -16,19 +17,21 @@ on:
         - main
 
 jobs:
-  create-release-pr:
+  release-please:
     name: Release please
-    if: ${{ github.event_name == 'push' }}
     # https://github.com/googleapis/release-please-action?tab=readme-ov-file#workflow-permissions
     permissions:
       contents: write
       issues: write
       pull-requests: write 
+    outputs:
+      release-created: ${{ steps.release.outputs.release_created }}
+      version: ${{ steps.release.outputs.version }}
     runs-on: ubuntu-latest
     steps:
       - name: Release please action
         id: release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
@@ -36,33 +39,56 @@ jobs:
   prepare:
     name: Prepare
     runs-on: ubuntu-latest
+    needs: release-please
+    permissions:
+      contents: read
+      pull-requests: read
     outputs:
-      semver: ${{ steps.semver.outputs.current-version }}
-      app-name: ${{ steps.app_config.outputs.app-name }}
-      release-created: ${{ steps.release.outputs.release-created }}
+      app-name: ${{ steps.get-app-name.outputs.app-name }}
+      ecr-version: ${{ steps.get-ecr-version.outputs.ecr-version }}
     steps:
-      - &checkout_repo
-        name: Checkout repository
-        uses: actions/checkout@v5
-      - name: Get version from package.json
-        id: semver
-        uses: martinbeentjes/npm-get-version-action@main
-      - name: Get app config from app.config.json
-        id: app_config
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            src/app.config.json
+            package.json
+      - name: Get app name from app.config.json
+        id: get-app-name
         run: |
-          sudo apt-get install jq
           APP_NAME=$(jq -r '.app_name // error("app_name missing from ./src/app.config.json")' ./src/app.config.json) && \
-            echo "app-name=$APP_NAME" >> $GITHUB_OUTPUT && echo "APP_NAME: $APP_NAME"
-      - name: Get release please PR info from commit message
-        id: release
+              echo "app-name=$APP_NAME" >> $GITHUB_OUTPUT && echo "app-name = $APP_NAME"
+      - name: Get the version to use for ECR image tagging
+        id: get-ecr-version
+        if: needs.release-please.outputs.release-created != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Note: `gh pr list` matches on `--head` OR `--label`, so it is important that PR_BRANCH is the complete branch name.
+          PR_BRANCH: "release-please--branches--main--components--telicent-query"
+          PR_LABEL: "autorelease: pending"
         run: |
-          RELEASE_CREATED=${{ contains(github.event.head_commit.message, env.RELEASE_PREFIX) }} && \
-          echo "release-created=$RELEASE_CREATED" >> $GITHUB_OUTPUT && echo "RELEASE_CREATED: $RELEASE_CREATED"
 
-  vuln-scan:
+          # Check to see if there is an open release please PR and extract the version from the PR title.
+          NEXT_VERSION=$(gh pr list --repo $GITHUB_REPOSITORY --head $PR_BRANCH \
+              --label "$PR_LABEL" --state open --json title \
+              --jq 'if .[0] == null then "" else .[0].title | match("\\d+\\.\\d+\\.\\d+") | .string end' 2>/dev/null)
+
+          # If there is an open release please PR, use the extracted version for ECR tagging.
+          if [[ -n "$NEXT_VERSION" ]]; then
+              echo "Found a release please PR. Pushes to ECR will use <ecr-version>-<short-sha>."
+              echo "ecr-version=$NEXT_VERSION" >> $GITHUB_OUTPUT && echo " -- ecr-version = $NEXT_VERSION"
+          # Otherwise, use the current version from package.json.
+          else
+              echo "A release please PR does not exist. Pushes to ECR will use <ecr-version>-<short-sha>."
+              CURRENT_VERSION=$(jq -r '.version // error("version missing from ./package.json")' ./package.json) && \
+                  echo "ecr-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT && echo " -- ecr-version = $CURRENT_VERSION"
+          fi
+
+  vulnerability-scan:
     name: Vulnerability scanning
     needs:
       - prepare
+      - release-please
     permissions:
       actions: read
       contents: write
@@ -72,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run vulnerability scanning
-        continue-on-error: ${{ needs.prepare.outputs.release-created != 'true' }}
+        continue-on-error: ${{ needs.release-please.outputs.release-created != 'true' }}
         uses: telicent-oss/shared-workflows/.github/actions/trivy-repo-scan@main
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
@@ -88,83 +114,102 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - *checkout_repo
+      - name: Checkout repository
+        uses: actions/checkout@v6
       - name: Prepare Yarn
         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
           node-version: 20
           additional-args: '--network-timeout 600000'
-          create-yarnrc: false
           sanity-check: true
           verbose: true
       - name: Run tests
-        run: yarn global add jest && yarn test:ci
+        run: yarn test
         shell: bash
       - name: Build application
-        run: yarn build:tailwind && LOCAL_MACHINE=false yarn build
+        run: LOCAL_MACHINE=false yarn build
       - name: Upload build to artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build
-          path: ./build
+          path: build/
 
-  # Build and push a non-release image to ECR on push to main when no GitHub release is created by release please, or on workflow_dispatch
-  build-dev-image:
-    name: Build dev image
-    if: needs.prepare.outputs.release-created != 'true'
+  # Build and push container image to ECR (only when release is not created)
+  build-and-push-dev-images-and-charts:
+    name: Build and push to ECR
+    if: needs.release-please.outputs.release-created != 'true'
     needs:
+      - release-please
       - prepare
       - test-and-build-application
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-      packages: write
-    runs-on: ubuntu-latest
     steps:
-      - name: Build and push image
+      - name: Build and push image to ECR
+        id: build-and-push-dev-image
         uses: telicent-oss/shared-workflows/.github/actions/push-container-image@main
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
+          allow-development-tag: true
           allow-mutable-tags: false
-          allow-version-tag: false
           build-artifact: build
-          dockerfile: Dockerfile
-          enable-buildkit-cache: false
           grype-scan-image: false
-          path: .
           registry: aws
-          version: ${{ needs.prepare.outputs.semver }}
+          sha-tag-format: short
           # Secrets
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Package and push Helm charts to ECR
+        uses: telicent-oss/shared-workflows/.github/actions/push-helm-chart@main
+        with:
+          app-name: ${{ env.CHART_NAME }}
+          app-name-prefix: ''
+          chart: charts/${{ env.CHART_NAME }}
+          registry: aws
+          version: ${{ needs.prepare.outputs.ecr-version }}-${{ steps.build-and-push-dev-image.outputs.sha-image-tag }}
+          appVersion: ${{ steps.build-and-push-dev-image.outputs.sha-image-tag }}
+          replace-chart-versions: true
 
-  # Build and push a release image to Quay on push to main when a GitHub release is created by release please.
-  build-release-image:
-    name: Build release image
-    if: needs.prepare.outputs.release-created == 'true'
+  # Build and push container image to Quay (only when release is created)
+  build-and-push-release-image:
+    name: Build and push to Quay
+    if: needs.release-please.outputs.release-created == 'true'
     needs:
+      - release-please
       - prepare
-      - vuln-scan
+      - vulnerability-scan
       - test-and-build-application
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
       id-token: write
-    runs-on: ubuntu-latest
     steps:
-      - name: Build and push image
+      - name: Build and push image to Quay
+        id: build-and-push-dev-image
         uses: telicent-oss/shared-workflows/.github/actions/push-container-image@main
         with:
           app-name: ${{ needs.prepare.outputs.app-name }}
+          allow-latest-tag: true
           allow-mutable-tags: false
           allow-sha-tag: false
           build-artifact: build
-          dockerfile: Dockerfile
-          enable-buildkit-cache: false
-          path: .
+          grype-scan-image: false
           registry: quay
-          version: ${{ needs.prepare.outputs.semver }}
+          version: ${{ needs.release-please.outputs.version }}
           # Secrets
-          teams-webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_FE }}
+          teams-webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_FE_BUILDS }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           quay-username: ${{ secrets.QUAY_USERNAME }}
           quay-token: ${{ secrets.QUAY_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Package and push Helm charts to Quay
+        uses: telicent-oss/shared-workflows/.github/actions/push-helm-chart@main
+        with:
+          app-name: ${{ env.CHART_NAME }}
+          app-name-prefix: ''
+          chart: charts/${{ env.CHART_NAME }}
+          registry: quay
+          version: ${{ needs.release-please.outputs.version }}
+          # Secrets
+          quay-username: ${{ secrets.QUAY_USERNAME }}
+          quay-token: ${{ secrets.QUAY_TOKEN }}
