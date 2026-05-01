@@ -1,0 +1,16 @@
+# Copyright (C) 2026 Telicent Limited
+
+apiVersion: v2
+name: query-ui
+description: Telicent Query UI for executing SPARQL and GraphQL queries against knowledge graphs
+type: application
+version: 0.1.9
+appVersion: "1.5.3"
+
+icon: "https://avatars.githubusercontent.com/u/65304240?s=200&v=4"
+
+# The name of the chart's maintainers.
+# Required for CT lint to pass.
+maintainers:
+  - name: telicent
+    url: https://github.com/Telicent-IO
