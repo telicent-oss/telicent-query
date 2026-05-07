@@ -1,0 +1,23 @@
+{{- /*
+Copyright (C) 2026 Telicent Limited
+*/}}
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: {{ include "query-ui.serviceName" . }}
+  namespace: {{ include "query-ui.namespace" . | quote }}
+  labels:
+    {{- include "query-ui.labels" . | nindent 4 }}
+
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "query-ui.selectorLabels" . | nindent 4 }}
+  ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    targetPort: http
+    port: {{ .Values.service.port }}

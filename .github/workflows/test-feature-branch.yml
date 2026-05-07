@@ -4,7 +4,7 @@ run-name: Test Feature Branch
 on:
   push:
     branches-ignore:
-      - 'main'
+      - "main"
 
 jobs:
   quality:
@@ -13,6 +13,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      packages: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -21,6 +22,8 @@ jobs:
         with:
           node-version: 20
           additional-args: '--network-timeout 600000'
+          create-yarnrc: true
+          frozen-lockfile: true
       - name: Run tests
         run: yarn test --coverage --reporters=default --reporters=jest-ctrf-json-reporter
         shell: bash

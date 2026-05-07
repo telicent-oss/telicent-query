@@ -1,0 +1,36 @@
+{{- /*
+Copyright (C) 2026 Telicent Limited
+*/}}
+
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: {{ include "query-ui.configMapName" . }}
+  namespace: {{ include "query-ui.namespace" . | quote }}
+  labels:
+    {{- include "query-ui.labels" . | nindent 4 }}
+
+data:
+  env-config.js: |
+    const API_DOMAIN = "{{ .Values.global.apiHostDomain }}"; 
+    // Configure the GraphQL API endpoint as used by the client browser.
+    window.GRAPHQL_URL = `https://${API_DOMAIN}/graphql/knowledge/graphql`;
+    // Configure the Graph SPARQL API endpoint as used by the client browser.
+    window.SPARQL_URL = `https://${API_DOMAIN}/sparql/knowledge/sparql`;
+    // Configure the Access endpoint as used by the client browser.
+    window.ACCESS_URL = `https://${API_DOMAIN}/access`;
+    window.BETA = false;
+   
+    window.featureFlags = {
+      FF_AI_TRANSLATE: false,
+      FF_AUTH_V2: true,
+    };
+    
+    window.AUTH_V2_CONFIG = {
+      authServerUrl: "https://{{ .Values.global.authHostDomain }}",
+      clientId: "{{ .Values.oauth.clientId }}",
+      scope: "{{ .Values.oauth.scopes }}",
+      redirectUri: "https://{{ .Values.global.appHostDomain }}/query/callback",
+      popupRedirectUri: "https://{{ .Values.global.appHostDomain }}/query/auth-redirect-uri",
+    };
