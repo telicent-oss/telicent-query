@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.5.4](https://github.com/telicent-oss/telicent-query/compare/v1.5.3...v1.5.4) (2026-05-07)
+
+
+### Bug Fixes
+
+* axios cve ([42c3351](https://github.com/telicent-oss/telicent-query/commit/42c335118fead0cad62c54aef553d67ce656cd07))
+* axios cve ([6b441a8](https://github.com/telicent-oss/telicent-query/commit/6b441a8619bd52af8b8de9c7dc6f719135b50fe6))
+* cves ([b1082cc](https://github.com/telicent-oss/telicent-query/commit/b1082cc6870ac2f15e5c978a8e400072bc547d82))
+* cves ([80213dc](https://github.com/telicent-oss/telicent-query/commit/80213dc3486927ec4277db4f4f7316de26359714))
+* minimatch version ([93b5b17](https://github.com/telicent-oss/telicent-query/commit/93b5b17243106c4b2c5b36317a782515ca79bb4b))
+* raise base image version in dockerfile ([8a8c142](https://github.com/telicent-oss/telicent-query/commit/8a8c142c344b73a3325a7da597058f67514d5904))
+* raise base image version in dockerfile ([f31c0aa](https://github.com/telicent-oss/telicent-query/commit/f31c0aaa13be2321b861e3506658c673759e6636))
+* update all ci ([75d165a](https://github.com/telicent-oss/telicent-query/commit/75d165a879a5a40c35d8a823b5e1162e4e40b9c0))
+* update ci and add helm chart ([50906c9](https://github.com/telicent-oss/telicent-query/commit/50906c9d6fc75eafaa195b58f3362930985caa5c))
+* update yarn and remove what we don't need anymore from resolutions ([4d8d203](https://github.com/telicent-oss/telicent-query/commit/4d8d203a334e8ea6b8bc33c7643efcab8d56614d))
+* **yarn.lock:** update packages to fix flatted cve ([8921d58](https://github.com/telicent-oss/telicent-query/commit/8921d58b8efd30876ca40cdc9ac7d4382c8013b9))
+* **yarn.lock:** update packages to fix flatted cve ([606917d](https://github.com/telicent-oss/telicent-query/commit/606917d2d0e9f84dccaca0022c38917677bd22ad))
+
 ## [1.5.3](https://github.com/telicent-oss/telicent-query/compare/v1.5.2...v1.5.3) (2026-03-11)
 
 
