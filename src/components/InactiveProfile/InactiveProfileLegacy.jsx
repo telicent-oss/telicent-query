@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, TeliButton, TeliStandardLayout, AppBar, FlexBox, Text } from '@telicent-oss/ds';
+import { Button, AppBar, FlexBox, Text } from '@telicent-oss/ds';
 import config from 'config/app-config';
 import { Box } from '@mui/material';
 
