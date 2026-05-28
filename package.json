@@ -81,14 +81,16 @@
     "lodash-es": "^4.18.0"
   },
   "scripts": {
-    "prestart": "[ \"$LOCAL_MACHINE\" = \"false\" ] && echo 'skip cp-config' || ./scripts/cp-config.js.sh",
     "start": "vite",
     "start:docker": "./scripts/docker-build && ./scripts/docker-run",
     "start:windows": "vite --openssl-legacy-provider ",
     "cy:open": "cypress open",
     "cy:run": " cypress run",
+    "predev": "yarn cp-config",
     "dev": "vite",
+    "prebuild": "yarn cp-config",
     "build": "touch ./public/env-config.js ; vite build",
+    "cp-config": "[ \"$LOCAL_MACHINE\" = \"false\" ] && echo 'skip cp-config.js.sh' || ./scripts/cp-config.js.sh",
     "build:tailwind": "npx tailwindcss -i ./src/index.css -o ./src/main.css",
     "test": "jest",
     "test:ci": "mkdir -p ./reports && jest --transformIgnorePatterns \"node_modules/(?!@telicent-io/ds)/\" --ci --json --outputFile=\"reports/results.json\" --watchAll=false --maxConcurrency=1",
