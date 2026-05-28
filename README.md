@@ -8,6 +8,9 @@ Starter application for querying data in Telicent CORE
 
 ### Run locally
 
+Export the required env vars (see
+<https://telicent.atlassian.net/wiki/x/BICSNw>), then:
+
 ```sh
 git clone <repo>
 cd telicent-query
@@ -15,20 +18,22 @@ yarn install
 yarn dev
 ```
 
-The app boots at <http://localhost:3001/query/> against the shared sandbox
-(`*.system-integration.telicent-sandbox.telicent.live`). No manual config step.
+The app boots at <http://localhost:3001/query/>.
 
 ### Configuration
 
 Runtime config lives in `env-config.js` (gitignored), served at `/env-config.js`
 via a `<script>` tag in `index.html`. The committed `env-config.default.js`
-holds the working sandbox values. On the first `yarn dev` or `yarn build`,
-`scripts/cp-config.js.sh` bootstraps `env-config.js` from the default if it
-doesn't exist, then copies it into `./public/`.
+is an `envsubst` template holding `${VAR}` placeholders. On the first
+`yarn dev` or `yarn build`, `scripts/cp-config.js.sh` runs the template
+through `envsubst` into `env-config.js`, then copies it into `./public/`.
+The script fails fast if any required host env var is unset.
 
-To point the app at a local backend, edit `env-config.js` directly — your
-edits won't be tracked. To reset to sandbox defaults, delete `env-config.js`
-and re-run `yarn dev`.
+To reset, delete `env-config.js` and re-run `yarn dev`. You can also edit
+the generated `env-config.js` directly — your edits won't be tracked, and
+bootstrap only runs when the file is missing.
+
+`envsubst` is required (`brew install gettext` on macOS).
 
 #### Architecture: runtime config
 

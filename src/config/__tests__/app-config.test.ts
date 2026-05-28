@@ -84,6 +84,7 @@ describe('app-config', () => {
             "uri-basename": "alpha",
           },
           "APP_SWITCH_LIBRARY": [],
+          "ARC_GIS_API_TOKEN": undefined,
           "AUTH_V2_CONFIG_WITH_LOGOUT": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -93,6 +94,7 @@ describe('app-config', () => {
             "scope": "openid profile",
           },
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
+          "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": true,
           "featureFlags": {
@@ -141,6 +143,7 @@ describe('app-config', () => {
             "uri-basename": "alpha",
           },
           "APP_SWITCH_LIBRARY": [],
+          "ARC_GIS_API_TOKEN": undefined,
           "AUTH_V2_CONFIG_WITH_LOGOUT": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -150,6 +153,7 @@ describe('app-config', () => {
             "scope": "openid profile",
           },
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
+          "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": false,
           "featureFlags": {
