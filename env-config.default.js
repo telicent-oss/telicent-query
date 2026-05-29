@@ -10,15 +10,9 @@ window.GRAPHQL_URL = 'https://${API_HOST_DOMAIN}/sparql/knowledge/graphql';
 
 window.SPARQL_URL = 'https://${API_HOST_DOMAIN}/sparql/knowledge/sparql';
 
-window.ACCESS_URL = 'http://localhost:3001/api/access';
-
 window.MAP_TILER_TOKEN = '${MAP_TILER_TOKEN}';
 
 window.ARC_GIS_API_TOKEN = '${ARC_GIS_API_TOKEN}';
-
-window.featureFlags = {
-  FF_AUTH_V2: true,
-};
 
 window.AUTH_V2_CONFIG = {
   authServerUrl: 'https://${AUTH_HOST_DOMAIN}',

@@ -3,17 +3,11 @@ import { AUTH_V2_CONFIG_SCHEMA } from '../app-config.AUTH_V2_CONFIG.schemas-type
 import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
 
 export const ENV_SCHEMA = z.object({
-  ACCESS_URL: z.string().optional(),
   GRAPHQL_URL: z.string(),
   SPARQL_URL: z.string(),
   MAP_TILER_TOKEN: z.string().optional(),
   ARC_GIS_API_TOKEN: z.string().optional(),
   BETA: z.boolean().optional(),
-  featureFlags: z
-    .object({
-      FF_AUTH_V2: z.boolean().optional(),
-    })
-    .optional(),
   AUTH_V2_CONFIG: AUTH_V2_CONFIG_SCHEMA,
   APP_SWITCH_LIBRARY: z.array(AppSwitchLibrarySchema).optional(),
 });
