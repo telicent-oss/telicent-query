@@ -6,7 +6,7 @@
 // Optional exports: MAP_TILER_TOKEN, ARC_GIS_API_TOKEN.
 // See https://telicent.atlassian.net/wiki/x/BICSNw for values.
 
-window.GRAPHQL_URL = 'https://${API_HOST_DOMAIN}/sparql/knowledge';
+window.GRAPHQL_URL = 'https://${API_HOST_DOMAIN}/sparql/knowledge/graphql';
 
 window.SPARQL_URL = 'https://${API_HOST_DOMAIN}/sparql/knowledge/sparql';
 
