@@ -13,25 +13,21 @@ const config = (() => {
   try {
     return z
       .object({
-        ACCESS_URL: ENV_SCHEMA.shape.ACCESS_URL,
         GRAPHQL_URL: ENV_SCHEMA.shape.GRAPHQL_URL,
         SPARQL_URL: ENV_SCHEMA.shape.SPARQL_URL,
+        MAP_TILER_TOKEN: ENV_SCHEMA.shape.MAP_TILER_TOKEN,
+        ARC_GIS_API_TOKEN: ENV_SCHEMA.shape.ARC_GIS_API_TOKEN,
         beta: z.boolean().optional(),
-        featureFlags: z.object({
-          FF_AUTH_V2: z.boolean(),
-        }),
         APP_CONFIG_JSON: APP_CONFIG_JSON_SCHEMA,
         AUTH_V2_CONFIG_WITH_LOGOUT: AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA,
         APP_SWITCH_LIBRARY: z.array(AppSwitchLibrarySchema),
       })
       .parse({
-        ACCESS_URL: env.ACCESS_URL,
         GRAPHQL_URL: env.GRAPHQL_URL,
         SPARQL_URL: env.SPARQL_URL,
+        MAP_TILER_TOKEN: env.MAP_TILER_TOKEN,
+        ARC_GIS_API_TOKEN: env.ARC_GIS_API_TOKEN,
         beta: env.BETA,
-        featureFlags: {
-          FF_AUTH_V2: Boolean(env.featureFlags?.FF_AUTH_V2),
-        },
         APP_CONFIG_JSON,
         AUTH_V2_CONFIG_WITH_LOGOUT: {
           ...(env.AUTH_V2_CONFIG || null),

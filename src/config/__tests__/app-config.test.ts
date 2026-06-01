@@ -45,12 +45,10 @@ describe('app-config', () => {
   });
 
   it('builds config from env', () => {
-    const envOverrides = {
-      ACCESS_URL: 'https://ACCESS_URL.example.test',
+    const envOverrides: Env = {
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
       SPARQL_URL: 'https://SPARQL_URL.example.test',
       BETA: true,
-      featureFlags: { FF_AUTH_V2: true },
       AUTH_V2_CONFIG: authConfig,
     };
     const { default: config, getConfig } = loadConfig(envOverrides);
@@ -58,7 +56,6 @@ describe('app-config', () => {
     expect({ inputs: envOverrides, output: config }).toMatchInlineSnapshot(`
       {
         "inputs": {
-          "ACCESS_URL": "https://ACCESS_URL.example.test",
           "AUTH_V2_CONFIG": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -69,12 +66,8 @@ describe('app-config', () => {
           "BETA": true,
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
         },
         "output": {
-          "ACCESS_URL": "https://ACCESS_URL.example.test",
           "APP_CONFIG_JSON": {
             "app_name": "App Name",
             "app_name_snake_case": "app_name",
@@ -84,6 +77,7 @@ describe('app-config', () => {
             "uri-basename": "alpha",
           },
           "APP_SWITCH_LIBRARY": [],
+          "ARC_GIS_API_TOKEN": undefined,
           "AUTH_V2_CONFIG_WITH_LOGOUT": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -93,11 +87,9 @@ describe('app-config', () => {
             "scope": "openid profile",
           },
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
+          "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": true,
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
         },
       }
     `);
@@ -105,9 +97,8 @@ describe('app-config', () => {
     expect(getConfig()).toBe(config);
   });
 
-  it('handles missing feature flags and beta false', () => {
-    const envOverrides = {
-      ACCESS_URL: 'https://ACCESS_URL.example.test',
+  it('handles beta false', () => {
+    const envOverrides: Env = {
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
       SPARQL_URL: 'https://SPARQL_URL.example.test',
       BETA: false,
@@ -118,7 +109,6 @@ describe('app-config', () => {
     expect({ inputs: envOverrides, output: config }).toMatchInlineSnapshot(`
       {
         "inputs": {
-          "ACCESS_URL": "https://ACCESS_URL.example.test",
           "AUTH_V2_CONFIG": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -131,7 +121,6 @@ describe('app-config', () => {
           "SPARQL_URL": "https://SPARQL_URL.example.test",
         },
         "output": {
-          "ACCESS_URL": "https://ACCESS_URL.example.test",
           "APP_CONFIG_JSON": {
             "app_name": "App Name",
             "app_name_snake_case": "app_name",
@@ -141,6 +130,7 @@ describe('app-config', () => {
             "uri-basename": "alpha",
           },
           "APP_SWITCH_LIBRARY": [],
+          "ARC_GIS_API_TOKEN": undefined,
           "AUTH_V2_CONFIG_WITH_LOGOUT": {
             "authServerUrl": "https://auth.example.test",
             "clientId": "client-123",
@@ -150,11 +140,9 @@ describe('app-config', () => {
             "scope": "openid profile",
           },
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
+          "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": false,
-          "featureFlags": {
-            "FF_AUTH_V2": false,
-          },
         },
       }
     `);

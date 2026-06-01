@@ -1,8 +1,19 @@
-import React from 'react';
-import config from '../../config/app-config';
-import UserFetchNew from './UserFetchNew';
-import UserFetchLegacy from './UserFetchLegacy';
+import { Navigate, Outlet } from 'react-router-dom';
 
-const UserFetch = config.featureFlags?.FF_AUTH_V2 ? UserFetchNew : UserFetchLegacy;
+import { useAuth } from '@telicent-oss/ds';
+
+const UserFetch = () => {
+  const { loading: isLoading, error } = useAuth();
+
+  if (isLoading) {
+    return <section>Loading...</section>;
+  }
+
+  if (error) {
+    return <Navigate to="/error" replace state={{ err: error }} />;
+  }
+
+  return <Outlet />;
+};
 
 export default UserFetch;

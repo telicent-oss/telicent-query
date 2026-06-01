@@ -1,14 +1,12 @@
-import type React from 'react';
+import 'react';
 
 type MockTagProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
-type MockIntrinsicElements = {
-  [K in `mock-${string}`]: MockTagProps;
-};
-
-declare global {
+declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements extends MockIntrinsicElements {}
+    interface IntrinsicElements {
+      [K: `mock-${string}`]: MockTagProps;
+    }
   }
 }
 
