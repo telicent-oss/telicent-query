@@ -47,7 +47,6 @@ jest.mock('components', () => ({
   UserFetch: ({ children }: { children?: ReactNode }) => (
     <mock-user-fetch>{children}</mock-user-fetch>
   ),
-  UserInfo: () => <mock-user-info />,
   ProtectedRoutes: ({ children }: { children?: ReactNode }) => (
     <mock-protected-routes>{children}</mock-protected-routes>
   ),
@@ -150,11 +149,6 @@ describe('App', () => {
             <h3>
               Hello I'm Telicent Query
             </h3>
-          </mock-route>
-          <mock-route
-            data-path="/user-info"
-          >
-            <mock-user-info />
           </mock-route>
           <mock-route
             data-path="/error"

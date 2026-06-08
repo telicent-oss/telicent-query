@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TeliSpinner as Spinner } from '@telicent-oss/ds';
+import { Spinner } from '@telicent-oss/ds';
 import DisplayYasqe from './DisplayYasqe';
 import SparqlTable from './SparqlTable';
 import Header from '../Header/Header';

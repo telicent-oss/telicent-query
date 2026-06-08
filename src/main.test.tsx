@@ -83,7 +83,7 @@ const loadMain = ({ appBaseName = 'query' }: { appBaseName?: string } = {}) => {
 };
 
 describe('main', () => {
-  it('renders App wrapped with AuthProvider', () => {
+  it('wraps App in AuthProvider, UIThemeProvider, and BrowserRouter', () => {
     const inputs = { appBaseName: 'query' };
 
     loadMain(inputs);
@@ -102,6 +102,7 @@ describe('main', () => {
             hasQueryClient: Boolean(authProviderProps.queryClient),
           }
         : undefined,
+      uiThemeProviderTheme: uiThemeProviderProps?.theme,
     };
 
     expect({ inputs, output }).toMatchInlineSnapshot(`
@@ -127,6 +128,7 @@ describe('main', () => {
           },
           "createRootElementId": "root",
           "reportWebVitalsCallCount": 1,
+          "uiThemeProviderTheme": "GraphOrange",
         },
       }
     `);
