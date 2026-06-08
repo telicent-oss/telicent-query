@@ -1,4 +1,4 @@
-import { createGraphiQLFetcher, Fetcher } from '@graphiql/toolkit';
+import { Fetcher } from '@graphiql/toolkit';
 import { useAuth, Brand } from '@telicent-oss/ds';
 import { GraphiQL } from 'graphiql';
 import 'graphiql/graphiql.css';
@@ -39,8 +39,8 @@ const DEFAULT_QUERY = `
 #
 { __typename }
 `;
-const TelicentGraphiQLNew = () => {
-  const { api, user } = useAuth(); // now legal
+const TelicentGraphiQL = () => {
+  const { api, user } = useAuth();
 
   const fetcher: Fetcher = useCallback(
     async (params) => {
@@ -63,18 +63,4 @@ const TelicentGraphiQLNew = () => {
   );
 };
 
-const TelicentGraphiQLLegacy = () => {
-  const fetcher = createGraphiQLFetcher({ url: config.GRAPHQL_URL });
-
-  return (
-    <section style={{ height: '100vh' }}>
-      <GraphiQL fetcher={fetcher}>
-        <GraphiQL.Logo>
-          <Brand appName="queryQL" />
-        </GraphiQL.Logo>
-      </GraphiQL>
-    </section>
-  );
-};
-
-export default config.featureFlags.FF_AUTH_V2 ? TelicentGraphiQLNew : TelicentGraphiQLLegacy;
+export default TelicentGraphiQL;

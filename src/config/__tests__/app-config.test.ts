@@ -50,7 +50,6 @@ describe('app-config', () => {
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
       SPARQL_URL: 'https://SPARQL_URL.example.test',
       BETA: true,
-      featureFlags: { FF_AUTH_V2: true },
       AUTH_V2_CONFIG: authConfig,
     };
     const { default: config, getConfig } = loadConfig(envOverrides);
@@ -69,9 +68,6 @@ describe('app-config', () => {
           "BETA": true,
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
         },
         "output": {
           "ACCESS_URL": "https://ACCESS_URL.example.test",
@@ -95,9 +91,6 @@ describe('app-config', () => {
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": true,
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
         },
       }
     `);
@@ -105,7 +98,7 @@ describe('app-config', () => {
     expect(getConfig()).toBe(config);
   });
 
-  it('handles missing feature flags and beta false', () => {
+  it('handles missing beta flag', () => {
     const envOverrides = {
       ACCESS_URL: 'https://ACCESS_URL.example.test',
       GRAPHQL_URL: 'https://GRAPHQL_URL.example.test',
@@ -152,9 +145,6 @@ describe('app-config', () => {
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "SPARQL_URL": "https://SPARQL_URL.example.test",
           "beta": false,
-          "featureFlags": {
-            "FF_AUTH_V2": false,
-          },
         },
       }
     `);

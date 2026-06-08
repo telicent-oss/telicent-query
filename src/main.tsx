@@ -27,17 +27,13 @@ const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
 const RenderApp = (
   <UIThemeProvider dark theme="GraphOrange">
     <BrowserRouter basename={basename}>
-      {config.featureFlags.FF_AUTH_V2 ? (
-        <AuthProvider
-          config={config.AUTH_V2_CONFIG_WITH_LOGOUT}
-          apiUrl={config.AUTH_V2_CONFIG_WITH_LOGOUT.authServerUrl}
-          queryClient={queryClient}
-        >
-          <App />
-        </AuthProvider>
-      ) : (
+      <AuthProvider
+        config={config.AUTH_V2_CONFIG_WITH_LOGOUT}
+        apiUrl={config.AUTH_V2_CONFIG_WITH_LOGOUT.authServerUrl}
+        queryClient={queryClient}
+      >
         <App />
-      )}
+      </AuthProvider>
     </BrowserRouter>
   </UIThemeProvider>
 );

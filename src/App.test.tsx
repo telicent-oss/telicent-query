@@ -13,7 +13,6 @@ let callbackProps: ComponentProps<typeof DsCallback> | undefined;
 let authRedirectProps: ComponentProps<typeof DsAuthRedirectUri> | undefined;
 
 const mockConfig = {
-  featureFlags: { FF_AUTH_V2: true },
   AUTH_V2_CONFIG_WITH_LOGOUT: {
     authServerUrl: 'https://auth.example.test',
     clientId: 'client-123',
@@ -69,14 +68,13 @@ describe('App', () => {
     mockPathname = '/';
     callbackProps = undefined;
     authRedirectProps = undefined;
-    mockConfig.featureFlags = { FF_AUTH_V2: true };
   });
 
   it('renders callback route when pathname ends with /callback', () => {
     mockPathname = '/callback';
 
     const { asFragment } = render(<App />);
-    const inputs = { pathname: mockPathname, featureFlags: mockConfig.featureFlags };
+    const inputs = { pathname: mockPathname };
     const output = {
       callbackProps,
       authRedirectProps,
@@ -85,9 +83,6 @@ describe('App', () => {
     expect({ inputs, output }).toMatchInlineSnapshot(`
       {
         "inputs": {
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
           "pathname": "/callback",
         },
         "output": {
@@ -111,12 +106,11 @@ describe('App', () => {
     `);
   });
 
-  it('renders auth redirect when feature flag is on', () => {
+  it('renders auth redirect route', () => {
     mockPathname = '/';
-    mockConfig.featureFlags = { FF_AUTH_V2: true };
 
     const { asFragment } = render(<App />);
-    const inputs = { pathname: mockPathname, featureFlags: mockConfig.featureFlags };
+    const inputs = { pathname: mockPathname };
     const output = {
       callbackProps,
       authRedirectProps,
@@ -125,9 +119,6 @@ describe('App', () => {
     expect({ inputs, output }).toMatchInlineSnapshot(`
       {
         "inputs": {
-          "featureFlags": {
-            "FF_AUTH_V2": true,
-          },
           "pathname": "/",
         },
         "output": {
@@ -174,61 +165,6 @@ describe('App', () => {
             data-path="/auth-redirect-uri"
           >
             <mock-auth-redirect-uri />
-          </mock-route>
-        </mock-routes>
-      </DocumentFragment>
-    `);
-  });
-
-  it('skips auth redirect when feature flag is off', () => {
-    mockPathname = '/';
-    mockConfig.featureFlags = { FF_AUTH_V2: false };
-
-    const { asFragment } = render(<App />);
-    const inputs = { pathname: mockPathname, featureFlags: mockConfig.featureFlags };
-    const output = {
-      callbackProps,
-      authRedirectProps,
-    };
-
-    expect({ inputs, output }).toMatchInlineSnapshot(`
-      {
-        "inputs": {
-          "featureFlags": {
-            "FF_AUTH_V2": false,
-          },
-          "pathname": "/",
-        },
-        "output": {
-          "authRedirectProps": undefined,
-          "callbackProps": undefined,
-        },
-      }
-    `);
-    expect(asFragment()).toMatchInlineSnapshot(`
-      <DocumentFragment>
-        <mock-routes>
-          <mock-route
-            data-path="index"
-          >
-            <mock-protected-routes />
-          </mock-route>
-          <mock-route
-            data-path="/health"
-          >
-            <h3>
-              Hello I'm Telicent Query
-            </h3>
-          </mock-route>
-          <mock-route
-            data-path="/user-info"
-          >
-            <mock-user-info />
-          </mock-route>
-          <mock-route
-            data-path="/error"
-          >
-            <mock-error-page />
           </mock-route>
         </mock-routes>
       </DocumentFragment>

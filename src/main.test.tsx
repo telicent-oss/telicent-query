@@ -24,13 +24,7 @@ const baseAuthConfig = {
   onLogout: () => {},
 };
 
-const loadMain = ({
-  featureFlagAuthV2,
-  appBaseName = 'query',
-}: {
-  featureFlagAuthV2: boolean;
-  appBaseName?: string;
-}) => {
+const loadMain = ({ appBaseName = 'query' }: { appBaseName?: string } = {}) => {
   jest.resetModules();
   document.body.innerHTML = '<div id="root"></div>';
   authProviderProps = undefined;
@@ -77,7 +71,6 @@ const loadMain = ({
   jest.doMock('config/app-config', () => ({
     __esModule: true,
     default: {
-      featureFlags: { FF_AUTH_V2: featureFlagAuthV2 },
       AUTH_V2_CONFIG_WITH_LOGOUT: baseAuthConfig,
     },
   }));
@@ -90,8 +83,8 @@ const loadMain = ({
 };
 
 describe('main', () => {
-  it('renders AuthProvider branch when FF_AUTH_V2 is true', () => {
-    const inputs = { featureFlagAuthV2: true, appBaseName: 'query' };
+  it('renders App wrapped with AuthProvider', () => {
+    const inputs = { appBaseName: 'query' };
 
     loadMain(inputs);
     const { asFragment } = render(<>{renderedRootNode}</>);
@@ -115,7 +108,6 @@ describe('main', () => {
       {
         "inputs": {
           "appBaseName": "query",
-          "featureFlagAuthV2": true,
         },
         "output": {
           "authProviderProps": {
@@ -146,49 +138,6 @@ describe('main', () => {
             <mock-auth-provider>
               <mock-app />
             </mock-auth-provider>
-          </mock-browser-router>
-        </mock-ui-theme-provider>
-      </DocumentFragment>
-    `);
-  });
-
-  it('renders App directly when FF_AUTH_V2 is false', () => {
-    const inputs = { featureFlagAuthV2: false, appBaseName: 'query' };
-
-    loadMain(inputs);
-    const { asFragment } = render(<>{renderedRootNode}</>);
-
-    const output = {
-      createRootElementId: (createRootElement as Element | null)?.id,
-      reportWebVitalsCallCount,
-      browserRouterProps: {
-        basename: browserRouterProps?.basename,
-      },
-      authProviderProps,
-    };
-
-    expect({ inputs, output }).toMatchInlineSnapshot(`
-      {
-        "inputs": {
-          "appBaseName": "query",
-          "featureFlagAuthV2": false,
-        },
-        "output": {
-          "authProviderProps": undefined,
-          "browserRouterProps": {
-            "basename": "/query",
-          },
-          "createRootElementId": "root",
-          "reportWebVitalsCallCount": 1,
-        },
-      }
-    `);
-
-    expect(asFragment()).toMatchInlineSnapshot(`
-      <DocumentFragment>
-        <mock-ui-theme-provider>
-          <mock-browser-router>
-            <mock-app />
           </mock-browser-router>
         </mock-ui-theme-provider>
       </DocumentFragment>
