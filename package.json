@@ -71,7 +71,7 @@
     "braces": "^3.0.3",
     "nth-check": "2.0.1",
     "@telicent-oss/ontologyservice": "^1.1.0",
-    "ws": "8.17.1",
+    "ws": "8.21.0",
     "qs": "^6.14.1",
     "minimatch": "^3.1.4",
     "lodash": "^4.18.0",
