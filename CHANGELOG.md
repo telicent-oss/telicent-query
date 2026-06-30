@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.6.0](https://github.com/telicent-oss/telicent-query/compare/v1.5.4...v1.6.0) (2026-06-30)
+
+
+### Features
+
+* bump to React 19 + @telicent-oss/ds 3.0.0 ([11a7fa0](https://github.com/telicent-oss/telicent-query/commit/11a7fa0f0e6f425b4cf394cb04799d41b17b700b))
+* remove legacy auth routes ([a93a83d](https://github.com/telicent-oss/telicent-query/commit/a93a83d3b6fdab3d710f29ca55deabd7840bade9))
+* standardise env-config bootstrap via env-config.default.js ([cdbb546](https://github.com/telicent-oss/telicent-query/commit/cdbb54684933e0bb2e459b81d8fea39ddbf48122))
+* TELFE-1036/react-19-migration ([5095fb6](https://github.com/telicent-oss/telicent-query/commit/5095fb69739fd9b9e3ffb1ae53651f37bf7c9551))
+
+
+### Bug Fixes
+
+* align ds imports with @telicent-oss/ds 3.0.0 API ([767b2d4](https://github.com/telicent-oss/telicent-query/commit/767b2d4b0e22b2109f40981b5846b02034994e54))
+* **config:** fix url ([4ef2dda](https://github.com/telicent-oss/telicent-query/commit/4ef2ddad6080056d3bfbbaf7d8073772817abfcf))
+* **types:** scope mock-* JSX augmentation under react module ([aa8ce7c](https://github.com/telicent-oss/telicent-query/commit/aa8ce7c54a0281386b66a2177d0af0a56c37cf75))
+
 ## [1.5.4](https://github.com/telicent-oss/telicent-query/compare/v1.5.3...v1.5.4) (2026-05-07)
 
 
