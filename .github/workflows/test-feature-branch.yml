@@ -8,17 +8,18 @@ on:
 
 jobs:
   quality:
-    name: Run unit tests
+    name: Test & quality
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: read
       packages: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - name: Prepare Yarn
-        uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
+        uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@2de60e7079916a626fa0c37ee7683cc6fece50a1 # main @ 2026-07-15
         with:
           node-version: 20
           additional-args: '--network-timeout 600000'
