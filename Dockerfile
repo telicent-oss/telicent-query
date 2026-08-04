@@ -1,4 +1,4 @@
-FROM telicent/telicent-nginx1.29:latest
+FROM telicent/telicent-nginx1.30:1.0.15
 ARG APP_NAME
 USER user
 COPY ./*.sbom.json /opt/telicent/sbom/
