@@ -17,6 +17,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          # SonarQube attributes issues and works out what is new code from git
+          # history, so the scan needs the full clone rather than the default
+          # shallow one.
+          fetch-depth: 0
       - name: Prepare Yarn
         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
@@ -34,3 +39,11 @@ jobs:
           report-path: './ctrf/ctrf-report.json'
           github-report: true
           annotate: false
+
+      # The project key and source layout come from sonar-project.properties.
+      # Runs after the tests so the lcov coverage they write is picked up.
+      - name: Check code quality
+        uses: telicent-oss/shared-workflows/.github/actions/sast-scanning@main
+        with:
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
