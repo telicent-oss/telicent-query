@@ -116,6 +116,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          # SonarQube attributes issues and works out what is new code from git
+          # history, so the scan needs the full clone rather than the default
+          # shallow one.
+          fetch-depth: 0
       - name: Prepare Yarn
         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
         with:
@@ -124,8 +129,16 @@ jobs:
           sanity-check: true
           verbose: true
       - name: Run tests
-        run: yarn test
+        run: yarn test --coverage
         shell: bash
+      # Analyse main so the project has an up to date scan behind it, which is
+      # what the code health report published with the release describes. The
+      # project key and source layout come from sonar-project.properties.
+      - name: Check code quality
+        uses: telicent-oss/shared-workflows/.github/actions/sast-scanning@main
+        with:
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
       - name: Build application
         run: LOCAL_MACHINE=false yarn build
       - name: Upload build to artifact
@@ -202,6 +215,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           quay-username: ${{ secrets.QUAY_USERNAME }}
           quay-token: ${{ secrets.QUAY_TOKEN }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-report-s3-uri: s3://${{ secrets.RELEASE_ARTEFACT_BUCKET_NAME }}/${{ needs.prepare.outputs.app-name }}/${{ needs.release-please.outputs.version }}/SAST/
+          sonar-report-aws-region: eu-west-2
+          sonar-report-aws-role: ${{ secrets.SONAR_ROLE_TO_ASSUME }}
       - name: Package and push Helm charts to Quay
         uses: telicent-oss/shared-workflows/.github/actions/push-helm-chart@main
         with:
