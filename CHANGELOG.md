@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.1](https://github.com/telicent-oss/telicent-query/compare/v1.6.0...v1.6.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* bump base image ([f79048a](https://github.com/telicent-oss/telicent-query/commit/f79048a3d304a54dd4b1de3525c94d88530c8f1a))
+* swap to reusable workflow ([c527a08](https://github.com/telicent-oss/telicent-query/commit/c527a08ede92e299d2ffa33b8d45ffac967ca55f))
+* swap to reusable workflow ([df5d5e3](https://github.com/telicent-oss/telicent-query/commit/df5d5e38398b8ad68113baadb2b1f5dc6da4c81d))
+
 ## [1.6.0](https://github.com/telicent-oss/telicent-query/compare/v1.5.4...v1.6.0) (2026-06-30)
 
 
