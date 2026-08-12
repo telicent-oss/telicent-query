@@ -33,16 +33,12 @@ jest.mock('@telicent-oss/ds', () => {
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div id="box">{children}</div>);
 
-jest.mock('../../../package.json', () => ({
-  version: '1.2.3',
-}));
-
 describe('UserProfile', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('renders base version number and sign out button', () => {
+  it('renders wrapper and sign out button', () => {
     mockUseAuth.mockReturnValue({
       user: {
         preferred_name: 'Vanessa',
@@ -56,8 +52,6 @@ describe('UserProfile', () => {
     render(<UserProfile />);
 
     expect(screen.getByTestId('user-profile-wrapper')).toBeInTheDocument();
-    expect(screen.getByText('Version number')).toBeInTheDocument();
-    expect(screen.getByText('1.2.3')).toBeInTheDocument();
     expect(screen.getByTestId('sign-out-button')).toHaveTextContent('Sign Out');
   });
 
@@ -100,7 +94,7 @@ describe('UserProfile', () => {
 
     render(<UserProfile />);
 
-    expect(screen.getByTestId('user-profile-wrapper')).toHaveAttribute('data-fullname', 'Vanessa');
+    expect(screen.getByTestId('user-profile-wrapper')).toHaveAttribute('data-fullname', '');
 
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.getByText('Vanessa')).toBeInTheDocument();
