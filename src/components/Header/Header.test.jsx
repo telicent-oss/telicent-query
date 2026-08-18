@@ -22,9 +22,11 @@ jest.mock('../../config/app-config', () => ({
 }));
 
 jest.mock('../UserProfile/UserProfile', () => () => <div id="user-profile">User Profile</div>);
+jest.mock('./AppInfoPopover', () => () => <div id="app-info-popover">App Info</div>);
 
 jest.mock('@telicent-oss/ds', () => ({
   AppSwitch: ({ apps }) => <div id="app-switch">{apps.map((app) => app.name).join(', ')}</div>,
+  FlexBox: ({ children }) => <div id="flex-box">{children}</div>,
   AppBar: ({ onClick, appName, startChild, endChild, isElevated }) => (
     <div>
       <button id="app-bar" onClick={onClick}>
@@ -47,6 +49,7 @@ describe('Header', () => {
 
     expect(screen.getByTestId('app-bar')).toHaveTextContent('Test App');
     expect(screen.getByTestId('app-switch')).toHaveTextContent('App One, App Two');
+    expect(screen.getByTestId('app-info-popover')).toBeInTheDocument();
     expect(screen.getByTestId('user-profile')).toBeInTheDocument();
     expect(screen.getByTestId('is-elevated')).toHaveTextContent('true');
   });

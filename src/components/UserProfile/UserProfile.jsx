@@ -8,7 +8,6 @@ import {
   useAuth,
 } from '@telicent-oss/ds';
 
-import packgeJson from '../../../package.json';
 import Box from '@mui/material/Box';
 
 const UserProfile = () => {
@@ -19,7 +18,8 @@ const UserProfile = () => {
   };
 
   return (
-    <UserProfileWrapper fullName={user?.preferred_name || ''}>
+    // Icon-only trigger — username lives inside the dropdown, not beside the avatar.
+    <UserProfileWrapper fullName="">
       <UserProfileContent>
         {loading && <section>Loading...</section>}
         {error && <section>{error.message}</section>}
@@ -27,7 +27,6 @@ const UserProfile = () => {
           <>
             <TitleAndContent title={'Username'} content={user.preferred_name} />
             <TitleAndContent title={'Email'} content={user.email} />
-            <TitleAndContent title={'Version number'} content={packgeJson.version} />
           </>
         )}
       </UserProfileContent>
