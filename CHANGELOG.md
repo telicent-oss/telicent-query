@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/telicent-oss/telicent-query/compare/v1.6.1...v1.7.0) (2026-08-18)
+
+
+### Features
+
+* add AppInfoPopover to AppBar and bump @telicent-oss/ds to 3.5.0 ([d4897a6](https://github.com/telicent-oss/telicent-query/commit/d4897a6f86ca052da978cb4e375a98bd49566f69))
+* add AppInfoPopover to AppBar, bump @telicent-oss/ds to 3.5.0 ([ee25c8b](https://github.com/telicent-oss/telicent-query/commit/ee25c8b942682a6d927c4798e7812bfbf7b3b092))
+
 ## [1.6.1](https://github.com/telicent-oss/telicent-query/compare/v1.6.0...v1.6.1) (2026-08-05)
 
 
