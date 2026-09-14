@@ -18,11 +18,3 @@ process.env = {
   GRAPHQL_URL: 'http://localhost:4000',
   FF_CYTOSCAPE: true,
 };
-
-jest.mock('react-map-gl/maplibre', () => ({
-  __esModule: true,
-  default: ({ children }) => <div id="telicentMap">{children}</div>,
-  Source: ({ data, ...otherProps }) => <div data-features={JSON.stringify(data)} {...otherProps} />,
-  Layer: (props) => <div {...props} />,
-  MapProvider: ({ children }) => <div>{children}</div>,
-}));
