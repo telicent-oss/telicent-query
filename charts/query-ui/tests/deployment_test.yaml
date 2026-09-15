@@ -2,6 +2,7 @@ suite: Deployment tests
 
 templates:
   - templates/deployment.yaml
+  - templates/configmap-envjs.yaml
 
 set:
   replicas: 2

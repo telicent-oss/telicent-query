@@ -20,7 +20,7 @@ data:
     window.SPARQL_URL = `https://${API_DOMAIN}/sparql/knowledge/sparql`;
     // Configure the Access endpoint as used by the client browser.
     window.ACCESS_URL = `https://${API_DOMAIN}/access`;
-    window.BETA = false;
+    window.BETA = false;o
    
     window.featureFlags = {
       FF_AI_TRANSLATE: false,
