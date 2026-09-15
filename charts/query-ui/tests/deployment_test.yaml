@@ -112,7 +112,7 @@ tests:
   #         path: spec.template.metadata.annotations["prometheus.io/path"]
   #         value: "/metrics"
 
-    - it: should leave out resources when not set
+  - it: should leave out resources when not set
     template: templates/deployment.yaml
     set:
       resources: {}
