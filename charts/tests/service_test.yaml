@@ -1,0 +1,82 @@
+suite: Service tests
+
+templates:
+  - charts/query-ui/templates/service.yaml
+
+set:
+  service:
+    port: 8080
+
+tests:
+  - it: should create a Service
+    asserts:
+      - isKind:
+          of: Service
+
+  - it: should use the given Service name
+    set:
+      service:
+        name: query-ui-test
+    asserts:
+      - equal:
+          path: metadata.name
+          value: query-ui-test
+
+  - it: should use the namespace override when given
+    release:
+      namespace: query-ui-test
+    set:
+      namespaceOverride: unit-test
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: unit-test
+
+  - it: should set the service type
+    set:
+      service:
+        type: ClusterIP
+    asserts:
+      - equal:
+          path: spec.type
+          value: ClusterIP
+
+  - it: should set the selector
+    set:
+      nameOverride: query-ui-test
+    asserts:
+      - isSubset:
+          path: spec.selector
+          content:
+            app.kubernetes.io/name: query-ui-test
+            app.kubernetes.io/instance: RELEASE-NAME
+
+  - it: should set the service port
+    asserts:
+      - equal:
+          path: spec.ports[0].port
+          value: 8080
+
+  - it: should set the port name to http
+    asserts:
+      - equal:
+          path: spec.ports[0].name
+          value: http
+
+  - it: should set the app protocol to http
+    asserts:
+      - equal:
+          path: spec.ports[0].appProtocol
+          value: http
+
+  - it: should use TCP protocol
+    asserts:
+      - equal:
+          path: spec.ports[0].protocol
+          value: TCP
+
+  - it: should target the http port
+    asserts:
+      - equal:
+          path: spec.ports[0].targetPort
+          value: http

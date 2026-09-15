@@ -1,0 +1,74 @@
+suite: ConfigMap tests
+
+templates:
+  - charts/query-ui/templates/configmap-envjs.yaml
+
+set:
+  global:
+    apiHostDomain: api.example.com
+    authHostDomain: auth.example.com
+    appHostDomain: app.example.com
+  oauth:
+    clientId: my-client-id
+    scopes: query-ui scope test
+
+tests:
+  - it: should create a ConfigMap
+    asserts:
+      - isKind:
+          of: ConfigMap
+
+  - it: should use the existing configmap name when given
+    set:
+      configMap:
+        existingConfigMap: existing-cm
+    asserts:
+      - equal:
+          path: metadata.name
+          value: existing-cm
+
+  - it: should use the namespace override when given
+    release:
+      namespace: query-ui-test
+    set:
+      namespaceOverride: unit-test
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: unit-test
+
+  - it: should set the API domain from global.apiHostDomain
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'const API_DOMAIN = "api\.example\.com";'
+
+  - it: should build the auth server URL from global.authHostDomain
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'authServerUrl: "https://auth\.example\.com",'
+
+  - it: should set the OAuth client ID
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'clientId: "my-client-id",'
+
+  - it: should set the OAuth scopes
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'scope: "query-ui scope test",'
+
+  - it: should build the redirect URI from global.authHostDomain
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'redirectUri: "https://app\.example\.com/dev/callback",'
+
+  - it: should build the popup redirect URI from global.host
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'popupRedirectUri: "https://app\.example\.com/dev/auth-redirect-uri",'

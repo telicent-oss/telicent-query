@@ -1,0 +1,13 @@
+name: Test Helm chart
+
+on:
+  push:
+
+jobs:
+  helm-unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Helm unit tests
+        uses: telicent-oss/shared-workflows/.github/actions/unit-helm-charts@feat/helm-unit-test
+        with:
+          chart: charts/query-ui
