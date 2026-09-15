@@ -1,49 +1,49 @@
-# name: test-feature-branch.yml
-# run-name: Test Feature Branch
+name: test-feature-branch.yml
+run-name: Test Feature Branch
 
-# on:
-#   push:
-#     branches-ignore:
-#       - "main"
+on:
+  push:
+    branches-ignore:
+      - "main"
 
-# jobs:
-#   quality:
-#     name: Run unit tests
-#     runs-on: ubuntu-latest
-#     permissions:
-#       id-token: write
-#       contents: read
-#       packages: read
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v5
-#         with:
-#           # SonarQube attributes issues and works out what is new code from git
-#           # history, so the scan needs the full clone rather than the default
-#           # shallow one.
-#           fetch-depth: 0
-#       - name: Prepare Yarn
-#         uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
-#         with:
-#           node-version: 20
-#           additional-args: '--network-timeout 600000'
-#           create-yarnrc: true
-#           frozen-lockfile: true
-#       - name: Run tests
-#         run: yarn test --coverage --reporters=default --reporters=jest-ctrf-json-reporter
-#         shell: bash
-#       - name: Test report summary
-#         uses: ctrf-io/github-test-reporter@v1
-#         if: always()
-#         with:
-#           report-path: './ctrf/ctrf-report.json'
-#           github-report: true
-#           annotate: false
+jobs:
+  quality:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      packages: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          # SonarQube attributes issues and works out what is new code from git
+          # history, so the scan needs the full clone rather than the default
+          # shallow one.
+          fetch-depth: 0
+      - name: Prepare Yarn
+        uses: telicent-oss/shared-workflows/.github/actions/yarn-prepare@main
+        with:
+          node-version: 20
+          additional-args: '--network-timeout 600000'
+          create-yarnrc: true
+          frozen-lockfile: true
+      - name: Run tests
+        run: yarn test --coverage --reporters=default --reporters=jest-ctrf-json-reporter
+        shell: bash
+      - name: Test report summary
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: './ctrf/ctrf-report.json'
+          github-report: true
+          annotate: false
 
-#       # The project key and source layout come from sonar-project.properties.
-#       # Runs after the tests so the lcov coverage they write is picked up.
-#       - name: Check code quality
-#         uses: telicent-oss/shared-workflows/.github/actions/sast-scanning@main
-#         with:
-#           sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
-#           sonar-token: ${{ secrets.SONAR_TOKEN }}
+      # The project key and source layout come from sonar-project.properties.
+      # Runs after the tests so the lcov coverage they write is picked up.
+      - name: Check code quality
+        uses: telicent-oss/shared-workflows/.github/actions/sast-scanning@main
+        with:
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}

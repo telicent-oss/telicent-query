@@ -1,5 +1,5 @@
 name: Test Helm chart
-
+run-name: Unit Tests for Helm Chart
 on:
   push:
 
