@@ -33,6 +33,41 @@ tests:
           path: spec.template.spec.imagePullSecrets[0].name
           value: global-secret
 
+  - it: should build the image from registry, repository and tag
+    template: templates/deployment.yaml
+    set:
+      global:
+        imageRegistry: registry.io
+      image:
+        repository: quay/query-ui
+        tag: "1.2.0"
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.io/quay/query-ui:1.0.0
+
+  - it: should fall back to Chart.AppVersion when image.tag is not set
+    template: templates/deployment.yaml
+    set:
+      global:
+        imageRegistry: registry.io
+      image:
+        repository: quay/query-ui
+    asserts:
+      - matchRegex:
+          path: spec.template.spec.containers[0].image
+          pattern: '^registry\.io/quay/query-ui:.+$'
+
+  - it: should set the imagePullPolicy from values
+    template: templates/deployment.yaml
+    set:
+      image:
+        pullPolicy: Always
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: Always
+
   - it: should fall back to image.pullSecrets when global is not set
     template: templates/deployment.yaml
     set:
