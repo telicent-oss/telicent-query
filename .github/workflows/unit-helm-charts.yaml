@@ -1,7 +1,10 @@
 name: Test Helm chart
 run-name: Unit Tests for Helm Chart
+
 on:
-  push:
+  pull_request:
+    branches:
+      - main 
 
 jobs:
   helm-unittest:
