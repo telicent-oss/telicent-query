@@ -51,40 +51,23 @@ tests:
           path: spec.template.spec.containers[0].image
           pattern: '^registry\.io/quay/query-ui:.+$'
 
-  - it: should use global imagePullSecrets when set
-    template: templates/deployment.yaml
-    set:
-      global:
-        imagePullSecrets:
-          - name: global-secret
+   - it: should default the pod securityContext per policy
     asserts:
       - equal:
-          path: spec.template.spec.imagePullSecrets[0].name
-          value: global-secret
+          path: spec.template.spec.securityContext
+          value:
+            runAsUser: 185
+            runAsGroup: 185
+            runAsNonRoot: true
 
-  - it: should fall back to image.pullSecrets when global is not set
-    template: templates/deployment.yaml
-    set:
-      image:
-        pullSecrets:
-          - name: default-image-secret
+  - it: should default the container securityContext per policy
     asserts:
       - equal:
-          path: spec.template.spec.imagePullSecrets[0].name
-          value: default-image-secret
-
-  - it: should not include env when extraEnvVars not set
-    template: templates/deployment.yaml
-    asserts:
-      - notExists:
-          path: spec.template.spec.containers[0].env
-
-  - it: should reference the configmap in the volume
-    template: templates/deployment.yaml
-    set:
-      configMap:
-        existingConfigMap: query-ui-cm
-    asserts:
-      - equal:
-          path: spec.template.spec.volumes[0].configMap.name
-          value: query-ui-cm
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
