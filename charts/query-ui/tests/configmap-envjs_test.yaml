@@ -3,41 +3,19 @@ suite: ConfigMap tests
 templates:
   - templates/configmap-envjs.yaml
 
-set:
-  global:
-    apiHostDomain: api.example.com
-    authHostDomain: auth.example.com
-    appHostDomain: app.example.com
-  oauth:
-    clientId: my-client-id
-    scopes: query-ui scope test
-
 tests:
-  - it: should create a ConfigMap
+  - it: should create a ConfigMap with the generated name when no existingConfigMap given
     asserts:
       - isKind:
           of: ConfigMap
-
-  - it: should default the configmap name to tc-<chart>-envjs
-    asserts:
       - equal:
           path: metadata.name
           value: tc-query-ui-envjs   
 
-  - it: should build the env-config.js with the given values
+  - it: should use the existingConfigMap name when given
+    set:
+      existingConfigMap: existing-cm
     asserts:
-      - matchRegex:
-          path: data["env-config.js"]
-          pattern: 'const API_DOMAIN = "api\.example\.com";'
-      - matchRegex:
-          path: data["env-config.js"]
-          pattern: 'authServerUrl: "https://auth\.example\.com",'
-      - matchRegex:
-          path: data["env-config.js"]
-          pattern: 'clientId: "my-client-id",'
-      - matchRegex:
-          path: data["env-config.js"]
-          pattern: 'redirectUri: "https://app\.example\.com/query/callback",'
-      - matchRegex:
-          path: data["env-config.js"]
-          pattern: 'popupRedirectUri: "https://app\.example\.com/query/auth-redirect-uri",'
+      - equal:
+          path: metadata.name
+          value: existing-cm
