@@ -17,17 +17,20 @@ set:
 
 tests:
   - it: should create a Deployment
+    template: templates/deployment.yaml
     asserts:
       - isKind:
           of: Deployment
 
   - it: should set the replica count
+    template: templates/deployment.yaml
     asserts:
       - equal:
           path: spec.replicas
           value: 2
 
   - it: should build the image from registry, repository and tag
+    template: templates/deployment.yaml
     set:
       global:
         imageRegistry: registry.io
@@ -37,6 +40,7 @@ tests:
           value: registry.io/quay/query-ui:1.0.0
 
   - it: should fall back to Chart.AppVersion when image.tag is not set
+    template: templates/deployment.yaml
     set:
       global:
         imageRegistry: my-registry.io
@@ -48,6 +52,7 @@ tests:
           pattern: '^registry\.io/quay/query-ui:.+$'
 
   - it: should use global imagePullSecrets when set
+    template: templates/deployment.yaml
     set:
       global:
         imagePullSecrets:
@@ -58,6 +63,7 @@ tests:
           value: global-secret
 
   - it: should fall back to image.pullSecrets when global is not set
+    template: templates/deployment.yaml
     set:
       image:
         pullSecrets:
@@ -68,11 +74,13 @@ tests:
           value: default-image-secret
 
   - it: should not include env when extraEnvVars not set
+    template: templates/deployment.yaml
     asserts:
       - notExists:
           path: spec.template.spec.containers[0].env
 
   - it: should reference the configmap in the volume
+    template: templates/deployment.yaml
     set:
       configMap:
         existingConfigMap: query-ui-cm
