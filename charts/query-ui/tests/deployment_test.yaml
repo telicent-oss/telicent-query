@@ -1,7 +1,7 @@
 suite: Deployment tests
 
 templates:
-  - charts/query-ui/templates/deployment.yaml
+  - templates/deployment.yaml
 
 set:
   replicas: 2

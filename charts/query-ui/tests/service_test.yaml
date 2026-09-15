@@ -1,7 +1,7 @@
 suite: Service tests
 
 templates:
-  - charts/query-ui/templates/service.yaml
+  - templates/service.yaml
 
 set:
   service:

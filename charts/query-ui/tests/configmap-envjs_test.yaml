@@ -1,7 +1,7 @@
 suite: ConfigMap tests
 
 templates:
-  - charts/query-ui/templates/configmap-envjs.yaml
+  - templates/configmap-envjs.yaml
 
 set:
   global:
