@@ -251,6 +251,14 @@ The `Unit Tests for Helm Chart` workflow runs `helm unittest` against the chart 
 | Should create a ConfigMap with the generated name when no existingConfigMap given | Checks that configmap is created following `tc-<chart>-env` name | 
 | Should use the existingConfigMap name when given | Checks whether existing configmap can be set |
 
+## Authorization Policies
+### Tests
+
+| Test | What it checks |
+|---|---|
+| Should build the principal from release namespace and service account, not a hardcoded value | Checks that the principal substitutes in the release namespace and service account name correctly when `hosts.enableAutoCorrect` is disabled |
+| Should apply release-name autocorrect to the service account when enabled | Checks that when `hosts.enableAutoCorrect` is set to true, the release name is correctly prefixed onto the service account in the principal |
+
 
 ## License
 
