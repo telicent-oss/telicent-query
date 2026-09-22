@@ -8,7 +8,7 @@ set:
   replicas: 2
   revisionHistoryLimit: 5
   image:
-    repository: quay/helm-unit-test
+    repository: telicent/helm-unit-test
     tag: "1.0.0"
   resources: {}
   podSecurityContext: {}
@@ -38,24 +38,26 @@ tests:
       global:
         imageRegistry: registry.io
       image:
-        repository: quay/helm-unit-test
-        tag: "1.0.0"
+        repository: telicent/helm-unit-test
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: registry.io/quay/helm-unit-test:1.0.0
+          value: registry.io/telicent/helm-unit-test:1.0.0
 
   - it: should fall back to Chart.AppVersion when image.tag is not set
     template: templates/deployment.yaml
+    chart:
+      appVersion: "1.2.3"
     set:
       global:
         imageRegistry: registry.io
       image:
-        repository: quay/helm-unit-test
+        repository: telicent/helm-unit-test
+        tag: ""
     asserts:
       - matchRegex:
           path: spec.template.spec.containers[0].image
-          pattern: '^registry\.io/quay/helm-unit-test:.+$'
+          pattern: '^registry\.io/telicent/helm-unit-test:1.2.3'
 
   - it: should set the imagePullPolicy from values
     template: templates/deployment.yaml
