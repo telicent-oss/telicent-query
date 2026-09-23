@@ -127,33 +127,6 @@ tests:
             seccompProfile:
               type: RuntimeDefault
 
-  # for charts with metrics added
-  # - it: should not set prometheus annotations when metrics disabled
-  #   template: templates/deployment.yaml
-  #   set:
-  #     metrics:
-  #       enabled: false
-  #   asserts:
-  #     - notExists:
-  #         path: spec.template.metadata.annotations["prometheus.io/scrape"]
-
-  # - it: should set prometheus annotations with defaults when metrics enabled
-  #   template: templates/deployment.yaml
-  #   set:
-  #     metrics:
-  #       enabled: true
-  #       port: 9090
-  #   asserts:
-  #     - equal:
-  #         path: spec.template.metadata.annotations["prometheus.io/scrape"]
-  #         value: "true"
-  #     - equal:
-  #         path: spec.template.metadata.annotations["prometheus.io/port"]
-  #         value: "9090"
-  #     - equal:
-  #         path: spec.template.metadata.annotations["prometheus.io/path"]
-  #         value: "/metrics"
-
   - it: should leave out resources when not set
     template: templates/deployment.yaml
     set:
