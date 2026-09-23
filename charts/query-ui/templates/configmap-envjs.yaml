@@ -1,7 +1,7 @@
 {{- /*
 Copyright (C) 2026 Telicent Limited
 */}}
-
+{{- if not .Values.configMap.existingConfigMap }}
 apiVersion: v1
 kind: ConfigMap
 
@@ -34,3 +34,4 @@ data:
       redirectUri: "https://{{ .Values.global.appHostDomain }}/query/callback",
       popupRedirectUri: "https://{{ .Values.global.appHostDomain }}/query/auth-redirect-uri",
     };
+{{- end }}
