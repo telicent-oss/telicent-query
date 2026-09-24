@@ -6,6 +6,16 @@ import '@testing-library/jest-dom';
 
 import { configure } from '@testing-library/react';
 
+// jsdom lacks BroadcastChannel; @telicent-oss/ds touches it at import time.
+if (typeof globalThis.BroadcastChannel === 'undefined') {
+  globalThis.BroadcastChannel = class {
+    postMessage() {}
+    close() {}
+    addEventListener() {}
+    removeEventListener() {}
+  };
+}
+
 configure({ testIdAttribute: 'id' });
 
 beforeEach(() => {

@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SparqlTable snapshot matches snapshot with empty results 1`] = `
+<div>
+  <div
+    class="py-2"
+  >
+    No results were returned from your query.
+  </div>
+</div>
+`;
+
+exports[`SparqlTable snapshot matches snapshot with results 1`] = `
+<div>
+  <div>
+    <table
+      aria-label="results table"
+      class="MuiTable-root css-16xnxkh-MuiTable-root"
+    >
+      <thead
+        class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head css-3dg3px-MuiTableRow-root"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-1e7sgt7-MuiTableCell-root"
+            scope="col"
+          >
+            subject
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-1e7sgt7-MuiTableCell-root"
+            scope="col"
+          >
+            predicate
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-1e7sgt7-MuiTableCell-root"
+            scope="col"
+          >
+            object
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root css-op1cv5-MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root css-14969b5-MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="https://example.com#alice"
+              >
+                https://example.com#alice
+              </div>
+            </div>
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="http://xmlns.com/foaf/0.1/name"
+              >
+                http://xmlns.com/foaf/0.1/name
+              </div>
+            </div>
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="Alice"
+              >
+                Alice
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root css-14969b5-MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="https://example.com#bob"
+              >
+                https://example.com#bob
+              </div>
+            </div>
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="http://xmlns.com/foaf/0.1/name"
+              >
+                http://xmlns.com/foaf/0.1/name
+              </div>
+            </div>
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-8nag0p-MuiTableCell-root"
+          >
+            <div
+              class="flex w-auto items-center justify-between"
+            >
+              <div
+                class="text-ellipsis overflow-hidden max-h-[1.5rem] mr-2.5"
+                title="Bob"
+              >
+                Bob
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
