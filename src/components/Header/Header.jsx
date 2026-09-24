@@ -5,9 +5,15 @@ import UserProfile from '../UserProfile/UserProfile';
 import AppInfoPopover from './AppInfoPopover';
 import AppSettingsPopover from './AppSettingsPopover';
 import config from '../../config/app-config';
+import { useThemeMode } from '../../hooks/useThemeMode';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { dark } = useThemeMode();
+  const apps = config.APP_SWITCH_LIBRARY.map(({ iconDark, iconLight, ...rest }) => ({
+    ...rest,
+    icon: dark ? iconDark : iconLight,
+  }));
   const goToGraphiql = (e) => {
     e.stopPropagation();
     navigate('/graphiql');
@@ -18,7 +24,7 @@ const Header = () => {
       appName={config.APP_CONFIG_JSON.app_name}
       startChild={
         <FlexBox direction="row" alignItems="center" gap={1}>
-          <AppSwitch apps={config.APP_SWITCH_LIBRARY} />
+          <AppSwitch apps={apps} />
           <Button variant="outlined" size="small" color="primary" onClick={goToGraphiql}>
             GraphQL
           </Button>

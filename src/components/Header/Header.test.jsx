@@ -15,10 +15,14 @@ jest.mock('../../config/app-config', () => ({
       app_name: 'Test App',
     },
     APP_SWITCH_LIBRARY: [
-      { id: '1', name: 'App One', url: '/app-one', icon: 'icon-1' },
-      { id: '2', name: 'App Two', url: '/app-two', icon: 'icon-2' },
+      { id: '1', name: 'App One', url: '/app-one', iconDark: 'icon-1-dark', iconLight: 'icon-1-light' },
+      { id: '2', name: 'App Two', url: '/app-two', iconDark: 'icon-2-dark', iconLight: 'icon-2-light' },
     ],
   },
+}));
+
+jest.mock('../../hooks/useThemeMode', () => ({
+  useThemeMode: () => ({ dark: true, setDark: () => {}, toggle: () => {} }),
 }));
 
 jest.mock('../UserProfile/UserProfile', () => () => <div id="user-profile">User Profile</div>);
