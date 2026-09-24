@@ -28,6 +28,11 @@ jest.mock('./AppSettingsPopover', () => () => <div id="app-settings-popover">App
 jest.mock('@telicent-oss/ds', () => ({
   AppSwitch: ({ apps }) => <div id="app-switch">{apps.map((app) => app.name).join(', ')}</div>,
   FlexBox: ({ children }) => <div id="flex-box">{children}</div>,
+  Button: ({ children, onClick }) => (
+    <button id="graphiql-nav-button" onClick={onClick}>
+      {children}
+    </button>
+  ),
   AppBar: ({ onClick, appName, startChild, endChild, isElevated }) => (
     <div>
       <button id="app-bar" onClick={onClick}>
