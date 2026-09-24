@@ -15,8 +15,20 @@ jest.mock('../../config/app-config', () => ({
       app_name: 'Test App',
     },
     APP_SWITCH_LIBRARY: [
-      { id: '1', name: 'App One', url: '/app-one', iconDark: 'icon-1-dark', iconLight: 'icon-1-light' },
-      { id: '2', name: 'App Two', url: '/app-two', iconDark: 'icon-2-dark', iconLight: 'icon-2-light' },
+      {
+        id: '1',
+        name: 'App One',
+        url: '/app-one',
+        iconDark: 'icon-1-dark',
+        iconLight: 'icon-1-light',
+      },
+      {
+        id: '2',
+        name: 'App Two',
+        url: '/app-two',
+        iconDark: 'icon-2-dark',
+        iconLight: 'icon-2-light',
+      },
     ],
   },
 }));
