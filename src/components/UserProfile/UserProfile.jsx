@@ -6,9 +6,8 @@ import {
   Button,
   Divider,
   useAuth,
+  Box,
 } from '@telicent-oss/ds';
-
-import Box from '@mui/material/Box';
 
 const UserProfile = () => {
   const { user, error, logout, loading } = useAuth();
@@ -30,19 +29,17 @@ const UserProfile = () => {
           </>
         )}
       </UserProfileContent>
-      <>
-        <Divider />
-        <Box sx={{ pt: 1 }}>
-          <Button
-            onClick={handleSignOut}
-            color="primary"
-            variant="contained"
-            startIcon={<i className="fa-solid fa-arrow-right-from-bracket" />}
-          >
-            Sign Out
-          </Button>
-        </Box>
-      </>
+      <Divider />
+      <Box sx={{ pt: 1 }}>
+        <Button
+          onClick={handleSignOut}
+          color="primary"
+          variant="contained"
+          startIcon={<i className="fa-solid fa-arrow-right-from-bracket" />}
+        >
+          Sign Out
+        </Button>
+      </Box>
     </UserProfileWrapper>
   );
 };
