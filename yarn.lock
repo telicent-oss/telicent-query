@@ -1386,7 +1386,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.9.0.tgz#745969d649977776b43fc7648c556aaa462b4102"
   integrity sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==
 
-"@emotion/react@^11.11.1":
+"@emotion/react@^11.10.6":
   version "11.14.0"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.14.0.tgz#cfaae35ebc67dd9ef4ea2e9acc6cd29e157dd05d"
   integrity sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==
@@ -1416,7 +1416,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.4.0.tgz#c9299c34d248bc26e82563735f78953d2efca83c"
   integrity sha512-fTBW9/8r2w3dXWYM4HCB1Rdp8NLibOw2+XELH5m5+AkWiL/KqYX6dc0kKYlaYyKjrQ6ds33MCdMPEwgs2z1rqg==
 
-"@emotion/styled@^11.11.0":
+"@emotion/styled@^11.10.6":
   version "11.14.1"
   resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-11.14.1.tgz#8c34bed2948e83e1980370305614c20955aacd1c"
   integrity sha512-qEEJt42DuToa3gurlH4Qqc1kVpNq8wO8cJtDzU46TjlzWjDlsVyevtYCRijVq3SrHsROS+gVQ8Fnea108GnKzw==
@@ -2919,15 +2919,20 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.16.0.tgz#987bd975c1a486a38ff33eb0634f70436305570f"
   integrity sha512-Er2N7q3WOiH6y2JLxsxNX+u2/sLqSsL0bxFgDjuiPiA7vKhZRm+IzcS17vRee3GNXr64UsesA5CAp9yTiIYw9A==
 
-"@telicent-oss/ds@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-4.0.0.tgz#80b2f858363d96d6b0a1cb6f481e02248311f719"
-  integrity sha512-z5tA57aYyDd73ygBqVW/nqRuZBDWndOnWaun3luXU/mxzT5L2UuripSOOigkW0GPZgz80Cv+q0e/w3N4KrMipw==
+"@telicent-oss/ds@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-4.1.0.tgz#52ae44235d36941c72b01a95dafffd9d5c5fddf0"
+  integrity sha512-jqkxNrjZz5o8YZwoWHC4j+QBBUApcfab4TJXv1Lm/ypvSp9bQLWZhn4hF6GNLaT8YqqJfdHXCU/TN+LoSc1YIA==
   dependencies:
+    "@emotion/react" "^11.10.6"
+    "@emotion/styled" "^11.10.6"
     "@fortawesome/fontawesome-svg-core" "^6.5.1"
     "@fortawesome/free-regular-svg-icons" "^6.5.1"
     "@fortawesome/free-solid-svg-icons" "^6.5.1"
     "@fortawesome/react-fontawesome" "^0.2.0"
+    "@mui/lab" "5.0.0-alpha.170"
+    "@mui/material" "^5.16.7"
+    "@mui/x-date-pickers" "^8.9.2"
     "@react-spring/web" "^9.7.5"
     "@telicent-oss/fe-auth-lib" "1.0.4"
     "@telicent-oss/mui-icons-material" "^1.0.0"
