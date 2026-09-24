@@ -3,6 +3,7 @@ import { AppSwitch, AppBar, FlexBox } from '@telicent-oss/ds';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from '../UserProfile/UserProfile';
 import AppInfoPopover from './AppInfoPopover';
+import AppSettingsPopover from './AppSettingsPopover';
 import config from '../../config/app-config';
 
 const Header = () => {
@@ -15,6 +16,7 @@ const Header = () => {
       endChild={
         <FlexBox direction="row" alignItems="center" gap={1}>
           <AppInfoPopover />
+          <AppSettingsPopover />
           <UserProfile />
         </FlexBox>
       }

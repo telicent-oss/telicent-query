@@ -63,6 +63,13 @@ const loadMain = ({ appBaseName = 'query' }: { appBaseName?: string } = {}) => {
     },
   }));
 
+  jest.doMock('./hooks/useThemeMode', () => ({
+    ThemeModeProvider: ({ children }: { children: ReactNode }) => (
+      <mock-theme-mode-provider>{children}</mock-theme-mode-provider>
+    ),
+    useThemeMode: () => ({ dark: true, setDark: () => {}, toggle: () => {} }),
+  }));
+
   jest.doMock('./App', () => () => <mock-app />);
   jest.doMock('./reportWebVitals', () => () => {
     reportWebVitalsCallCount += 1;
@@ -135,13 +142,15 @@ describe('main', () => {
 
     expect(asFragment()).toMatchInlineSnapshot(`
       <DocumentFragment>
-        <mock-ui-theme-provider>
-          <mock-browser-router>
-            <mock-auth-provider>
-              <mock-app />
-            </mock-auth-provider>
-          </mock-browser-router>
-        </mock-ui-theme-provider>
+        <mock-theme-mode-provider>
+          <mock-ui-theme-provider>
+            <mock-browser-router>
+              <mock-auth-provider>
+                <mock-app />
+              </mock-auth-provider>
+            </mock-browser-router>
+          </mock-ui-theme-provider>
+        </mock-theme-mode-provider>
       </DocumentFragment>
     `);
   });

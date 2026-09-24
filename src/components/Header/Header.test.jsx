@@ -23,6 +23,7 @@ jest.mock('../../config/app-config', () => ({
 
 jest.mock('../UserProfile/UserProfile', () => () => <div id="user-profile">User Profile</div>);
 jest.mock('./AppInfoPopover', () => () => <div id="app-info-popover">App Info</div>);
+jest.mock('./AppSettingsPopover', () => () => <div id="app-settings-popover">App Settings</div>);
 
 jest.mock('@telicent-oss/ds', () => ({
   AppSwitch: ({ apps }) => <div id="app-switch">{apps.map((app) => app.name).join(', ')}</div>,
