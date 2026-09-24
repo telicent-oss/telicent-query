@@ -137,30 +137,34 @@ describe('App', () => {
     `);
     expect(asFragment()).toMatchInlineSnapshot(`
       <DocumentFragment>
-        <mock-routes>
-          <mock-route
-            data-path="index"
-          >
-            <mock-protected-routes />
-          </mock-route>
-          <mock-route
-            data-path="/health"
-          >
-            <h3>
-              Hello I'm Telicent Query
-            </h3>
-          </mock-route>
-          <mock-route
-            data-path="/error"
-          >
-            <mock-error-page />
-          </mock-route>
-          <mock-route
-            data-path="/auth-redirect-uri"
-          >
-            <mock-auth-redirect-uri />
-          </mock-route>
-        </mock-routes>
+        <main
+          id="main-content"
+        >
+          <mock-routes>
+            <mock-route
+              data-path="index"
+            >
+              <mock-protected-routes />
+            </mock-route>
+            <mock-route
+              data-path="/health"
+            >
+              <h3>
+                Hello I'm Telicent Query
+              </h3>
+            </mock-route>
+            <mock-route
+              data-path="/error"
+            >
+              <mock-error-page />
+            </mock-route>
+            <mock-route
+              data-path="/auth-redirect-uri"
+            >
+              <mock-auth-redirect-uri />
+            </mock-route>
+          </mock-routes>
+        </main>
       </DocumentFragment>
     `);
   });

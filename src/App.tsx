@@ -22,20 +22,22 @@ const App = () => {
     );
   }
   return (
-    <Routes>
-      <Route element={<ProtectedRoutes />}>
-        <Route path="/" element={<UserFetch />}>
-          <Route path="/" element={<Sparql />} />
-          <Route path="/graphiql" element={<TelicentGraphiQL />} />
+    <main id="main-content">
+      <Routes>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<UserFetch />}>
+            <Route path="/" element={<Sparql />} />
+            <Route path="/graphiql" element={<TelicentGraphiQL />} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="/health" element={<h3>Hello I'm Telicent Query</h3>} />
-      <Route path="/error" element={<ErrorPage />} />
-      <Route
-        path="/auth-redirect-uri"
-        element={<AuthRedirectUri config={config.AUTH_V2_CONFIG_WITH_LOGOUT} />}
-      />
-    </Routes>
+        <Route path="/health" element={<h3>Hello I'm Telicent Query</h3>} />
+        <Route path="/error" element={<ErrorPage />} />
+        <Route
+          path="/auth-redirect-uri"
+          element={<AuthRedirectUri config={config.AUTH_V2_CONFIG_WITH_LOGOUT} />}
+        />
+      </Routes>
+    </main>
   );
 };
 
