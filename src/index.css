@@ -44,14 +44,6 @@ button.graphiql-execute-button {
   border-radius: 12px;
   border: 1px solid #141414;
 }
-.error-notification {
-  @apply px-2 py-1 bg-error;
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  align-items: center;
-  border-radius: 5px;
-}
-
 @supports (scrollbar-color: #6a6a6a #14141460) {
   * {
     scrollbar-width: auto;
