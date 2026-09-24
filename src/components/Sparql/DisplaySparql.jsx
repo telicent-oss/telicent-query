@@ -3,7 +3,6 @@ import { Spinner } from '@telicent-oss/ds';
 import DisplayYasqe from './DisplayYasqe';
 import SparqlTable from './SparqlTable';
 import Header from '../Header/Header';
-import ScrollToTop from '../../lib/ScrollToTop';
 
 const DisplaySparql = () => {
   const [results, setResults] = useState(null);
@@ -38,7 +37,6 @@ const DisplaySparql = () => {
               <SparqlTable bindings={results} />
             </div>
           )}
-          <ScrollToTop />
         </div>
       )}
     </>
