@@ -26,7 +26,7 @@ const TelicentGraphiQL = () => {
         <GraphiQL.Logo>
           <FlexBox direction="row" alignItems="center" gap={2}>
             <UIThemeProvider theme="GraphOrange" dark>
-              <Button variant="outlined" size="small" color="primary" onClick={() => navigate('/')}>
+              <Button variant="secondary" size="small" onClick={() => navigate('/')}>
                 SPARQL
               </Button>
             </UIThemeProvider>
