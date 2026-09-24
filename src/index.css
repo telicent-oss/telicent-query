@@ -51,6 +51,14 @@ button.graphiql-execute-button {
   }
 }
 
+/* Override CodeMirror default light theme's cm-string-2 (bright orange #F50)
+   which fails AA contrast on light backgrounds. #A65200 is the DS
+   GraphOrange light-mode primary — passes AA on white (5.53:1). Applies only
+   to the default theme, which we only mount in light mode. */
+.cm-s-default .cm-string-2 {
+  color: #a65200;
+}
+
 @layer components {
   .cyNode {
     @apply flex items-center justify-center break-all;
