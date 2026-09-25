@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.8.0](https://github.com/telicent-oss/telicent-query/compare/v1.7.0...v1.8.0) (2026-09-25)
+
+
+### Features
+
+* add helm unit tests ([2f701de](https://github.com/telicent-oss/telicent-query/commit/2f701de917ac83116ef2166dff6e354eda0919b8))
+* add security checks ([3ea45a2](https://github.com/telicent-oss/telicent-query/commit/3ea45a29bee352c23f9017aff9478f165f2f4925))
+* add security checks ([d8216a0](https://github.com/telicent-oss/telicent-query/commit/d8216a028d37d0f24b169476d4d8beb63d71f6ae))
+* added auth policy test ([abde7d9](https://github.com/telicent-oss/telicent-query/commit/abde7d98c15878bf1902989e66ad764550efe918))
+* make tests standard across all projects ([1ba5d9e](https://github.com/telicent-oss/telicent-query/commit/1ba5d9eb7dcb5f8a48e85d3e7769e2706db421c4))
+* moved tests into query-ui ([08f473e](https://github.com/telicent-oss/telicent-query/commit/08f473e444e63fbe2a76042560b6f60876ef60e0))
+* remove metrics test ([7d1b56a](https://github.com/telicent-oss/telicent-query/commit/7d1b56a820d5294d4be943b1d9bec986622fd0bc))
+* rename workflow name ([ab153cc](https://github.com/telicent-oss/telicent-query/commit/ab153cc759fe8a6f0d5dcc388780592b25d870ce))
+* **TELFE-1710:** add dark/light theme switcher via AppSettings popover ([85c1d12](https://github.com/telicent-oss/telicent-query/commit/85c1d12074178eb9b7b1c8ba008d4104921cddc1))
+* **TELFE-1710:** add navigation between SPARQL and GraphQL routes ([441e9cd](https://github.com/telicent-oss/telicent-query/commit/441e9cdfd8535d68c5ac3a6bd66cbe589d23a61f))
+* **TELFE-1710:** drop MUI direct deps and add theme switcher ([4ae9773](https://github.com/telicent-oss/telicent-query/commit/4ae977366e4dcf1f510389694d26143cc93a00fc))
+* **TELFE-1710:** override CodeMirror light theme string colour for AA contrast ([2df21a3](https://github.com/telicent-oss/telicent-query/commit/2df21a32fbe75513158af9ae128b7bdfe15fac7c))
+* **TELFE-1710:** use theme-aware icons in app switcher ([31d5a41](https://github.com/telicent-oss/telicent-query/commit/31d5a416e7a1546d938f5ad25bf41fae96f4f6fa))
+* test for failure ([075ebb9](https://github.com/telicent-oss/telicent-query/commit/075ebb9e91209fd342729bffff6eca3d7dc469dd))
+* test for failure ([40df65c](https://github.com/telicent-oss/telicent-query/commit/40df65c617a64abee82b41983c028ad27b4e77cf))
+* test updated pipeline ([d7632d9](https://github.com/telicent-oss/telicent-query/commit/d7632d9d64014af425a9c36c4a5d0aa5214aa687))
+* update configmap test ([de6cfcc](https://github.com/telicent-oss/telicent-query/commit/de6cfccc60722d87caa817cf89739cb5d744e910))
+* update configmap test ([99634c1](https://github.com/telicent-oss/telicent-query/commit/99634c179c022f8e8917db1267506b2c60b94526))
+* update path for tests ([388b6d3](https://github.com/telicent-oss/telicent-query/commit/388b6d38c8f8c042c01338e01a110ecce0d9d3e6))
+* update readme ([feb75c5](https://github.com/telicent-oss/telicent-query/commit/feb75c5451985fc7b5421af46d6eb33c1540ae39))
+* update security and resources tests ([33b65dd](https://github.com/telicent-oss/telicent-query/commit/33b65dde5b033915bb009122651b46d2e1d84d44))
+* update workflow rules ([9d91c1c](https://github.com/telicent-oss/telicent-query/commit/9d91c1c4dd7c0d2cad401b3e8d085a32e3c6d33d))
+* update workflow rules ([98df8e8](https://github.com/telicent-oss/telicent-query/commit/98df8e80ff40bb821e37fc8b9e2836282629b32e))
+
+
+### Bug Fixes
+
+* indentation ([e942f95](https://github.com/telicent-oss/telicent-query/commit/e942f95720ed74a110ec6d5afe2eea1a9fddd9d7))
+* **TELFE-1710:** align Button variant and yasqe setOption typing with DS 4.1.0 ([b30c52f](https://github.com/telicent-oss/telicent-query/commit/b30c52f43caa88150ef5929234094a3817f1bc44))
+* **TELFE-1710:** wrap app routes in main landmark for accessibility ([682fa46](https://github.com/telicent-oss/telicent-query/commit/682fa46529e6a9da07736e11d3d3daa75de54365))
+* typo ([38c526b](https://github.com/telicent-oss/telicent-query/commit/38c526b9b9bdab31afeb82eb4612bf59167106fa))
+* typo ([d73b53f](https://github.com/telicent-oss/telicent-query/commit/d73b53f6a14943ab136d2361992c115739bcd0f8))
+* unit tests ([d921c13](https://github.com/telicent-oss/telicent-query/commit/d921c1359464cd949fd24cd4b6201802afe25266))
+* unit tests ([b9ff0be](https://github.com/telicent-oss/telicent-query/commit/b9ff0bec92d53de9a6078010c1feceb811692c4f))
+* unit tests ([6312906](https://github.com/telicent-oss/telicent-query/commit/6312906b3a578c7657bec0af8bfd25b0069be3da))
+* updated template path ([eda86f1](https://github.com/telicent-oss/telicent-query/commit/eda86f112395ea2918f0910713ac83dd7cfbefe6))
+
 ## [1.7.0](https://github.com/telicent-oss/telicent-query/compare/v1.6.1...v1.7.0) (2026-09-14)
 
 
