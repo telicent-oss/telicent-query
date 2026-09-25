@@ -56,11 +56,12 @@ const DisplayYasqe = ({ setResults, setDuration, setLoading }: DisplayYasqeProps
   }, [setResults, setDuration, setLoading]);
 
   // Flip the CodeMirror theme without re-creating Yasqe (preserves typed query).
-  // Cast: yasqe's setOption is overloaded to its own narrow option enum, but
-  // 'theme' is a valid inherited CodeMirror option that yasqe doesn't re-type.
+  // Cast: yasqe narrows setOption to its own option enum but 'theme' is a valid
+  // inherited CodeMirror option it doesn't re-type.
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (yasqeRef.current as any)?.setOption('theme', cmThemeFor(dark));
+    (
+      yasqeRef.current as unknown as { setOption(opt: 'theme', val: string): void } | null
+    )?.setOption('theme', cmThemeFor(dark));
   }, [dark]);
 
   return <div id="yasqe" />;
