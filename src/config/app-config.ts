@@ -1,10 +1,10 @@
 import z from 'zod';
+import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
 import APP_CONFIG_JSON from '../app.config.json';
 import { AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA } from './app-config.AUTH_V2_CONFIG.schemas-types';
 import { getEnv } from './env/getEnv';
 import { ENV_SCHEMA } from './env/env.schema';
 import { APP_CONFIG_JSON_SCHEMA } from '../constants';
-import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
 import { renderErrorForReleaseEngineer } from '../lib/renderErrorForReleaseEngineer';
 
 const env = getEnv();

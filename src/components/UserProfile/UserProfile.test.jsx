@@ -27,11 +27,10 @@ jest.mock('@telicent-oss/ds', () => {
       </button>
     ),
     Divider: () => <hr id="divider" />,
+    Box: ({ children }) => <div id="box">{children}</div>,
     useAuth: () => mockUseAuth(),
   };
 });
-
-jest.mock('@mui/material/Box', () => ({ children }) => <div id="box">{children}</div>);
 
 describe('UserProfile', () => {
   beforeEach(() => {

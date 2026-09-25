@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { AUTH_V2_CONFIG_SCHEMA } from '../app-config.AUTH_V2_CONFIG.schemas-types';
 import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
+import { AUTH_V2_CONFIG_SCHEMA } from '../app-config.AUTH_V2_CONFIG.schemas-types';
 
 export const ENV_SCHEMA = z.object({
   GRAPHQL_URL: z.string(),

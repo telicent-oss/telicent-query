@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@telicent-oss/ds';
 
 const SparqlTable = ({ bindings }) => {
   const SparqlRow = ({ row, rowNumber }) => {
@@ -9,7 +9,7 @@ const SparqlTable = ({ bindings }) => {
         key={row.name}
         sx={{
           '&:last-child td, &:last-child th': { border: 0 },
-          'th,td': { color: 'white !important' },
+          'th,td': { color: 'text.primary' },
         }}
       >
         {keys.map((key, index) => (
@@ -44,7 +44,7 @@ const SparqlTable = ({ bindings }) => {
     );
   return (
     <div>
-      <Table aria-label="results table" sx={{ th: { color: 'white', fontWeight: 800 } }}>
+      <Table aria-label="results table" sx={{ th: { color: 'text.primary', fontWeight: 800 } }}>
         <TableHead>
           <TableRow>
             {Object.keys(bindings[0]).map((key) => (

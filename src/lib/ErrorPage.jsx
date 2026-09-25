@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
-import { AppBar, FlexBox, Text, Button, Paper, H5, useExtendedTheme } from '@telicent-oss/ds';
+import { AppBar, FlexBox, Text, Button, Paper, H5, Box, useExtendedTheme } from '@telicent-oss/ds';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import config from '../config/app-config';
-import { Box } from '@mui/material';
 
 const ErrorPage = () => {
   const { state } = useLocation();

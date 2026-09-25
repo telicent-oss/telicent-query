@@ -10,6 +10,7 @@ import config from 'config/app-config';
 import { AuthProvider, UIThemeProvider } from '@telicent-oss/ds';
 import { QueryClient } from '@tanstack/react-query';
 import APP_CONFIG_JSON from './app.config.json';
+import { ThemeModeProvider, useThemeMode } from './hooks/useThemeMode';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,23 +23,31 @@ export const queryClient = new QueryClient({
   },
 });
 
-const root = createRoot(document.getElementById('root')!);
 const basename = `/${APP_CONFIG_JSON['uri-basename']}`;
-const RenderApp = (
-  <UIThemeProvider dark theme="GraphOrange">
-    <BrowserRouter basename={basename}>
-      <AuthProvider
-        config={config.AUTH_V2_CONFIG_WITH_LOGOUT}
-        apiUrl={config.AUTH_V2_CONFIG_WITH_LOGOUT.authServerUrl}
-        queryClient={queryClient}
-      >
-        <App />
-      </AuthProvider>
-    </BrowserRouter>
-  </UIThemeProvider>
-);
 
-root.render(RenderApp);
+const Themed = () => {
+  const { dark } = useThemeMode();
+  return (
+    <UIThemeProvider theme="GraphOrange" dark={dark}>
+      <BrowserRouter basename={basename}>
+        <AuthProvider
+          config={config.AUTH_V2_CONFIG_WITH_LOGOUT}
+          apiUrl={config.AUTH_V2_CONFIG_WITH_LOGOUT.authServerUrl}
+          queryClient={queryClient}
+        >
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    </UIThemeProvider>
+  );
+};
+
+const root = createRoot(document.getElementById('root')!);
+root.render(
+  <ThemeModeProvider>
+    <Themed />
+  </ThemeModeProvider>,
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

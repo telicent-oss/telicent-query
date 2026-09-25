@@ -44,19 +44,19 @@ button.graphiql-execute-button {
   border-radius: 12px;
   border: 1px solid #141414;
 }
-.error-notification {
-  @apply px-2 py-1 bg-error;
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  align-items: center;
-  border-radius: 5px;
-}
-
 @supports (scrollbar-color: #6a6a6a #14141460) {
   * {
     scrollbar-width: auto;
     scrollbar-color: #6a6a6a #14141460;
   }
+}
+
+/* Override CodeMirror default light theme's cm-string-2 (bright orange #F50)
+   which fails AA contrast on light backgrounds. #A65200 is the DS
+   GraphOrange light-mode primary — passes AA on white (5.53:1). Applies only
+   to the default theme, which we only mount in light mode. */
+.cm-s-default .cm-string-2 {
+  color: #a65200;
 }
 
 @layer components {

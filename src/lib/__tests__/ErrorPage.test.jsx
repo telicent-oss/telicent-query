@@ -10,6 +10,7 @@ jest.mock('@telicent-oss/ds', () => {
     Button: ({ children }) => <button>{children}</button>,
     Paper: ({ children }) => <div>{children}</div>,
     H5: ({ children }) => <h5>{children}</h5>,
+    Box: ({ children }) => <div>{children}</div>,
     useExtendedTheme: () => ({
       palette: {
         primary: {

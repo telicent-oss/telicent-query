@@ -15,18 +15,40 @@ jest.mock('../../config/app-config', () => ({
       app_name: 'Test App',
     },
     APP_SWITCH_LIBRARY: [
-      { id: '1', name: 'App One', url: '/app-one', icon: 'icon-1' },
-      { id: '2', name: 'App Two', url: '/app-two', icon: 'icon-2' },
+      {
+        id: '1',
+        name: 'App One',
+        url: '/app-one',
+        iconDark: 'icon-1-dark',
+        iconLight: 'icon-1-light',
+      },
+      {
+        id: '2',
+        name: 'App Two',
+        url: '/app-two',
+        iconDark: 'icon-2-dark',
+        iconLight: 'icon-2-light',
+      },
     ],
   },
 }));
 
+jest.mock('../../hooks/useThemeMode', () => ({
+  useThemeMode: () => ({ dark: true, setDark: () => {}, toggle: () => {} }),
+}));
+
 jest.mock('../UserProfile/UserProfile', () => () => <div id="user-profile">User Profile</div>);
 jest.mock('./AppInfoPopover', () => () => <div id="app-info-popover">App Info</div>);
+jest.mock('./AppSettingsPopover', () => () => <div id="app-settings-popover">App Settings</div>);
 
 jest.mock('@telicent-oss/ds', () => ({
   AppSwitch: ({ apps }) => <div id="app-switch">{apps.map((app) => app.name).join(', ')}</div>,
   FlexBox: ({ children }) => <div id="flex-box">{children}</div>,
+  Button: ({ children, onClick }) => (
+    <button id="graphiql-nav-button" onClick={onClick}>
+      {children}
+    </button>
+  ),
   AppBar: ({ onClick, appName, startChild, endChild, isElevated }) => (
     <div>
       <button id="app-bar" onClick={onClick}>
