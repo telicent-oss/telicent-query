@@ -2919,10 +2919,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.16.0.tgz#987bd975c1a486a38ff33eb0634f70436305570f"
   integrity sha512-Er2N7q3WOiH6y2JLxsxNX+u2/sLqSsL0bxFgDjuiPiA7vKhZRm+IzcS17vRee3GNXr64UsesA5CAp9yTiIYw9A==
 
-"@telicent-oss/ds@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-4.1.0.tgz#52ae44235d36941c72b01a95dafffd9d5c5fddf0"
-  integrity sha512-jqkxNrjZz5o8YZwoWHC4j+QBBUApcfab4TJXv1Lm/ypvSp9bQLWZhn4hF6GNLaT8YqqJfdHXCU/TN+LoSc1YIA==
+"@telicent-oss/ds@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@telicent-oss/ds/-/ds-4.2.0.tgz#311fd547fc098c2572fc55d4eb81b6639bd322c4"
+  integrity sha512-c4xSrpuBR0pYFlCnG7UcrhxZ0DMBNkkl9BrANi8ELV0g/T381eR3tHjbggWv3ZU6w/o9aA7ysaDASGBD73aQfQ==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"

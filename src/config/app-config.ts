@@ -1,11 +1,11 @@
 import z from 'zod';
+import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
 import APP_CONFIG_JSON from '../app.config.json';
 import { AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA } from './app-config.AUTH_V2_CONFIG.schemas-types';
 import { getEnv } from './env/getEnv';
 import { ENV_SCHEMA } from './env/env.schema';
 import { APP_CONFIG_JSON_SCHEMA } from '../constants';
 import { renderErrorForReleaseEngineer } from '../lib/renderErrorForReleaseEngineer';
-import { AppSwitchLibraryEntrySchema } from './env/env.schema';
 
 const env = getEnv();
 
@@ -20,7 +20,7 @@ const config = (() => {
         beta: z.boolean().optional(),
         APP_CONFIG_JSON: APP_CONFIG_JSON_SCHEMA,
         AUTH_V2_CONFIG_WITH_LOGOUT: AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA,
-        APP_SWITCH_LIBRARY: z.array(AppSwitchLibraryEntrySchema),
+        APP_SWITCH_LIBRARY: z.array(AppSwitchLibrarySchema),
       })
       .parse({
         GRAPHQL_URL: env.GRAPHQL_URL,
