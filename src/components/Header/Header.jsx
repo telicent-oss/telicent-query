@@ -26,7 +26,7 @@ const Header = () => {
         <FlexBox direction="row" alignItems="center" gap={1}>
           <AppSwitch apps={apps} />
           <Button variant="secondary" size="small" onClick={goToGraphiql}>
-            GraphQL
+            GraphiQL
           </Button>
         </FlexBox>
       }
