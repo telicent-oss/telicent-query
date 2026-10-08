@@ -2,13 +2,14 @@
 
 exports[`UserProfile snapshot matches snapshot when user is present 1`] = `
 <div>
-  <div
-    class="MuiStack-root css-1ffd7vq-MuiStack-root"
+  <button
+    aria-expanded="false"
+    aria-haspopup="menu"
+    aria-label="User menu"
+    class="MuiStack-root css-13c7f1z-MuiStack-root"
+    id="user-profile"
+    type="button"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-subtitle1 css-s3l54z-MuiTypography-root"
-      title=""
-    />
     <div
       class="MuiAvatar-root MuiAvatar-circular-outlined MuiAvatar-colorDefault css-rxy1ww-MuiAvatar-root"
     >
@@ -37,11 +38,9 @@ exports[`UserProfile snapshot matches snapshot when user is present 1`] = `
         />
       </svg>
     </div>
-    <button
-      aria-label="user-profile"
-      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-xeu292-MuiButtonBase-root-MuiIconButton-root"
-      tabindex="0"
-      type="button"
+    <span
+      aria-hidden="true"
+      class="MuiBox-root css-lr19xi"
     >
       <svg
         aria-hidden="true"
@@ -58,10 +57,7 @@ exports[`UserProfile snapshot matches snapshot when user is present 1`] = `
           fill="currentColor"
         />
       </svg>
-      <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
-    </button>
-  </div>
+    </span>
+  </button>
 </div>
 `;
