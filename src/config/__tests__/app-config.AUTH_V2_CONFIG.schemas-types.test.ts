@@ -55,11 +55,10 @@ describe('AUTH_V2_CONFIG schemas', () => {
           {
             "code": "invalid_type",
             "expected": "string",
-            "message": "Required",
+            "message": "Invalid input: expected string, received undefined",
             "path": [
               "clientId",
             ],
-            "received": "undefined",
           },
         ],
       }
