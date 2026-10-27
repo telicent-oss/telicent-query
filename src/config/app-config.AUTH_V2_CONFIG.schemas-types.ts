@@ -9,7 +9,7 @@ export const AUTH_V2_CONFIG_SCHEMA = z.object({
 });
 
 export const AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA = AUTH_V2_CONFIG_SCHEMA.extend({
-  onLogout: z.function().args().returns(z.void()),
+  onLogout: z.function({ input: [], output: z.void() }),
 });
 
 export type AuthV2Config = z.infer<typeof AUTH_V2_CONFIG_SCHEMA>;
