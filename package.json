@@ -6,7 +6,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/runtime": "^7.23.2",
     "@tanstack/react-query": "^5.90.7",
-    "@telicent-oss/ds": "^6.0.0",
+    "@telicent-oss/ds": "^6.1.1",
     "@triply/yasqe": "^4.2.28",
     "classnames": "^2.3.1",
     "graphiql": "^3.7.1",
@@ -83,7 +83,8 @@
     "linkify-it": "^5.0.2",
     "markdown-it": "^14.3.3",
     "postcss": "^8.5.18",
-    "source-map-js": "^1.2.2"
+    "source-map-js": "^1.2.2",
+    "decode-uri-component": "^0.5.1"
   },
   "scripts": {
     "start": "vite",
