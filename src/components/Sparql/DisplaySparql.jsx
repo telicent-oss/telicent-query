@@ -2,20 +2,37 @@ import React, { useState } from 'react';
 import { Spinner } from '@telicent-oss/ds';
 import DisplayYasqe from './DisplayYasqe';
 import SparqlTable from './SparqlTable';
+import { QueryErrorAlert } from './QueryErrorAlert';
 import Header from '../Header/Header';
+import config from '../../config/app-config';
+import { DatasetSelector } from '../DatasetSelector/DatasetSelector';
+import { useDatasets } from '../../hooks/useDatasets';
+import { buildEndpoint } from '../../lib/buildEndpoint';
 
 const DisplaySparql = () => {
   const [results, setResults] = useState(null);
   const [duration, setDuration] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { options, selected, select, add } = useDatasets();
 
   return (
     <>
-      <Header />
+      <Header>
+        <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+      </Header>
 
       <div className="p-1.5 sticky">
-        <DisplayYasqe setResults={setResults} setDuration={setDuration} setLoading={setLoading} />
+        <DisplayYasqe
+          endpoint={buildEndpoint(config.SPARQL_URL, selected)}
+          setResults={setResults}
+          setDuration={setDuration}
+          setLoading={setLoading}
+          setError={setError}
+        />
       </div>
+
+      {error && <QueryErrorAlert error={error} />}
 
       {results && (
         <div>

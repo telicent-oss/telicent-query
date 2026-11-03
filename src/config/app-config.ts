@@ -3,7 +3,7 @@ import { AppSwitchLibrarySchema } from '@telicent-oss/ds';
 import APP_CONFIG_JSON from '../app.config.json';
 import { AUTH_V2_CONFIG_WITH_LOGOUT_SCHEMA } from './app-config.AUTH_V2_CONFIG.schemas-types';
 import { getEnv } from './env/getEnv';
-import { ENV_SCHEMA } from './env/env.schema';
+import { DATASET_NAME_SCHEMA, DEFAULT_DATASETS, ENV_SCHEMA } from './env/env.schema';
 import { APP_CONFIG_JSON_SCHEMA } from '../constants';
 import { renderErrorForReleaseEngineer } from '../lib/renderErrorForReleaseEngineer';
 
@@ -15,6 +15,7 @@ const config = (() => {
       .object({
         GRAPHQL_URL: ENV_SCHEMA.shape.GRAPHQL_URL,
         SPARQL_URL: ENV_SCHEMA.shape.SPARQL_URL,
+        DATASETS: z.array(DATASET_NAME_SCHEMA).min(1),
         MAP_TILER_TOKEN: ENV_SCHEMA.shape.MAP_TILER_TOKEN,
         ARC_GIS_API_TOKEN: ENV_SCHEMA.shape.ARC_GIS_API_TOKEN,
         beta: z.boolean().optional(),
@@ -25,6 +26,7 @@ const config = (() => {
       .parse({
         GRAPHQL_URL: env.GRAPHQL_URL,
         SPARQL_URL: env.SPARQL_URL,
+        DATASETS: env.DATASETS ?? DEFAULT_DATASETS,
         MAP_TILER_TOKEN: env.MAP_TILER_TOKEN,
         ARC_GIS_API_TOKEN: env.ARC_GIS_API_TOKEN,
         beta: env.BETA,

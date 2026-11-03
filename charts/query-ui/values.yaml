@@ -43,6 +43,11 @@ configMap:
   # Note: When it's set, it will disable configmap creation
   existingConfigMap: ""
 
+# @key datasets Datasets offered in the Query UI dataset picker. Users can add their own in the UI.
+datasets:
+  - knowledge
+  - ontology
+
 #
 # @section Common Parameters
 #
