@@ -37,8 +37,14 @@ function readSelected(options: string[]): string {
   return options[0];
 }
 
+const findExisting = (options: string[], name: string): string | undefined =>
+  options.find((o) => o.toLowerCase() === name.toLowerCase());
+
+// Case-insensitive de-dupe; config names win over custom ones.
 const merge = (base: string[], extra: string[]): string[] =>
-  Array.from(new Set([...base, ...extra]));
+  [...base, ...extra].filter(
+    (name, i, all) => all.findIndex((n) => n.toLowerCase() === name.toLowerCase()) === i,
+  );
 
 export const useDatasets = (): Datasets => {
   const [custom, setCustom] = useState<string[]>(readCustom);
@@ -72,8 +78,9 @@ export const useDatasets = (): Datasets => {
     (name: string) => {
       const trimmed = name.trim();
       if (!isValidDatasetName(trimmed)) return false;
-      if (!options.includes(trimmed)) setCustom((prev) => [...prev, trimmed]);
-      setSelected(trimmed);
+      const existing = findExisting(options, trimmed);
+      if (!existing) setCustom((prev) => [...prev, trimmed]);
+      setSelected(existing ?? trimmed);
       return true;
     },
     [options],

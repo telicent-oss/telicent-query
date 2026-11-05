@@ -64,6 +64,15 @@ describe('DatasetSelector', () => {
     expect(screen.queryByRole('option', { name: /^Add/ })).not.toBeInTheDocument();
   });
 
+  it('treats a case-only variant as the existing dataset', async () => {
+    render(<Harness />);
+    await userEvent.clear(getInput());
+    await userEvent.type(getInput(), 'OntologY');
+    expect(await screen.findByRole('option', { name: 'ontology' })).toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: /^Add/ })).not.toBeInTheDocument();
+    expect(screen.queryByText('Letters, numbers, - and _ only')).not.toBeInTheDocument();
+  });
+
   it('flags invalid names and does not offer to add them', async () => {
     render(<Harness />);
     await userEvent.clear(getInput());

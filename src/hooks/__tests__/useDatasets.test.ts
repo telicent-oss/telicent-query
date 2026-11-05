@@ -45,6 +45,25 @@ describe('useDatasets', () => {
     expect(window.localStorage.getItem('query.customDatasets')).toBe('[]');
   });
 
+  it('selects the existing dataset for a case-only variant', () => {
+    const { result } = renderHook(() => useDatasets());
+    act(() => {
+      result.current.add('OntologY');
+    });
+    expect(result.current.options).toEqual(['knowledge', 'ontology']);
+    expect(result.current.selected).toBe('ontology');
+    expect(window.localStorage.getItem('query.customDatasets')).toBe('[]');
+  });
+
+  it('drops stored case-only duplicates of config datasets', () => {
+    window.localStorage.setItem(
+      'query.customDatasets',
+      JSON.stringify(['OntologY', 'mine', 'MINE']),
+    );
+    const { result } = renderHook(() => useDatasets());
+    expect(result.current.options).toEqual(['knowledge', 'ontology', 'mine']);
+  });
+
   it('rejects invalid names', () => {
     const { result } = renderHook(() => useDatasets());
     let added = true;

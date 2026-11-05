@@ -30,7 +30,9 @@ export const DatasetSelector = ({
   const autocompleteOptions = useMemo(() => options.map(toOption), [options]);
   const selectedOption = autocompleteOptions.find((o) => o.value === value) ?? null;
   const typed = inputValue.trim();
-  const isExisting = options.includes(typed);
+  const typedLower = typed.toLowerCase();
+  // Dataset paths are case-sensitive on the server, so a case-only variant is almost certainly a typo.
+  const isExisting = options.some((o) => o.toLowerCase() === typedLower);
   const isInvalid = typed !== '' && !isExisting && !isValidDatasetName(typed);
 
   return (
@@ -49,7 +51,7 @@ export const DatasetSelector = ({
       filterOptions={(all) => {
         // Show every option while the input still shows the current selection.
         if (typed === '' || typed === value) return all;
-        const matches = all.filter((o) => o.label.toLowerCase().includes(typed.toLowerCase()));
+        const matches = all.filter((o) => o.label.toLowerCase().includes(typedLower));
         return isExisting || !isValidDatasetName(typed)
           ? matches
           : [...matches, { label: `Add "${typed}"`, value: typed }];
