@@ -44,7 +44,7 @@ exports[`UserProfile snapshot matches snapshot when user is present 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-angle-down css-ru5e81-DownArrow fa-sm"
+        class="svg-inline--fa fa-angle-down css-1misdcy-DownArrow fa-sm"
         data-icon="angle-down"
         data-prefix="fas"
         role="img"
