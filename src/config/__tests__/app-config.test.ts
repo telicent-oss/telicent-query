@@ -86,6 +86,10 @@ describe('app-config', () => {
             "redirectUri": "https://app.example.test/callback",
             "scope": "openid profile",
           },
+          "DATASETS": [
+            "knowledge",
+            "ontology",
+          ],
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",
@@ -139,6 +143,10 @@ describe('app-config', () => {
             "redirectUri": "https://app.example.test/callback",
             "scope": "openid profile",
           },
+          "DATASETS": [
+            "knowledge",
+            "ontology",
+          ],
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "MAP_TILER_TOKEN": undefined,
           "SPARQL_URL": "https://SPARQL_URL.example.test",

@@ -6,7 +6,7 @@ import AppInfoPopover from './AppInfoPopover';
 import config from '../../config/app-config';
 import { useThemeMode } from '../../hooks/useThemeMode';
 
-const Header = () => {
+const Header = ({ children }) => {
   const navigate = useNavigate();
   const { dark, setDark } = useThemeMode();
   const apps = config.APP_SWITCH_LIBRARY.map(({ iconDark, iconLight, ...rest }) => ({
@@ -24,9 +24,16 @@ const Header = () => {
       startChild={
         <FlexBox direction="row" alignItems="center" gap={1}>
           <AppSwitch apps={apps} />
-          <Button variant="secondary" size="small" onClick={goToGraphiql}>
+          {/* Match the height of the small DS Autocomplete beside it. */}
+          <Button variant="secondary" size="small" sx={{ height: 40 }} onClick={goToGraphiql}>
             GraphiQL
           </Button>
+          {children && (
+            // Stop clicks (including from the portalled listbox) reaching the AppBar's navigate.
+            <FlexBox direction="row" alignItems="center" onClick={(e) => e.stopPropagation()}>
+              {children}
+            </FlexBox>
+          )}
         </FlexBox>
       }
       endChild={

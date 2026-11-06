@@ -15,9 +15,11 @@ data:
   env-config.js: |
     const API_DOMAIN = "{{ .Values.global.apiHostDomain }}"; 
     // Configure the GraphQL API endpoint as used by the client browser.
-    window.GRAPHQL_URL = `https://${API_DOMAIN}/graphql/knowledge/graphql`;
+    window.GRAPHQL_URL = `https://${API_DOMAIN}/graphql/{dataset}/graphql`;
     // Configure the Graph SPARQL API endpoint as used by the client browser.
-    window.SPARQL_URL = `https://${API_DOMAIN}/sparql/knowledge/sparql`;
+    window.SPARQL_URL = `https://${API_DOMAIN}/sparql/{dataset}/sparql`;
+    // Datasets offered in the dataset picker; {dataset} above is replaced with the selection.
+    window.DATASETS = {{ .Values.datasets | default (list "knowledge" "ontology") | toJson }};
     // Configure the Access endpoint as used by the client browser.
     window.ACCESS_URL = `https://${API_DOMAIN}/access`;
     window.BETA = false;
