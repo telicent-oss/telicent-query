@@ -27,6 +27,7 @@ export const ThemeModeProvider = ({ children }: PropsWithChildren) => {
   const [dark, setDark] = useState<boolean>(readInitial);
 
   useEffect(() => {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
     try {
       window.localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
     } catch {
