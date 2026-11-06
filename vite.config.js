@@ -1,3 +1,4 @@
+import { appLoader } from '@telicent-oss/ds/app-loader';
 import react from '@vitejs/plugin-react';
 import dns from 'dns';
 import { defineConfig } from 'vite';
@@ -5,7 +6,7 @@ import { defineConfig } from 'vite';
 dns.setDefaultResultOrder?.('ipv4first');
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), appLoader({ theme: 'GraphOrange', modeStorageKey: 'query.themeMode' })],
   optimizeDeps: {
     include: ['graphiql'],
   },

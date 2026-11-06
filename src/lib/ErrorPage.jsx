@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import config from '../config/app-config';
+import { useAppReady } from '../hooks/useAppReady';
 
 const ErrorPage = () => {
   const { state } = useLocation();
+  useAppReady(true);
 
   const theme = useExtendedTheme();
 

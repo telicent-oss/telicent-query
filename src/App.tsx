@@ -6,6 +6,12 @@ import config from 'config/app-config';
 import { Sparql, UserFetch, ProtectedRoutes } from 'components';
 import { ErrorPage } from 'lib';
 import TelicentGraphiQL from './components/Graphiql/TelicentGraphiQL';
+import { useAppReady } from './hooks/useAppReady';
+
+const Health = () => {
+  useAppReady(true);
+  return <h3>Hello I'm Telicent Query</h3>;
+};
 
 const App = () => {
   const location = useLocation();
@@ -30,7 +36,7 @@ const App = () => {
             <Route path="/graphiql" element={<TelicentGraphiQL />} />
           </Route>
         </Route>
-        <Route path="/health" element={<h3>Hello I'm Telicent Query</h3>} />
+        <Route path="/health" element={<Health />} />
         <Route path="/error" element={<ErrorPage />} />
         <Route
           path="/auth-redirect-uri"
