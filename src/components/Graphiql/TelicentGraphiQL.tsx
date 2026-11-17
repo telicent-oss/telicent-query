@@ -5,7 +5,7 @@ import 'graphiql/graphiql.css';
 import config from '../../config/app-config';
 import { DatasetSelector } from '../DatasetSelector/DatasetSelector';
 import { useDatasets } from '../../hooks/useDatasets';
-import { buildEndpoint } from '../../lib/buildEndpoint';
+import { buildEndpoint, hasDatasetPlaceholder } from '../../lib/buildEndpoint';
 import { toGraphqlFailure } from '../../adapters/graphql/graphqlResponseAdapter';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -51,9 +51,11 @@ const TelicentGraphiQL = () => {
             </UIThemeProvider>
             <Brand appName="queryQL" />
             {/* GraphiQL's toolbar is dark, so match the SPARQL button's theme or the text is unreadable. */}
-            <UIThemeProvider theme="GraphOrange" dark>
-              <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
-            </UIThemeProvider>
+            {hasDatasetPlaceholder(config.GRAPHQL_URL) && (
+              <UIThemeProvider theme="GraphOrange" dark>
+                <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+              </UIThemeProvider>
+            )}
           </FlexBox>
         </GraphiQL.Logo>
       </GraphiQL>

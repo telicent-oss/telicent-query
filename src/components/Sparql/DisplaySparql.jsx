@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 import config from '../../config/app-config';
 import { DatasetSelector } from '../DatasetSelector/DatasetSelector';
 import { useDatasets } from '../../hooks/useDatasets';
-import { buildEndpoint } from '../../lib/buildEndpoint';
+import { buildEndpoint, hasDatasetPlaceholder } from '../../lib/buildEndpoint';
 
 const DisplaySparql = () => {
   const [results, setResults] = useState(null);
@@ -19,7 +19,9 @@ const DisplaySparql = () => {
   return (
     <>
       <Header>
-        <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+        {hasDatasetPlaceholder(config.SPARQL_URL) && (
+          <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+        )}
       </Header>
 
       <div className="p-1.5 sticky">
