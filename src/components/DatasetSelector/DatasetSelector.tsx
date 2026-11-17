@@ -58,6 +58,8 @@ export const DatasetSelector = ({
       }}
       error={isInvalid}
       helperText={isInvalid ? INVALID_NAME_MESSAGE : undefined}
+      // The open listbox covers the helper text, so repeat the reason there.
+      noOptionsText={isInvalid ? INVALID_NAME_MESSAGE : 'No options'}
       fullWidth={false}
       sx={{ minWidth: 220 }}
     />

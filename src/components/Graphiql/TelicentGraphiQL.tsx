@@ -50,7 +50,10 @@ const TelicentGraphiQL = () => {
               </Button>
             </UIThemeProvider>
             <Brand appName="queryQL" />
-            <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+            {/* GraphiQL's toolbar is dark, so match the SPARQL button's theme or the text is unreadable. */}
+            <UIThemeProvider theme="GraphOrange" dark>
+              <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+            </UIThemeProvider>
           </FlexBox>
         </GraphiQL.Logo>
       </GraphiQL>

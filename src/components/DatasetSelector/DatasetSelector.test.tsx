@@ -77,7 +77,9 @@ describe('DatasetSelector', () => {
     render(<Harness />);
     await userEvent.clear(getInput());
     await userEvent.type(getInput(), 'bad/name');
-    expect(screen.getByText('Letters, numbers, - and _ only')).toBeInTheDocument();
+    // Shown in the open listbox, which covers the helper text, as well as the helper text.
+    expect(screen.getAllByText('Letters, numbers, - and _ only')).toHaveLength(2);
+    expect(screen.queryByText('No options')).not.toBeInTheDocument();
     expect(screen.queryByRole('option', { name: /^Add/ })).not.toBeInTheDocument();
   });
 });
