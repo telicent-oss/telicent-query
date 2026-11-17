@@ -7,84 +7,38 @@ jest.mock('../../config/app-config', () => ({
 }));
 
 describe('useDatasets', () => {
-  it('defaults to config datasets with the first selected', () => {
+  it('offers the configured datasets with the first selected', () => {
     const { result } = renderHook(() => useDatasets());
     expect(result.current.options).toEqual(['knowledge', 'ontology']);
     expect(result.current.selected).toBe('knowledge');
   });
 
-  it('selects an existing dataset and ignores unknown ones', () => {
+  it('selects a configured dataset and ignores unknown ones', () => {
     const { result } = renderHook(() => useDatasets());
     act(() => result.current.select('ontology'));
     expect(result.current.selected).toBe('ontology');
-    act(() => result.current.select('nope'));
+    act(() => result.current.select('mydataset'));
     expect(result.current.selected).toBe('ontology');
   });
 
-  it('adds and selects a new dataset, persisting across remounts', () => {
+  it('remembers the selection across remounts', () => {
     const first = renderHook(() => useDatasets());
-    act(() => {
-      first.result.current.add('mydataset');
-    });
-    expect(first.result.current.options).toEqual(['knowledge', 'ontology', 'mydataset']);
-    expect(first.result.current.selected).toBe('mydataset');
+    act(() => first.result.current.select('ontology'));
     first.unmount();
-
     const { result } = renderHook(() => useDatasets());
-    expect(result.current.options).toEqual(['knowledge', 'ontology', 'mydataset']);
-    expect(result.current.selected).toBe('mydataset');
-  });
-
-  it('does not duplicate an existing dataset', () => {
-    const { result } = renderHook(() => useDatasets());
-    act(() => {
-      result.current.add('ontology');
-    });
-    expect(result.current.options).toEqual(['knowledge', 'ontology']);
     expect(result.current.selected).toBe('ontology');
-    expect(window.localStorage.getItem('query.customDatasets')).toBe('[]');
   });
 
-  it('selects the existing dataset for a case-only variant', () => {
+  it('falls back to the first dataset when the stored one is not configured', () => {
+    window.localStorage.setItem('query.selectedDataset', 'mydataset');
     const { result } = renderHook(() => useDatasets());
-    act(() => {
-      result.current.add('OntologY');
-    });
-    expect(result.current.options).toEqual(['knowledge', 'ontology']);
-    expect(result.current.selected).toBe('ontology');
-    expect(window.localStorage.getItem('query.customDatasets')).toBe('[]');
-  });
-
-  it('drops stored case-only duplicates of config datasets', () => {
-    window.localStorage.setItem(
-      'query.customDatasets',
-      JSON.stringify(['OntologY', 'mine', 'MINE']),
-    );
-    const { result } = renderHook(() => useDatasets());
-    expect(result.current.options).toEqual(['knowledge', 'ontology', 'mine']);
-  });
-
-  it('rejects invalid names', () => {
-    const { result } = renderHook(() => useDatasets());
-    let added = true;
-    act(() => {
-      added = result.current.add('../admin');
-    });
-    expect(added).toBe(false);
-    expect(result.current.options).toEqual(['knowledge', 'ontology']);
     expect(result.current.selected).toBe('knowledge');
   });
 
-  it('falls back to defaults when storage is corrupt or tampered with', () => {
-    window.localStorage.setItem('query.customDatasets', '{not json');
-    window.localStorage.setItem('query.selectedDataset', 'gone');
-    const first = renderHook(() => useDatasets());
-    expect(first.result.current.options).toEqual(['knowledge', 'ontology']);
-    expect(first.result.current.selected).toBe('knowledge');
-    first.unmount();
-
-    window.localStorage.setItem('query.customDatasets', JSON.stringify(['ok', '../bad']));
+  it('clears custom datasets saved by the earlier build', () => {
+    window.localStorage.setItem('query.customDatasets', JSON.stringify(['mydataset']));
     const { result } = renderHook(() => useDatasets());
     expect(result.current.options).toEqual(['knowledge', 'ontology']);
+    expect(window.localStorage.getItem('query.customDatasets')).toBeNull();
   });
 });

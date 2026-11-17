@@ -14,13 +14,13 @@ const DisplaySparql = () => {
   const [duration, setDuration] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { options, selected, select, add } = useDatasets();
+  const { options, selected, select } = useDatasets();
 
   return (
     <>
       <Header>
         {hasDatasetPlaceholder(config.SPARQL_URL) && (
-          <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+          <DatasetSelector options={options} value={selected} onSelect={select} />
         )}
       </Header>
 

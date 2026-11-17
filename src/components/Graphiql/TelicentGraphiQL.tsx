@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const TelicentGraphiQL = () => {
   const { api, user } = useAuth();
   const navigate = useNavigate();
-  const { options, selected, select, add } = useDatasets();
+  const { options, selected, select } = useDatasets();
   const endpoint = buildEndpoint(config.GRAPHQL_URL, selected);
 
   const fetcher: Fetcher = useCallback(
@@ -53,7 +53,7 @@ const TelicentGraphiQL = () => {
             {/* GraphiQL's toolbar is dark, so match the SPARQL button's theme or the text is unreadable. */}
             {hasDatasetPlaceholder(config.GRAPHQL_URL) && (
               <UIThemeProvider theme="GraphOrange" dark>
-                <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+                <DatasetSelector options={options} value={selected} onSelect={select} />
               </UIThemeProvider>
             )}
           </FlexBox>
