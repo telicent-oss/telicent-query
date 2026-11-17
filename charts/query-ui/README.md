@@ -104,10 +104,10 @@ Note: Only global parameters used within this chart will be listed below
 
 ### ConfigMap Parameters
 
-| Name                          | Description                                                                         | Value                      |
-| ----------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
-| `configMap.existingConfigMap` | The name of an existing config map containing env-config.js                         | `""`                       |
-| `datasets`                    | Datasets offered in the Query UI dataset picker. Users can add their own in the UI. | `["knowledge","ontology"]` |
+| Name                          | Description                                                                                              | Value                                |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `configMap.existingConfigMap` | The name of an existing config map containing env-config.js                                              | `""`                                 |
+| `datasets`                    | Datasets offered in the Query UI dataset picker. Each must also be allowed by the graph access policies. | `["knowledge","ontology","catalog"]` |
 
 ### Common Parameters
 

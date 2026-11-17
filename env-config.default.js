@@ -10,8 +10,8 @@ window.GRAPHQL_URL = 'https://${API_HOST_DOMAIN}/sparql/{dataset}/graphql';
 
 window.SPARQL_URL = 'https://${API_HOST_DOMAIN}/sparql/{dataset}/sparql';
 
-// Datasets offered in the dataset picker. Users can add more in the UI.
-window.DATASETS = ['knowledge', 'ontology'];
+// Datasets offered in the dataset picker. Each must also be allowed by the graph access policies.
+window.DATASETS = ['knowledge', 'ontology', 'catalog'];
 
 window.MAP_TILER_TOKEN = '${MAP_TILER_TOKEN}';
 
