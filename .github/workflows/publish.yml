@@ -168,7 +168,6 @@ jobs:
           allow-development-tag: true
           allow-mutable-tags: false
           build-artifact: build
-          grype-scan-image: false
           registry: aws
           sha-tag-format: short
           # Secrets
@@ -207,7 +206,6 @@ jobs:
           allow-mutable-tags: false
           allow-sha-tag: false
           build-artifact: build
-          grype-scan-image: false
           registry: quay
           version: ${{ needs.release-please.outputs.version }}
           # Secrets
