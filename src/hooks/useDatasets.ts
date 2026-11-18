@@ -22,7 +22,7 @@ function readSelected(options: string[]): string {
 }
 
 // Datasets come only from config, because each one must also be allowed by
-// the platform's Istio policy. DevOps sets them in the Helm `datasets` value.
+// the graph access policies. DevOps sets them in the Helm `datasets` value.
 export const useDatasets = (): Datasets => {
   const options = config.DATASETS;
   const [selected, setSelected] = useState<string>(() => readSelected(options));
