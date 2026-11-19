@@ -19,7 +19,11 @@ data:
     // Configure the Graph SPARQL API endpoint as used by the client browser.
     window.SPARQL_URL = `https://${API_DOMAIN}/sparql/{dataset}/sparql`;
     // Datasets offered in the dataset picker; {dataset} above is replaced with the selection.
-    window.DATASETS = {{ .Values.datasets | default (list "knowledge" "ontology" "catalog") | toJson }};
+    // Leave `datasets` unset to use the app's built-in defaults.
+    {{- if kindIs "slice" .Values.datasets }}
+    {{- if empty .Values.datasets }}{{ fail "datasets must list at least one dataset" }}{{- end }}
+    window.DATASETS = {{ .Values.datasets | toJson }};
+    {{- end }}
     // Configure the Access endpoint as used by the client browser.
     window.ACCESS_URL = `https://${API_DOMAIN}/access`;
     window.BETA = false;
