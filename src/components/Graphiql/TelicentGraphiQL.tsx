@@ -5,7 +5,7 @@ import 'graphiql/graphiql.css';
 import config from '../../config/app-config';
 import { DatasetSelector } from '../DatasetSelector/DatasetSelector';
 import { useDatasets } from '../../hooks/useDatasets';
-import { buildEndpoint } from '../../lib/buildEndpoint';
+import { buildEndpoint, hasDatasetPlaceholder } from '../../lib/buildEndpoint';
 import { toGraphqlFailure } from '../../adapters/graphql/graphqlResponseAdapter';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const TelicentGraphiQL = () => {
   const { api, user } = useAuth();
   const navigate = useNavigate();
-  const { options, selected, select, add } = useDatasets();
+  const { options, selected, select } = useDatasets();
   const endpoint = buildEndpoint(config.GRAPHQL_URL, selected);
 
   const fetcher: Fetcher = useCallback(
@@ -50,7 +50,12 @@ const TelicentGraphiQL = () => {
               </Button>
             </UIThemeProvider>
             <Brand appName="queryQL" />
-            <DatasetSelector options={options} value={selected} onSelect={select} onAdd={add} />
+            {/* GraphiQL's toolbar is dark, so match the SPARQL button's theme or the text is unreadable. */}
+            {hasDatasetPlaceholder(config.GRAPHQL_URL) && (
+              <UIThemeProvider theme="GraphOrange" dark>
+                <DatasetSelector options={options} value={selected} onSelect={select} />
+              </UIThemeProvider>
+            )}
           </FlexBox>
         </GraphiQL.Logo>
       </GraphiQL>

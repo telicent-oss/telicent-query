@@ -5,10 +5,9 @@ import { AUTH_V2_CONFIG_SCHEMA } from '../app-config.AUTH_V2_CONFIG.schemas-type
 // Dataset names are interpolated into endpoint paths, so keep them to a safe charset.
 export const DATASET_NAME_SCHEMA = z.string().regex(/^[A-Za-z0-9_-]+$/);
 
-export const isValidDatasetName = (name: string): boolean =>
-  DATASET_NAME_SCHEMA.safeParse(name).success;
-
-export const DEFAULT_DATASETS = ['knowledge', 'ontology'];
+// Used when env-config.js doesn't set DATASETS. Must match the chart's `datasets` value,
+// which default-datasets.test.ts checks.
+export const DEFAULT_DATASETS = ['knowledge', 'ontology', 'catalog'];
 
 export const ENV_SCHEMA = z.object({
   GRAPHQL_URL: z.string(),

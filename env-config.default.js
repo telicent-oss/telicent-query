@@ -10,8 +10,8 @@ window.GRAPHQL_URL = 'https://${API_HOST_DOMAIN}/sparql/{dataset}/graphql';
 
 window.SPARQL_URL = 'https://${API_HOST_DOMAIN}/sparql/{dataset}/sparql';
 
-// Datasets offered in the dataset picker. Users can add more in the UI.
-window.DATASETS = ['knowledge', 'ontology'];
+// window.DATASETS is optional. Leave it unset to use DEFAULT_DATASETS in
+// src/config/env/env.schema.ts, or set an array to override, e.g. ['knowledge'].
 
 window.MAP_TILER_TOKEN = '${MAP_TILER_TOKEN}';
 
