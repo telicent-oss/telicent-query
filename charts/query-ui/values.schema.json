@@ -60,10 +60,11 @@
         },
         "datasets": {
             "type": "array",
-            "description": "Datasets offered in the Query UI dataset picker. Users can add their own in the UI.",
+            "description": "Datasets offered in the Query UI dataset picker. Each must also be allowed by the graph access policies.",
             "default": [
                 "knowledge",
-                "ontology"
+                "ontology",
+                "catalog"
             ],
             "items": {
                 "type": "string"

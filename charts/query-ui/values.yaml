@@ -43,10 +43,11 @@ configMap:
   # Note: When it's set, it will disable configmap creation
   existingConfigMap: ""
 
-# @key datasets Datasets offered in the Query UI dataset picker. Users can add their own in the UI.
+# @key datasets Datasets offered in the Query UI dataset picker. Each must also be allowed by the graph access policies.
 datasets:
   - knowledge
   - ontology
+  - catalog
 
 #
 # @section Common Parameters

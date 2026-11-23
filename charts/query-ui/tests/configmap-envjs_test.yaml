@@ -19,3 +19,23 @@ tests:
     asserts:
       - hasDocuments:
           count: 0
+  - it: should write the default datasets to env-config.js
+    asserts:
+      - matchRegex:
+          path: data["env-config.js"]
+          pattern: 'window\.DATASETS = \["knowledge","ontology","catalog"\];'
+
+  - it: should leave DATASETS out of env-config.js when datasets is null
+    set:
+      datasets: null
+    asserts:
+      - notMatchRegex:
+          path: data["env-config.js"]
+          pattern: 'window\.DATASETS'
+
+  - it: should fail when datasets is an empty list
+    set:
+      datasets: []
+    asserts:
+      - failedTemplate:
+          errorMessage: datasets must list at least one dataset

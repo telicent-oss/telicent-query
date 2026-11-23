@@ -89,6 +89,7 @@ describe('app-config', () => {
           "DATASETS": [
             "knowledge",
             "ontology",
+            "catalog",
           ],
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "MAP_TILER_TOKEN": undefined,
@@ -146,6 +147,7 @@ describe('app-config', () => {
           "DATASETS": [
             "knowledge",
             "ontology",
+            "catalog",
           ],
           "GRAPHQL_URL": "https://GRAPHQL_URL.example.test",
           "MAP_TILER_TOKEN": undefined,

@@ -1,4 +1,4 @@
-import { buildEndpoint } from '../buildEndpoint';
+import { buildEndpoint, hasDatasetPlaceholder } from '../buildEndpoint';
 
 describe('buildEndpoint', () => {
   it('substitutes the dataset placeholder', () => {
@@ -15,5 +15,15 @@ describe('buildEndpoint', () => {
 
   it('encodes the dataset name', () => {
     expect(buildEndpoint('https://api.test/{dataset}/q', 'a/b')).toBe('https://api.test/a%2Fb/q');
+  });
+});
+
+describe('hasDatasetPlaceholder', () => {
+  it('is true when the URL has a {dataset} placeholder', () => {
+    expect(hasDatasetPlaceholder('https://api.test/sparql/{dataset}/sparql')).toBe(true);
+  });
+
+  it('is false for a fixed URL', () => {
+    expect(hasDatasetPlaceholder('https://api.test/sparql/knowledge/sparql')).toBe(false);
   });
 });
