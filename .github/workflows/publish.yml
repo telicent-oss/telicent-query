@@ -73,16 +73,23 @@ jobs:
               --label "$PR_LABEL" --state open --json title \
               --jq 'if .[0] == null then "" else .[0].title | match("\\d+\\.\\d+\\.\\d+") | .string end' 2>/dev/null)
 
+          # The released version, and the number of commits on main since its tag.
+          CURRENT_VERSION=$(jq -r '.version // error("version missing from ./package.json")' ./package.json)
+          BUILD=$(gh api "repos/$GITHUB_REPOSITORY/compare/v$CURRENT_VERSION...$GITHUB_SHA" --jq .ahead_by)
+
           # If there is an open release please PR, use the extracted version for ECR tagging.
           if [[ -n "$NEXT_VERSION" ]]; then
-              echo "Found a release please PR. Pushes to ECR will use <ecr-version>-<short-sha>."
-              echo "ecr-version=$NEXT_VERSION" >> $GITHUB_OUTPUT && echo " -- ecr-version = $NEXT_VERSION"
-          # Otherwise, use the current version from package.json.
+              echo "Found a release please PR. Pushes to ECR will use its version."
+          # Otherwise, use the next patch of the released version in package.json.
           else
-              echo "A release please PR does not exist. Pushes to ECR will use <ecr-version>-<short-sha>."
-              CURRENT_VERSION=$(jq -r '.version // error("version missing from ./package.json")' ./package.json) && \
-                  echo "ecr-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT && echo " -- ecr-version = $CURRENT_VERSION"
+              echo "A release please PR does not exist. Pushes to ECR will use the next patch of $CURRENT_VERSION."
+              IFS=. read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+              NEXT_VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
           fi
+
+          # A release candidate of that version, numbered by the commits since the last release.
+          ECR_VERSION="$NEXT_VERSION-RC.$BUILD"
+          echo "ecr-version=$ECR_VERSION" >> "$GITHUB_OUTPUT" && echo " -- ecr-version = $ECR_VERSION"
 
   vulnerability-scan:
     name: Vulnerability scanning
@@ -179,7 +186,11 @@ jobs:
           app-name-prefix: ''
           chart: charts/${{ env.CHART_NAME }}
           registry: aws
-          version: ${{ needs.prepare.outputs.ecr-version }}-${{ steps.build-and-push-dev-image.outputs.sha-image-tag }}
+          # <next version>-RC.<commits since the last release>: semver orders
+          # RC.9 below RC.10, so the newest build is always the highest
+          # version, which a commit sha suffix cannot give. appVersion still
+          # names the image built from this commit.
+          version: ${{ needs.prepare.outputs.ecr-version }}
           appVersion: ${{ steps.build-and-push-dev-image.outputs.sha-image-tag }}
           replace-chart-versions: true
 
