@@ -45,51 +45,24 @@ jobs:
       pull-requests: read
     outputs:
       app-name: ${{ steps.get-app-name.outputs.app-name }}
-      ecr-version: ${{ steps.get-ecr-version.outputs.ecr-version }}
+      ecr-version: ${{ steps.get-ecr-version.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           sparse-checkout: |
             src/app.config.json
-            package.json
       - name: Get app name from app.config.json
         id: get-app-name
         run: |
           APP_NAME=$(jq -r '.app_name // error("app_name missing from ./src/app.config.json")' ./src/app.config.json) && \
               echo "app-name=$APP_NAME" >> $GITHUB_OUTPUT && echo "app-name = $APP_NAME"
+      # <next version>-RC.<commits since the last release>, from the release-please manifest
+      # and the open release pull request.
       - name: Get the version to use for ECR image tagging
         id: get-ecr-version
         if: needs.release-please.outputs.release-created != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Note: `gh pr list` matches on `--head` OR `--label`, so it is important that PR_BRANCH is the complete branch name.
-          PR_BRANCH: "release-please--branches--main--components--telicent-query"
-          PR_LABEL: "autorelease: pending"
-        run: |
-
-          # Check to see if there is an open release please PR and extract the version from the PR title.
-          NEXT_VERSION=$(gh pr list --repo $GITHUB_REPOSITORY --head $PR_BRANCH \
-              --label "$PR_LABEL" --state open --json title \
-              --jq 'if .[0] == null then "" else .[0].title | match("\\d+\\.\\d+\\.\\d+") | .string end' 2>/dev/null)
-
-          # The released version, and the number of commits on main since its tag.
-          CURRENT_VERSION=$(jq -r '.version // error("version missing from ./package.json")' ./package.json)
-          BUILD=$(gh api "repos/$GITHUB_REPOSITORY/compare/v$CURRENT_VERSION...$GITHUB_SHA" --jq .ahead_by)
-
-          # If there is an open release please PR, use the extracted version for ECR tagging.
-          if [[ -n "$NEXT_VERSION" ]]; then
-              echo "Found a release please PR. Pushes to ECR will use its version."
-          # Otherwise, use the next patch of the released version in package.json.
-          else
-              echo "A release please PR does not exist. Pushes to ECR will use the next patch of $CURRENT_VERSION."
-              IFS=. read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
-              NEXT_VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
-          fi
-
-          # A release candidate of that version, numbered by the commits since the last release.
-          ECR_VERSION="$NEXT_VERSION-RC.$BUILD"
-          echo "ecr-version=$ECR_VERSION" >> "$GITHUB_OUTPUT" && echo " -- ecr-version = $ECR_VERSION"
+        uses: telicent-oss/shared-workflows/.github/actions/release-candidate-version@main
 
   vulnerability-scan:
     name: Vulnerability scanning
