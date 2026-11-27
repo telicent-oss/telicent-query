@@ -5,6 +5,7 @@ import 'graphiql/graphiql.css';
 import config from '../../config/app-config';
 import { DatasetSelector } from '../DatasetSelector/DatasetSelector';
 import { useDatasets } from '../../hooks/useDatasets';
+import { useThemeMode } from '../../hooks/useThemeMode';
 import { buildEndpoint, hasDatasetPlaceholder } from '../../lib/buildEndpoint';
 import { toGraphqlFailure } from '../../adapters/graphql/graphqlResponseAdapter';
 import { useCallback } from 'react';
@@ -13,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const TelicentGraphiQL = () => {
   const { api, user } = useAuth();
   const navigate = useNavigate();
+  const { dark } = useThemeMode();
   const { options, selected, select } = useDatasets();
   const endpoint = buildEndpoint(config.GRAPHQL_URL, selected);
 
@@ -35,10 +37,11 @@ const TelicentGraphiQL = () => {
 
   return (
     <section style={{ height: '100vh' }}>
-      <GraphiQL fetcher={fetcher}>
+      {/* Follow the app's theme switcher, not the OS or GraphiQL's own picker. */}
+      <GraphiQL fetcher={fetcher} forcedTheme={dark ? 'dark' : 'light'}>
         <GraphiQL.Logo>
           <FlexBox direction="row" alignItems="center" gap={2}>
-            <UIThemeProvider theme="GraphOrange" dark>
+            <UIThemeProvider theme="GraphOrange" dark={dark}>
               {/* Match the height of the small DS Autocomplete beside it. */}
               <Button
                 variant="secondary"
@@ -50,9 +53,8 @@ const TelicentGraphiQL = () => {
               </Button>
             </UIThemeProvider>
             <Brand appName="queryQL" />
-            {/* GraphiQL's toolbar is dark, so match the SPARQL button's theme or the text is unreadable. */}
             {hasDatasetPlaceholder(config.GRAPHQL_URL) && (
-              <UIThemeProvider theme="GraphOrange" dark>
+              <UIThemeProvider theme="GraphOrange" dark={dark}>
                 <DatasetSelector options={options} value={selected} onSelect={select} />
               </UIThemeProvider>
             )}
